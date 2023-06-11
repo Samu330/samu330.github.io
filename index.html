@@ -14,22 +14,41 @@
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="sweetalert2.min.js"></script>
 		<link rel="stylesheet" href="sweetalert2.min.css">
-		<link
-    		rel="stylesheet"
-   		href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  		/>
 	</head>
 	<body>
 		<script>
-			Swal.fire({
-  			title: 'Bienvenid@',
-  			showClass: {
-    			popup: 'animate__animated animate__fadeInDown'
-  			},
-  			hideClass: {
-    			popup: 'animate__animated animate__fadeOutUp'
-  			}
-			})
+Swal.fire({
+  title: 'Ingresa tu nombre de GitHub, si no tienes cancela!',
+  input: 'text',
+  inputAttributes: {
+    autocapitalize: 'off'
+  },
+  showCancelButton: true,
+  confirmButtonText: 'Look up',
+  showLoaderOnConfirm: true,
+  preConfirm: (login) => {
+    return fetch(`//api.github.com/users/${login}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
+        return response.json()
+      })
+      .catch(error => {
+        Swal.showValidationMessage(
+          `Request failed: ${error}`
+        )
+      })
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: `${result.value.name}'`,
+      imageUrl: result.value.avatar_url
+    })
+  }
+})
 		</script>
 		<audio id="song">
   			<source src="assets/music/song.mp3">
