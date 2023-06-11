@@ -13,14 +13,14 @@
 	</head>
 	<body>
 		<audio id="song">
-  			<source src="assets/music/song.mp3">
-		</audio>
+  <source src="assets/music/song.mp3">
+</audio>
 
-		<script>
-  			window.addEventListener('click', () => {
-    			document.getElementById("song").play();
-  		})
-		</script>
+<script>
+  if (window.performance.navigation.type == 1) {
+    document.getElementById("song").play();
+  }
+</script>
 		<div class="animation-wrapper">
 			<div class="particle particle-1"></div>
 			<div class="particle particle-2"></div>
