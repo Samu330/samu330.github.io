@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hola</h1>
+<script>
+const axios = require('axios');
+
+const options = {
+  method: 'GET',
+  url: 'https://tiktok-videos-without-watermark.p.rapidapi.com/getVideo',
+  params: {
+    url: 'https://www.tiktok.com/@khaby.lame/video/7067201445686152454?is_from_webapp=1&sender_device=pc&web_id=7085812281682642434'
+  },
+  headers: {
+    'X-RapidAPI-Key': 'b08a521a05msh9fb7af06d8c364ep1fd9b3jsnbfb450b152df',
+    'X-RapidAPI-Host': 'tiktok-videos-without-watermark.p.rapidapi.com'
+  }
+};
+
+try {
+	const response = await axios.request(options);
+	console.log(response.data);
+} catch (error) {
+	console.error(error);
+}
+</script>
+  </body>
+</html>
