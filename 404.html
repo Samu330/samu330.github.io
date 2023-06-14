@@ -1,172 +1,185 @@
 <html>
-    <head>
-        <meta charset="utf-8">
+	<style>
+		body {
+    font-family: Trebuchet MS;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
 
-        <title>404</title>
+a {
+    text-decoration: none;
+}
 
-        <link rel="shortcut icon" href="https://vipvacaciones.com/wp-content/uploads/2022/06/Nubes-2.png" />
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    max-width: 95%;
+    margin-left: 2.5%;
+    position: fixed;
+    z-index: 2;
+}
 
-        <style>
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,600,700');
-$nunito-font: 'Nunito', sans-serif;
+.header__menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
 
-// mixins
-@mixin breakpoint($point) {
-    @if $point==mobile {
-        @media (max-width: 480px) and (min-width: 320px) {
-            @content ;
-        }
+.header__menu ul li {
+    color: #fff;
+    letter-spacing: .3em;
+}
+
+.header__menu ul li {
+    margin-right: 5vh;
+}
+
+.header__logo img {
+    filter: brightness(0) invert(1);
+    height: 40px;
+}
+
+.errorPage {
+    background: url(https://i.ibb.co/sv6wRvq/wildwest-bg.jpg);
+    background-size: cover;
+    background-position: bottom;
+    width: 100%;
+    height: 100vh;
+}
+
+img.errorPage__tembleweed {
+    animation: templeWeed 5s infinite 1s;
+}
+
+.errorPage__templeweed-container {
+    position: absolute;
+    bottom: 20px;
+    width: 10vw;
+    transform: translateX(-100%);
+    animation: moveWeed 3s infinite linear;
+}
+
+.errorPage__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin-top: -5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.errorPage__button {
+    display: block;
+    cursor: pointer;
+    border: 1px solid #fff;
+    color: #e3594e;
+    padding: 10px 30px;
+    letter-spacing: 0.2em;
+    box-shadow: 7px 7px 20px #00000026;
+    background: #fff;
+    transition: transform 300ms ease;
+}
+
+.errorPage__button:active {
+    transform: translateY(2px);
+    box-shadow: 3px 3px 20px #00000026;
+}
+
+.errorPage__text h3 {
+    font-size: 20vw;
+    line-height: 1;
+    margin: 0;
+    letter-spacing: 0.2em;
+    margin-bottom: 50px;
+    color: #fff;
+    text-shadow: 7px 7px 20px #00000026;
+}
+
+.hamburger__menu {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 300;
+    display: block;
+    margin-top: -6px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .header__menu .hamburger__menu {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .header__menu ul {
+    display: none;
+  }
+}
+
+@keyframes moveWeed {
+    0% {
+        left: 0;  
+        transform: translateX(-100%) rotate(0);
+    }
+    
+    100% {
+        left: 130%;
+        transform: translateX(100%) rotate(540deg);
     }
 }
 
-// keyrames
-@keyframes floating {
-    from { transform: translateY(0px); }
-    65%  { transform: translateY(15px); }
-    to   { transform: translateY(-0px); }
-}
-
-html {
-  height: 100%;
-}
-
-body{
-  background-image: url('https://assets.codepen.io/1538474/star.svg'),linear-gradient(to bottom, #05007A, #4D007D);
-  height: 100%;
-  margin: 0;
-  background-attachment: fixed;
-  overflow: hidden;
-}
-
-.mars{
-  left:0;
-  right:0;
-  bottom:0;
-  position:absolute;
-  height: 27vmin;
-  background: url('https://assets.codepen.io/1538474/mars.svg') no-repeat bottom center;
-  background-size: cover;
-}
-
-.logo-404{
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  top: 16vmin;
-  width: 30vmin;
-
-  @include breakpoint(mobile){
-    top: 45vmin;
-  }
-}
-
-.meteor{
-  position: absolute;
-  right: 2vmin;
-  top: 16vmin;
-}
-
-.title{
-  color: white;
-  font-family: $nunito-font;
-  font-weight: 600;
-  text-align: center;
-  font-size: 5vmin;
-  margin-top: 31vmin;
-
-  @include breakpoint(mobile){
-    margin-top: 65vmin;
-  }
-}
-
-.subtitle{
-  color: white;
-  font-family: $nunito-font;
-  font-weight: 400;
-  text-align: center;
-  font-size: 3.5vmin;
-  margin-top: -1vmin;
-  margin-bottom: 9vmin;
-}
-
-.btn-back{
-  border: 1px solid white;
-  color: white;
-  height: 5vmin;
-  padding: 12px;
-  font-family: $nunito-font;
-  text-decoration: none;
-  border-radius: 5px;
-
-  &:hover{
-    background: white;
-    color: #4D007D;
-  }
-
-  @include breakpoint(mobile){
-    font-size: 3.5vmin;
-  }
-}
-
-.astronaut{
-  position: absolute;
-  top: 18vmin;
-  left: 10vmin;
-  height: 30vmin;
-  animation: floating 3s infinite ease-in-out;
-
-  @include breakpoint(mobile){
-    top: 2vmin;
-  }
-}
-
-.spaceship{
-  position: absolute;
-  bottom: 15vmin;
-  right: 24vmin;
-
-  @include breakpoint(mobile){
-    width: 45vmin;
-    bottom: 18vmin;
-  }
+@keyframes templeWeed {
+    0% {
+        transform: translateY(0);
+    }
+    
+    30% {
+        transform: translateY(-3vw);
+    }
+    
+    60% {
+        transform: translateY(-4vw);
+    }
+    
+    90% {
+        transform: translateY(0);
+    }
+    
+    90% {
+        transform: translateY(0);
+    }
+    
 }
 	</style>
-    </head>
 
-    <body>
+<header class="header">
+        <div class="header__logo">
+            <img src="https://i.ibb.co/njBXyTk/logo.png">
+        </div>
+        <div class="header__menu">
+            <ul>
+                <a href="#"><li>HOME</li></a>
+                <a href="#"><li>ABOUT</li></a>
+                <a href="#"><li>WORKS</li></a>
+                <a href="#"><li>CONTACT</li></a>
+            </ul>
+          <span class="hamburger__menu">☰</span>
+        </div>
+    </header>
+    <section class="errorPage">
+        <div class="errorPage__text">
+            <h3>404</h3>
+            <span class="errorPage__button">Back to home</span>
+        </div>
+        <span class="errorPage__templeweed-container"><img src="https://i.ibb.co/mTg87G2/tembleweed.png" class="errorPage__tembleweed"></span>
+        <div class="errorPage__terrain"></div>
+    </section>
 
-	<div class="mars"></div>
-<img src="https://assets.codepen.io/1538474/404.svg" class="logo-404" />
-<img src="https://assets.codepen.io/1538474/meteor.svg" class="meteor" />
-<p class="title">Oh no!!</p>
-<p class="subtitle">
-  You’re either misspelling the URL <br /> or requesting a page that's no longer here.
-</p>
-<div align="center">
-  <a class="btn-back" href="#">Back to previous page</a>
-</div>
-<img src="https://assets.codepen.io/1538474/astronaut.svg" class="astronaut" />
-<img src="https://assets.codepen.io/1538474/spaceship.svg" class="spaceship" />    
-
-    <script>
-document.onkeydown = function(e) {
-    if (e.ctrlKey &&
-        (e.keyCode === 67 ||
-         e.keyCode === 86 ||
-         e.keyCode === 85 ||
-         e.keyCode === 117)) {
-        alert('hehe (｡•̀ᴗ-)✧');
-        return false;
-    } else {
-        return true;
-    }
-};
-</script>
-
-<script type='text/javascript'>
-	document.oncontextmenu = function(){return false}
-</script>
-    </body>
 </html>
