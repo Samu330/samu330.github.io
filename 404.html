@@ -1,204 +1,67 @@
+<!doctype html>
 <html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=1">
+<meta name="theme-color" content="#111111">
+
+<link rel="icon" type="image/png" sizes="32x32" href="https://knife.media/wp-content/themes/knife/assets/images/icon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://knife.media/wp-content/themes/knife/assets/images/icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://knife.media/wp-content/themes/knife/assets/images/icon-180.png" />
+
+<title>The page is not found &#8212; knife.media</title>
+
+</head>
+
+<body>
 	<style>
-		body {
-    font-family: Trebuchet MS;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
+		body,
+h1 {
+  margin: 0;
 }
-
+.video,
+.wrap {
+  position: relative;
+}
+body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 25rem;
+  font: 400 16px/1.4 -apple-system, BlinkMacSystemFont,"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  color: #fff;
+  background: #000;
+}
+h1 {
+  font-size: 1.875em;
+  font-weight: 400;
+}
+p {
+  margin: 1rem 0;
+}
 a {
-    text-decoration: none;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-    width: 100%;
-    max-width: 95%;
-    margin-left: 2.5%;
-    position: fixed;
-    z-index: 2;
-}
-
-.header__menu ul {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    list-style: none;
-}
-
-.header__menu ul li {
-    color: #fff;
-    letter-spacing: .3em;
-}
-
-.header__menu ul li {
-    margin-right: 5vh;
-}
-
-.header__logo img {
-    filter: brightness(0) invert(1);
-    height: 40px;
-}
-
-.errorPage {
-    background: url(https://i.ibb.co/sv6wRvq/wildwest-bg.jpg);
-    background-size: cover;
-    background-position: bottom;
-    width: 100%;
-    height: 100vh;
-}
-
-img.errorPage__tembleweed {
-    animation: templeWeed 5s infinite 1s;
-}
-
-.errorPage__templeweed-container {
-    position: absolute;
-    bottom: 20px;
-    width: 10vw;
-    transform: translateX(-100%);
-    animation: moveWeed 3s infinite linear;
-}
-
-.errorPage__text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    margin-top: -5%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.errorPage__button {
-    display: block;
-    cursor: pointer;
-    border: 1px solid #fff;
-    color: #e3594e;
-    padding: 10px 30px;
-    letter-spacing: 0.2em;
-    box-shadow: 7px 7px 20px #00000026;
-    background: #fff;
-    transition: transform 300ms ease;
-}
-
-.errorPage__button:active {
-    transform: translateY(2px);
-    box-shadow: 3px 3px 20px #00000026;
-}
-
-.errorPage__text h3 {
-    font-size: 20vw;
-    line-height: 1;
-    margin: 0;
-    letter-spacing: 0.2em;
-    margin-bottom: 50px;
-    color: #fff;
-    text-shadow: 7px 7px 20px #00000026;
-}
-
-.hamburger__menu {
-    color: #fff;
-    font-size: 30px;
-    font-weight: 300;
-    display: block;
-    margin-top: -6px;
-    cursor: pointer;
-}
-
-@media only screen and (min-width: 768px) {
-  .header__menu .hamburger__menu {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  .header__menu ul {
-    display: none;
-  }
-}
-
-@keyframes moveWeed {
-    0% {
-        left: 0;  
-        transform: translateX(-100%) rotate(0);
-    }
-    
-    100% {
-        left: 130%;
-        transform: translateX(100%) rotate(540deg);
-    }
-}
-
-@keyframes templeWeed {
-    0% {
-        transform: translateY(0);
-    }
-    
-    30% {
-        transform: translateY(-3vw);
-    }
-    
-    60% {
-        transform: translateY(-4vw);
-    }
-    
-    90% {
-        transform: translateY(0);
-    }
-    
-    90% {
-        transform: translateY(0);
-    }
-    
-}
+  color: #2f72e1;
+  border-bottom: 1px solid #2f72e1;
+ 
 	</style>
+    <div class="wrap">
+        <video class="video" poster="https://knife.media/wp-content/themes/knife/assets/images/poster-error.jpg" autoplay preload loop muted>
+            <source src="https://knife.media/wp-content/themes/knife/assets/video/video-error.mp4" type="video/mp4">
+        </video>
 
-<header class="header">
-        <div class="header__logo">
-            <img src="https://i.ibb.co/njBXyTk/logo.png">
+        <div class="message">
+            <h1>No tienes por que estar aqui</h1>
+            <p>Mejor ve a la <a href="https://samu330.lat/">pagina principal</a><br> :)</p>
         </div>
-        <div class="header__menu">
-            <ul>
-                <a href="#"><li>HOME</li></a>
-                <a href="#"><li>ABOUT</li></a>
-                <a href="#"><li>WORKS</li></a>
-                <a href="#"><li>CONTACT</li></a>
-            </ul>
-          <span class="hamburger__menu">☰</span>
-        </div>
-    </header>
-    <section class="errorPage">
-        <div class="errorPage__text">
-            <h3>404</h3>
-            <span class="errorPage__button">Back to home</span>
-        </div>
-        <span class="errorPage__templeweed-container"><img src="https://i.ibb.co/mTg87G2/tembleweed.png" class="errorPage__tembleweed"></span>
-        <div class="errorPage__terrain"></div>
-    </section>
-
-	    <script>
-document.onkeydown = function(e) {
-    if (e.ctrlKey &&
-        (e.keyCode === 67 ||
-         e.keyCode === 86 ||
-         e.keyCode === 85 ||
-         e.keyCode === 117)) {
-        alert('hehe (｡•̀ᴗ-)✧');
-        return false;
-    } else {
-        return true;
-    }
-};
-</script>
-
-<script type='text/javascript'>
-	document.oncontextmenu = function(){return false}
-</script>
-
+    </div>
+</body>
 </html>
