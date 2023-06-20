@@ -7,7 +7,7 @@
     
     <!-- 2. crear el formularo en html -->
     
-    <input id="usuario" placeholder="Escribe 1 o 2 o 3">
+    <input id="usuario" placeholder="Escribe algo xd">
     <button onclick="buscar()">buscar</button>
     
     <!-- 3. crer la tabla en html -->
@@ -15,7 +15,7 @@
     <table id="respuesta">
         <thead>
           <th>Id</th>
-          <th>Nombre de Usuario</th>
+          <th>Simi dice:</th>
         </thead>
         <tbody id="respuesta_body">
         </tbody>
@@ -34,18 +34,22 @@ function buscar(){
   
   $.ajax({
     
-    // 7. agrega el valor a la url
-    url: "https://jsonplaceholder.typicode.com/users/"+usuario
+    url: 'https://api.simsimi.vn/v1/simtalk';
+    const params = new URLSearchParams({
+    text: usuario,
+    lc: 'es',
+    key: ''
+    
+  });
+
   
   }).done(function(data) {
      
      
      // 8. construyes el <tr> con tus datos de respuesta
      let tr = '<tr>'+
-          '<td>' + data.id + '</td>' +
-          '<td>' + data.email + '</td>' +
+          '<td>' + data.message + '</td>'
         '</tr>'
-     console.log(tr) // *opcional para ver en consola
      
      // 9. usas append para agregar el tr al final
      $('#respuesta_body').append(tr)
