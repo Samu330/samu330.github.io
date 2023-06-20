@@ -1,4 +1,4 @@
-function putRequest()
+function postRequest()
 {
 async function simsimiTalk(query) {
   const url = 'https://api.simsimi.vn/v1/simtalk';
