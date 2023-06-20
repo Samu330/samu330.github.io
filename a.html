@@ -8,7 +8,7 @@
     <!-- 2. crear el formularo en html -->
     
     <input id="usuario" placeholder="Escribe algo xd">
-    <button onclick="buscar()">buscar</button>
+    <button onclick="buscar()">enviar</button>
     
     <!-- 3. crer la tabla en html -->
     
@@ -69,9 +69,8 @@ simsimiTalk(query)
   }).done(function(data) {
      
      
-     // 8. construyes el <tr> con tus datos de respuesta
      let tr = '<tr>'+
-          '<td>' + data.message + '</td>'
+          '<td>' + data.response + '</td>'
         '</tr>'
      
      // 9. usas append para agregar el tr al final
