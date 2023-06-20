@@ -1,110 +1,32 @@
-function getAllRequest()
-{
-  axios.get('http://localhost:8080/item')
-    .then(function (response) {
-    console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
-    .then(function () {
-    });
-}
-
-function getFilteredRequest()
-{
-  axios.get('https://api.simsimi.vn/v1/simtalk', {
-    params: {
-      text: 'Hola',
-      lc: 'es',
-      key: ''
-
-    }
-    })
-    .then(function (response) {
-    console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
-    .then(function () {
-    });
-}
-
-function getByIdRequest()
-{
-  id = 10;
-  axios.get('http://localhost:8080/item/' + id)
-    .then(function (response) {
-    console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
-    .then(function () {
-    });
-}
-
-function postRequest()
-{
-  axios.post('https://api.simsimi.vn/v1/simtalk', {
-    text: 'Hola',
-    lc: 'es',
-    key: ''
-
-    })
-    .then(function (response) {
-    window.alert(response);
-    })
-    .catch(function (error) {
-    window.alert(error);
-    })
-    .then(function () {
-    });
-}
-
 function putRequest()
 {
-  id = 10;
-  axios.put('http://localhost:8080/item/' + id, {
-    data: 'NewItem'
-    })
-    .then(function (response) {
-    console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
-    .then(function () {
+async function simsimiTalk(query) {
+  const url = 'https://api.simsimi.vn/v1/simtalk';
+  const params = new URLSearchParams({
+    text: query,
+    lc: 'es',
+    key: ''
+  });
+
+  try {
+    const response = await axios.post(url, params, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     });
+
+    return response.data;
+  } catch (error) {
+    window.alert(error);
+    return null;
+  }
 }
 
-function patchRequest()
-{
-  id = 10;
-  axios.patch('http://localhost:8080/item/' + id, {
-    data: 'NewItem'
-    })
-    .then(function (response) {
-    console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
-    .then(function () {
-    });
-}
+const query = 'hola como estas';
+simsimiTalk(query)
+  .then(response => {
+    window.alert(response);
+  })
+  .catch(error => {
+    window.alert(error);
+  });
 
-function deleteRequest()
-{
-  id = 10;
-  axios.delete('http://localhost:8080/item/' + id)
-    .then(function (response) {
-    console.log(response);
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
-    .then(function () {
-    });
 }
