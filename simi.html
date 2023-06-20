@@ -1,7 +1,7 @@
 <html>
 <head>
   <!-- 1. importas la libreria jquery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     
@@ -34,11 +34,34 @@ function buscar(){
   
   $.ajax({
     
-    url: 'https://api.simsimi.vn/v1/simtalk';
-    const params = new URLSearchParams({
-    text: usuario,
+async function simsimiTalk(query) {
+  const url = 'https://api.simsimi.vn/v1/simtalk';
+  const params = new URLSearchParams({
+    text: query,
     lc: 'es',
     key: ''
+  });
+
+  try {
+    const response = await axios.post(url, params, {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+
+    return response.data;
+  } catch (error) {
+    alert(error);
+    return null;
+  }
+}
+
+const query = 'hola como estas';
+simsimiTalk(query)
+  .then(response => {
+    alert(response);
+  })
+  .catch(error => {
+    alert(error);
+  });
     
   });
 
