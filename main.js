@@ -13,9 +13,12 @@ function getAllRequest()
 
 function getFilteredRequest()
 {
-  axios.get('http://localhost:8080/item', {
+  axios.get('https://api.simsimi.vn/v1/simtalk', {
     params: {
-      filter : 'myFilter'
+      text: 'Hola',
+      lc: 'es',
+      key: ''
+
     }
     })
     .then(function (response) {
@@ -44,14 +47,17 @@ function getByIdRequest()
 
 function postRequest()
 {
-  axios.post('http://localhost:8080/item', {
-    data: 'NewItem'
+  axios.post('https://api.simsimi.vn/v1/simtalk', {
+    text: 'Hola',
+    lc: 'es',
+    key: ''
+
     })
     .then(function (response) {
-    console.log(response);
+    window.alert(response);
     })
     .catch(function (error) {
-    console.log(error);
+    window.alert(error);
     })
     .then(function () {
     });
