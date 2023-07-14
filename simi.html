@@ -30,13 +30,13 @@
         var response = await axios.get("https://api.simsimi.net/v2/?text=" + encodeURIComponent(message) + "lc=es");
         var simsimiResponse = response.success;
         if (simsimiResponse.result === 100) {
-          addMessage("SimSimi", simsimiResponse);
+          addMessage("SimSimi", simsimiResponse.response);
         } else {
-          throw new Error(simsimiResponse.msg || "No se pudo obtener una respuesta de SimSimi");
+          throw new Error(simsimiResponse.success || "No se pudo obtener una respuesta de SimSimi");
         }
       } catch (error) {
         console.error(error);
-        addMessage("Error", "Ups! Algo salió mal");
+        addMessage(error);
       }
     }
 
