@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pacman</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .pacman {
+      position: relative;
+      width: 150px;
+      height: 150px;
+    }
+
+    .pacman:before, .pacman:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 75px solid;
+      border-color: #f7df1e;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      transition: border 0.2s;
+    }
+
+    .pacman:before {
+      top: 0;
+      left: 0;
+      border-right-color: transparent;
+      transform: rotate(-45deg);
+    }
+
+    .pacman:after {
+      bottom: 0;
+      right: 0;
+      border-left-color: transparent;
+      transform: rotate(45deg);
+    }
+
+    .pacman.open:before, .pacman.open:after {
+      width: 75px;
+      height: 150px;
+    }
+
+    .pacman.open:before {
+      border-right-color: #fff;
+    }
+
+    .pacman.open:after {
+      border-left-color: #fff;
+    }
+
+    .pacman .pacman-mouth {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      transform-origin: center top;
+      transition: transform 0.2s;
+    }
+
+    .pacman.open .pacman-mouth {
+      transform: rotate(45deg);
+    }
+
+    .pacman .pacman-tongue {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      background-color: #f7df1e;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.2s;
+    }
+
+    .pacman.open .pacman-tongue {
+      transform: translate(-50%, -75%);
+    }
+
+    .pacman .pacman-eye {
+      position: absolute;
+      top: 25px;
+      left: 55px;
+      width: 25px;
+      height: 25px;
+      background-color: #000;
+      border-radius: 50%;
+    }
+
+    .pacman .pacman-eye:before {
+      content: "";
+      position: absolute;
+      top: 12.5px;
+      left: 12.5px;
+      width: 10px;
+      height: 10px;
+      background-color: #fff;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="pacman"></div>
+
+  <script>
+    const pacman = document.querySelector('.pacman');
+
+    pacman.addEventListener('click', () => {
+      pacman.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
