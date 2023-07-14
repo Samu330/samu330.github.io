@@ -28,7 +28,7 @@
     async function sendMessage(message) {
       try {
         var response = await axios.get("https://api.simsimi.net/v2/?text=" + encodeURIComponent(message) + "lc=es");
-        var simsimiResponse = response.data;
+        var simsimiResponse = response.success;
         if (simsimiResponse.result === 100) {
           addMessage("SimSimi", simsimiResponse.response);
         } else {
