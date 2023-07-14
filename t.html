@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even){background-color: #f2f2f2}
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+</head>
+<body>
+
+<table>
+<?php
+$filename = 'archivo_excel.xlsx';
+if (file_exists($filename)) {
+    $objPHPExcel = PHPExcel_IOFactory::load($filename);
+ 
+    $sheet = $objPHPExcel->getActiveSheet();
+    $highestRow = $sheet->getHighestRow();
+    $highestColumn = $sheet->getHighestColumn();
+    $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+    
+    for ($row = 1; $row <= $highestRow; $row++) {
+        echo "<tr>";
+        for ($col = 0; $col < $highestColumnIndex; $col++) {
+            echo "<td>" . $sheet->getCellByColumnAndRow($col, $row)->getValue() . "</td>";
+        }
+        echo "</tr>";
+    }
+} else {
+    echo 'El archivo no existe.';
+}
+?>
+</table>
+
+</body>
+</html>
