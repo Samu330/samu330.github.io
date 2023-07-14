@@ -1,19 +1,56 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Axios consuming API REST Demo</title>
-    </head>
-    <body>
-        <div>
-            <div>
-                <button onclick="postRequest()">Create</button>
-            </div>
-        </div>
-        
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script src="main.js"></script>
-    </body>
+<head>
+  <title>Chat con SimSimi</title>
+</head>
+<body>
+  <h1>Chat con SimSimi</h1>
+
+  <ul id="messages"></ul>
+
+  <div>
+    <input type="text" id="input" placeholder="Escribe tu mensaje">
+    <button id="send">Enviar</button>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+
+  <script>
+    // Función para agregar un mensaje a la lista de mensajes
+    function addMessage(sender, message) {
+      var li = document.createElement("li");
+      li.textContent = sender + ": " + message;
+      document.getElementById("messages").appendChild(li);
+    }
+
+    // Función para enviar el mensaje al servidor de SimSimi
+    async function sendMessage(message) {
+      try {
+        var response = await axios.get("https://api.simsimi.net/v2/?text=" + encodeURIComponent(message));
+        var simsimiResponse = response.data;
+        if (simsimiResponse.result === 100) {
+          addMessage("SimSimi", simsimiResponse.response);
+        } else {
+          throw new Error(simsimiResponse.msg || "No se pudo obtener una respuesta de SimSimi");
+        }
+      } catch (error) {
+        console.error(error);
+        addMessage("Error", "Ups! Algo salió mal");
+      }
+    }
+
+    // Evento al hacer clic en el botón de enviar
+    document.getElementById("send").addEventListener("click", function() {
+      var input = document.getElementById("input");
+      var message = input.value.trim();
+      input.value = "";
+
+      if (message.length > 0) {
+        addMessage("Tú", message);
+        sendMessage(message);
+      }
+    });
+  </script>
+</body>
 </html>
