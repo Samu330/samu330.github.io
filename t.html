@@ -1,47 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th, td {
-        text-align: left;
-        padding: 8px;
-    }
-    tr:nth-child(even){background-color: #f2f2f2}
-    th {
-        background-color: #4CAF50;
-        color: white;
-    }
-</style>
+    <title>Tabla desde archivo Excel</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Correo electrónico</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+            // Código para leer el archivo Excel y generar las filas de la tabla
+            
+            // Ejemplo de código en Java utilizando Apache POI
+            
+            try {
+                FileInputStream file = new FileInputStream(new File("ruta_del_archivo_excel.xlsx"));
 
-<table>
-<?php
-$filename = 'archivo_excel.xlsx';
-if (file_exists($filename)) {
-    $objPHPExcel = PHPExcel_IOFactory::load($filename);
- 
-    $sheet = $objPHPExcel->getActiveSheet();
-    $highestRow = $sheet->getHighestRow();
-    $highestColumn = $sheet->getHighestColumn();
-    $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
-    
-    for ($row = 1; $row <= $highestRow; $row++) {
-        echo "<tr>";
-        for ($col = 0; $col < $highestColumnIndex; $col++) {
-            echo "<td>" . $sheet->getCellByColumnAndRow($col, $row)->getValue() . "</td>";
-        }
-        echo "</tr>";
-    }
-} else {
-    echo 'El archivo no existe.';
-}
-?>
-</table>
+                // Obtener el libro de trabajo
+                XSSFWorkbook workbook = new XSSFWorkbook(file);
 
+                // Obtener la hoja de trabajo
+                XSSFSheet sheet = workbook.getSheetAt(0);
+
+                // Obtener el número de filas de la hoja de trabajo
+                int rowCount = sheet.getLastRowNum();
+
+                // Recorrer las filas y generar las filas de la tabla
+                for (int i = 0; i <= rowCount; i++) {
+                    XSSFRow row = sheet.getRow(i);
+
+                    if (row != null) {
+                        String nombre = row.getCell(0).getStringCellValue();
+                        int edad = (int) row.getCell(1).getNumericCellValue();
+                        String correo = row.getCell(2).getStringCellValue();
+
+                        %>
+                        <tr>
+                            <td><%= nombre %></td>
+                            <td><%= edad %></td>
+                            <td><%= correo %></td>
+                        </tr>
+                        <%
+                    }
+                }
+                
+                workbook.close();
+                file.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            %>
+        </tbody>
+    </table>
 </body>
-</html>
+                        </html>
