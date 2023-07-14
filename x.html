@@ -1,70 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Filtro y exportar en Excel</title>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
+    <title>Tabla exportable a Excel</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 </head>
 <body>
-  <h2>Filtro y exportar en Excel</h2>
+    <h1>Tabla exportable a Excel</h1>
+    <input type="text" id="dataInput" placeholder="Ingrese los datos separados por coma">
+    <button onclick="createTable()">Crear tabla</button>
+    <button onclick="exportToExcel()">Exportar a Excel</button>
+    <div id="tableContainer"></div>
 
-  <input type="text" id="search-input" placeholder="Buscar">
-
-  <table id="data-table" class="tablesorter">
-    <thead>
-      <tr>
-        <th>Columna 1</th>
-        <th>Columna 2</th>
-        <th>Columna 3</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Dato 1</td>
-        <td>Valor 1</td>
-        <td>Otro valor 1</td>
-      </tr>
-      <tr>
-        <td>Dato 2</td>
-        <td>Valor 2</td>
-        <td>Otro valor 2</td>
-      </tr>
-      <tr>
-        <td>Dato 3</td>
-        <td>Valor 3</td>
-        <td>Otro valor 3</td>
-      </tr>
-      <!-- Agregar más filas según sea necesario -->
-    </tbody>
-  </table>
-
-  <button id="export-button">Exportar a Excel</button>
-
-  <script>
-    $(document).ready(function() {
-      // Inicializar el filtro de la tabla
-      $("#data-table").tablesorter({
-        theme: 'default',
-        widgets: ['zebra', 'filter'],
-        widgetOptions: {
-          filter_external: '#search-input',
-          filter_columnFilters: true
+    <script>
+        function createTable() {
+            var dataInput = document.getElementById("dataInput").value;
+            var dataArray = dataInput.split(",");
+            var tableHtml = "<table><thead><tr><th>ID</th><th>Nombre</th></tr></thead><tbody>";
+            
+            for (var i = 0; i < dataArray.length; i++) {
+                tableHtml += "<tr><td>" + (i + 1) + "</td><td>" + dataArray[i] + "</td></tr>";
+            }
+            
+            tableHtml += "</tbody></table>";
+            document.getElementById("tableContainer").innerHTML = tableHtml;
         }
-      });
 
-      // Exportar a Excel
-      $("#export-button").click(function() {
-        var table = $("#data-table").tableToCSV();
-        var a = document.createElement('a');
-        var data_type = 'data:application/vnd.ms-excel';
-        a.href = data_type + ', ' + encodeURIComponent(table);
-        a.download = 'data.xls';
-        a.click();
-      });
-    });
-  </script>
+        function exportToExcel() {
+            var wb = XLSX.utils.table_to_book(document.getElementsByTagName('table')[0], {sheet:"Sheet JS"});
+            var wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'binary'});
+            
+            function s2ab(s) {
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            }
+            
+            saveAs(new Blob([s2ab(wbout)], {type: "application/octet-stream"}), "tabla.xlsx");
+        }
+    </script>
 </body>
 </html>
