@@ -2,43 +2,55 @@
 <html>
 <head>
     <title>Cargar archivo Excel</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-    <input type="file" id="excelFile" accept=".xlsx, .xls"/>
-    <table id="dataTable" border="1"></table>
+    <div>
+  <input type="file" id="fileInput">
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
 
-    <script>
-        $(document).ready(function() {
-            $("#excelFile").on("change", function(e) {
-                var file = e.target.files[0];
-                var reader = new FileReader();
-    
-                reader.onload = function(e) {
-                    var data = new Uint8Array(e.target.result);
-                    var workbook = XLSX.read(data, { type: 'array' });
-                    var sheetName = workbook.SheetNames[0];
-                    var sheet = workbook.Sheets[sheetName];
-                    var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-    
-                    var table = $("#dataTable");
-    
-                    for (var i = 0; i < jsonData.length; i++) {
-                        var row = $("<tr/>");
-    
-                        for (var j = 0; j < jsonData[i].length; j++) {
-                            var cellData = jsonData[i][j];
-                            var cell = $("<td/>").text(cellData);
-                            row.append(cell);
-                        }
-    
-                        table.append(row);
-                    }
-                };
-    
-                reader.readAsArrayBuffer(file);
-            });
-        });
-    </script>
+<script>
+  const fileInput = document.getElementById("fileInput");
+  const dataTable = document.getElementById("dataTable");
+
+  fileInput.addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: "array" });
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+      // Clear previous data
+      dataTable.tBodies[0].innerHTML = "";
+
+      // Render table data
+      for (let i = 1; i < jsonData.length; i++) {
+        const row = document.createElement("tr");
+
+        for (let j = 0; j < jsonData[i].length; j++) {
+          const cell = document.createElement("td");
+          cell.textContent = jsonData[i][j];
+          row.appendChild(cell);
+        }
+
+        dataTable.tBodies[0].appendChild(row);
+      }
+    };
+
+    reader.readAsArrayBuffer(file);
+  });
+</script>
 </body>
 </html>
