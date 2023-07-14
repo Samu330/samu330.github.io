@@ -27,7 +27,7 @@
     // Función para enviar el mensaje al servidor de SimSimi
     async function sendMessage(message) {
       try {
-        var response = await axios.get("https://api.simsimi.net/v2/?text=" + encodeURIComponent(message));
+        var response = await axios.get("https://api.simsimi.net/v2/?text=" + encodeURIComponent(message) + "lc=es");
         var simsimiResponse = response.data;
         if (simsimiResponse.result === 100) {
           addMessage("SimSimi", simsimiResponse.response);
