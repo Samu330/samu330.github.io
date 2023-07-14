@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Filtro y exportar en Excel</title>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.widgets.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
+</head>
+<body>
+  <h2>Filtro y exportar en Excel</h2>
+
+  <input type="text" id="search-input" placeholder="Buscar">
+
+  <table id="data-table" class="tablesorter">
+    <thead>
+      <tr>
+        <th>Columna 1</th>
+        <th>Columna 2</th>
+        <th>Columna 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dato 1</td>
+        <td>Valor 1</td>
+        <td>Otro valor 1</td>
+      </tr>
+      <tr>
+        <td>Dato 2</td>
+        <td>Valor 2</td>
+        <td>Otro valor 2</td>
+      </tr>
+      <tr>
+        <td>Dato 3</td>
+        <td>Valor 3</td>
+        <td>Otro valor 3</td>
+      </tr>
+      <!-- Agregar más filas según sea necesario -->
+    </tbody>
+  </table>
+
+  <button id="export-button">Exportar a Excel</button>
+
+  <script>
+    $(document).ready(function() {
+      // Inicializar el filtro de la tabla
+      $("#data-table").tablesorter({
+        theme: 'default',
+        widgets: ['zebra', 'filter'],
+        widgetOptions: {
+          filter_external: '#search-input',
+          filter_columnFilters: true
+        }
+      });
+
+      // Exportar a Excel
+      $("#export-button").click(function() {
+        var table = $("#data-table").tableToCSV();
+        var a = document.createElement('a');
+        var data_type = 'data:application/vnd.ms-excel';
+        a.href = data_type + ', ' + encodeURIComponent(table);
+        a.download = 'data.xls';
+        a.click();
+      });
+    });
+  </script>
+</body>
+</html>
