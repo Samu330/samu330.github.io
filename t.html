@@ -1,76 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tabla desde archivo Excel</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            font-family: Arial, sans-serif;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        th {
-            background-color: #dddddd;
-        }
-    </style>
+    <title>Cargar archivo Excel</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Correo electrónico</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% 
-            // Código para leer el archivo Excel y generar las filas de la tabla
-            
-            // Ejemplo de código en Java utilizando Apache POI
-            
-            try {
-                FileInputStream file = new FileInputStream(new File("ruta_del_archivo_excel.xlsx"));
+    <input type="file" id="excelFile" accept=".xlsx, .xls"/>
+    <table id="dataTable" border="1"></table>
 
-                // Obtener el libro de trabajo
-                XSSFWorkbook workbook = new XSSFWorkbook(file);
-
-                // Obtener la hoja de trabajo
-                XSSFSheet sheet = workbook.getSheetAt(0);
-
-                // Obtener el número de filas de la hoja de trabajo
-                int rowCount = sheet.getLastRowNum();
-
-                // Recorrer las filas y generar las filas de la tabla
-                for (int i = 0; i <= rowCount; i++) {
-                    XSSFRow row = sheet.getRow(i);
-
-                    if (row != null) {
-                        String nombre = row.getCell(0).getStringCellValue();
-                        int edad = (int) row.getCell(1).getNumericCellValue();
-                        String correo = row.getCell(2).getStringCellValue();
-
-                        %>
-                        <tr>
-                            <td><%= nombre %></td>
-                            <td><%= edad %></td>
-                            <td><%= correo %></td>
-                        </tr>
-                        <%
+    <script>
+        $(document).ready(function() {
+            $("#excelFile").on("change", function(e) {
+                var file = e.target.files[0];
+                var reader = new FileReader();
+    
+                reader.onload = function(e) {
+                    var data = new Uint8Array(e.target.result);
+                    var workbook = XLSX.read(data, { type: 'array' });
+                    var sheetName = workbook.SheetNames[0];
+                    var sheet = workbook.Sheets[sheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+    
+                    var table = $("#dataTable");
+    
+                    for (var i = 0; i < jsonData.length; i++) {
+                        var row = $("<tr/>");
+    
+                        for (var j = 0; j < jsonData[i].length; j++) {
+                            var cellData = jsonData[i][j];
+                            var cell = $("<td/>").text(cellData);
+                            row.append(cell);
+                        }
+    
+                        table.append(row);
                     }
-                }
-                
-                workbook.close();
-                file.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            %>
-        </tbody>
-    </table>
+                };
+    
+                reader.readAsArrayBuffer(file);
+            });
+        });
+    </script>
 </body>
-                        </html>
+</html>
