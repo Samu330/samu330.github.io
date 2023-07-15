@@ -27,18 +27,25 @@
     // Función para enviar el mensaje al servidor de SimSimi
     async function sendMessage(message) {
       try {
-        var response = await axios.get("https://api.simsimi.net/v2/?text=" + message + "&lc=es");
-        var simsimiResponse = response.success;
-        if (simsimiResponse.result === 100) {
-          addMessage(simsimiResponse);
-        } else {
-          throw new Error(simsimiResponse.msg || "No se pudo obtener una respuesta de SimSimi");
+        return fetch(`https://api.simsimi.net/v2/?text=${message}&lc=es`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(response.statusText)
         }
-      } catch (error) {
-        console.error(error);
-        addMessage(error);
-      }
-    }
+        return response.json()
+      })
+      .catch(error => {
+        alert.showValidationMessage(
+          `Request failed: ${error}`
+        )
+      })
+      },
+      allowOutsideClick: () => !alret.isLoading()
+}).then((result) => {
+  if (result.isConfirmed) {
+    alert({title: `${result.success}`})
+  }
+})
 
     // Evento al hacer clic en el botón de enviar
     document.getElementById("send").addEventListener("click", function() {
