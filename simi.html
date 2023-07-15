@@ -30,7 +30,7 @@
         messageElement.textContent = `You: ${message}`;
         messagesDiv.appendChild(messageElement);
 
-        fetch(`https://api.simsimi.net/v2/?text=${message}&lang=es`)
+        fetch(`https://api.simsimi.net/v2/?text=${message}&lc=es`)
           .then((response) => response.json())
           .then((data) => {
             const replyElement = document.createElement("p");
