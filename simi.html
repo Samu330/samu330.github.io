@@ -34,10 +34,10 @@
           .then((response) => response.json())
           .then((data) => {
             const replyElement = document.createElement("p");
-            replyElement.textContent = `SimSimi: ${data.success.response}`;
+            replyElement.textContent = `SimSimi: ${data.success[0].response}`;
             messagesDiv.appendChild(replyElement);
           })
-          .catch((error) => console.log(error));
+          .catch((error) => alert(error));
       }
     </script>
   </body>
