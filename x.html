@@ -1,62 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chat con SimSimi</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Chatbot con Dialogflow</title>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger-cx/bootstrap.js?v=1"></script>
 </head>
 <body>
-    <h1>Chat con SimSimi</h1>
-    
-    <div id="chat-container">
-        <div id="messages"></div>
-        <input type="text" id="input-msg" placeholder="Escribe tu mensaje">
-        <button id="send-btn">Enviar</button>
-    </div>
-    
-    <script>
-        $(document).ready(function() {
-            var apiUrl = 'https://wsapi.simsimi.com/190410/talk';
-            var apiKey = '848362ba-ce7f-4eba-b90d-c5f5f6ce999f'; // Reemplazar con tu API Key de SimSimi
-            
-            $('#send-btn').click(function() {
-                var message = $('#input-msg').val();
-                sendMessageToSimSimi(message);
-            });
-            
-            function sendMessageToSimSimi(message) {
-                var data = {
-                    'utext': message,
-                    'lang': 'es',
-                    'atext_bad_prob_max': '0.1',
-                };
-            
-                var settings = {
-                    'async': true,
-                    'crossDomain': true,
-                    'url': apiUrl,
-                    'method': 'POST',
-                    'headers': {
-                        'Content-Type': 'application/json',
-                        'x-api-key': apiKey
-                    },
-                    'data': JSON.stringify(data)
-                };
-            
-                $.ajax(settings).done(function (response) {
-                    var reply = response.atext;
-                    appendMessage('user', message);
-                    appendMessage('sim-simi', reply);
-                    $('#input-msg').val('');
-                });
-            }
-            
-            function appendMessage(sender, message) {
-                var msgSender = (sender === 'user') ? 'Tú' : 'SimSimi';
-                var msgClass = (sender === 'user') ? 'user-msg' : 'sim-simi-msg';
-                var messageHTML = '<p class="' + msgClass + '"><strong>' + msgSender + ': </strong>' + message + '</p>';
-                $('#messages').append(messageHTML);
-            }
-        });
-    </script>
+    <df-messenger
+        chat-title="Chatbot"
+        agent-id="tu-agent-id-de-dialogflow"
+        language-code="es"
+    ></df-messenger>
 </body>
 </html>
