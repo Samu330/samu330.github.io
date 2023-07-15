@@ -34,7 +34,7 @@
           .then((response) => response.json())
           .then((data) => {
             const replyElement = document.createElement("p");
-            replyElement.textContent = `SimSimi: ${data.success.response}`;
+            replyElement.textContent = `SimSimi: ${data.success}`;
             messagesDiv.appendChild(replyElement);
           })
           .catch((error) => alert(error));
