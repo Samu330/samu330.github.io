@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#roulette {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #ff0000;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+    
+<div id="roulette"></div>
+<div id="result"></div>
+
+<script>
+// Array de resultados
+var results = ["Resultado 1", "Resultado 2", "Resultado 3", "Resultado 4"];
+
+// Elementos HTML
+var roulette = document.getElementById("roulette");
+var resultText = document.getElementById("result");
+
+// Evento al hacer clic en la ruleta
+roulette.addEventListener("click", function() {
+    // Detener la animación
+    roulette.style.animationPlayState = "paused";
+    
+    // Generar un número aleatorio para seleccionar el resultado
+    var randomIndex = Math.floor(Math.random() * results.length);
+    var randomResult = results[randomIndex];
+    
+    // Mostrar el resultado
+    resultText.innerHTML = randomResult;
+});
+</script>
+
+</body>
+</html>
