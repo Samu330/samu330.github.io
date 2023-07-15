@@ -44,12 +44,13 @@
       `;
       chatboxElement.appendChild(messageElement);
 
-      const response = await fetch(`https://api.simsimi.net/v2/?text=${encodeURIComponent(message)}&lc=es`, {
+      const response = await fetch(`https://api.simsimi.net/v2/?text=${message}&lc=es`, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       const data = await response.json();
+      alert(data.success)
 
       const responseElement = document.createElement('div');
       responseElement.className = 'message';
