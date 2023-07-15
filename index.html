@@ -27,7 +27,7 @@ Swal.fire({
   confirmButtonText: 'visualizar',
   showLoaderOnConfirm: true,
   preConfirm: (login) => {
-    return fetch(`https://api.simsimi.net/v2/?text=${login}&lc=es`)
+    return fetch(`//api.github.com/users/${login}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(response.statusText)
@@ -44,7 +44,8 @@ Swal.fire({
 }).then((result) => {
   if (result.isConfirmed) {
     Swal.fire({
-      title: `${result.value.success}`
+      title: `${result.value.bio}`,
+      imageUrl: result.value.avatar_url
     })
   }
 })
