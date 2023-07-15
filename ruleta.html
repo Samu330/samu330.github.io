@@ -1,59 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#roulette {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: #ff0000;
-    animation-name: spin;
-    animation-duration: 2s;
-    animation-iteration-count: infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-#result {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    font-weight: bold;
-}
-</style>
+  <title>Ruleta Giratoria</title>
+  <style>
+    .container {
+      width: 500px;
+      height: 500px;
+      position: relative;
+      border: 2px solid black;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    
+    .ruleta {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 5s 0s;
+    }
+    
+    .opcion {
+      width: 100%;
+      height: 20%;
+      background-color: #ff0012;
+      border-top: 2px solid white;
+      text-align: center;
+      font-size: 20px;
+      line-height: 200%;
+    }
+    
+    .resultado {
+      text-align: center;
+      font-size: 30px;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    
-<div id="roulette"></div>
-<div id="result"></div>
-
-<script>
-// Array de resultados
-var results = ["Resultado 1", "Resultado 2", "Resultado 3", "Resultado 4"];
-
-// Elementos HTML
-var roulette = document.getElementById("roulette");
-var resultText = document.getElementById("result");
-
-// Evento al hacer clic en la ruleta
-roulette.addEventListener("click", function() {
-    // Detener la animación
-    roulette.style.animationPlayState = "paused";
-    
-    // Generar un número aleatorio para seleccionar el resultado
-    var randomIndex = Math.floor(Math.random() * results.length);
-    var randomResult = results[randomIndex];
-    
-    // Mostrar el resultado
-    resultText.innerHTML = randomResult;
-});
-</script>
-
+  <div class="container">
+    <div class="ruleta">
+      <div class="opcion">Di un versículo</div>
+      <div class="opcion">Canta</div>
+      <div class="opcion">Que dice génesis 1:1</div>
+      <div class="opcion">Di un poema</div>
+      <div class="opcion">Di el salmos 23</div>
+      <div class="opcion">Di 5 versículos</div>
+      <div class="opcion">Que dice apocalipsis 3:20</div>
+    </div>
+  </div>
+  <button onclick="spin()">Girar</button>
+  <div class="resultado">Resultado: </div>
+  
+  <script>
+    function spin() {
+      var ruleta = document.querySelector('.ruleta');
+      var opciones = document.querySelectorAll('.opcion');
+      var resultado = document.querySelector('.resultado');
+      
+      ruleta.style.transform = 'rotate(1800deg)';
+      
+      setTimeout(function() {
+        var indice = Math.floor(Math.random() * opciones.length);
+        resultado.innerHTML = 'Resultado: ' + opciones[indice].innerHTML;
+        
+        ruleta.style.transform = 'rotate(0deg)';
+      }, 5000);
+    }
+  </script>
 </body>
 </html>
