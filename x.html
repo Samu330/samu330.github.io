@@ -1,44 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tabla exportable a Excel</title>
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <title>Chat con SimSimi</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>Tabla exportable a Excel</h1>
-    <input type="text" id="dataInput" placeholder="Ingrese los datos separados por coma">
-    <button onclick="createTable()">Crear tabla</button>
-    <button onclick="exportToExcel()">Exportar a Excel</button>
-    <div id="tableContainer"></div>
-
+    <h1>Chat con SimSimi</h1>
+    
+    <div id="chat-container">
+        <div id="messages"></div>
+        <input type="text" id="input-msg" placeholder="Escribe tu mensaje">
+        <button id="send-btn">Enviar</button>
+    </div>
+    
     <script>
-        function createTable() {
-            var dataInput = document.getElementById("dataInput").value;
-            var dataArray = dataInput.split(",");
-            var tableHtml = "<table><thead><tr><th>ID</th><th>Nombre</th></tr></thead><tbody>";
+        $(document).ready(function() {
+            var apiUrl = 'https://wsapi.simsimi.com/190410/talk';
+            var apiKey = '848362ba-ce7f-4eba-b90d-c5f5f6ce999f'; // Reemplazar con tu API Key de SimSimi
             
-            for (var i = 0; i < dataArray.length; i++) {
-                tableHtml += "<tr><td>" + (i + 1) + "</td><td>" + dataArray[i] + "</td></tr>";
+            $('#send-btn').click(function() {
+                var message = $('#input-msg').val();
+                sendMessageToSimSimi(message);
+            });
+            
+            function sendMessageToSimSimi(message) {
+                var data = {
+                    'utext': message,
+                    'lang': 'es',
+                    'atext_bad_prob_max': '0.1',
+                };
+            
+                var settings = {
+                    'async': true,
+                    'crossDomain': true,
+                    'url': apiUrl,
+                    'method': 'POST',
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'x-api-key': apiKey
+                    },
+                    'data': JSON.stringify(data)
+                };
+            
+                $.ajax(settings).done(function (response) {
+                    var reply = response.atext;
+                    appendMessage('user', message);
+                    appendMessage('sim-simi', reply);
+                    $('#input-msg').val('');
+                });
             }
             
-            tableHtml += "</tbody></table>";
-            document.getElementById("tableContainer").innerHTML = tableHtml;
-        }
-
-        function exportToExcel() {
-            var wb = XLSX.utils.table_to_book(document.getElementsByTagName('table')[0], {sheet:"Sheet JS"});
-            var wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'binary'});
-            
-            function s2ab(s) {
-                var buf = new ArrayBuffer(s.length);
-                var view = new Uint8Array(buf);
-                for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
-                return buf;
+            function appendMessage(sender, message) {
+                var msgSender = (sender === 'user') ? 'Tú' : 'SimSimi';
+                var msgClass = (sender === 'user') ? 'user-msg' : 'sim-simi-msg';
+                var messageHTML = '<p class="' + msgClass + '"><strong>' + msgSender + ': </strong>' + message + '</p>';
+                $('#messages').append(messageHTML);
             }
-            
-            saveAs(new Blob([s2ab(wbout)], {type: "application/octet-stream"}), "tabla.xlsx");
-        }
+        });
     </script>
 </body>
 </html>
