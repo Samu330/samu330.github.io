@@ -1,63 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Chat con SimSimi</title>
-</head>
-<body>
-  <h1>Chat con SimSimi</h1>
-
-  <ul id="messages"></ul>
-
-  <div>
-    <input type="text" id="input" placeholder="Escribe tu mensaje">
-    <button id="send">Enviar</button>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
-
-  <script>
-    // Función para agregar un mensaje a la lista de mensajes
-    function addMessage(sender, message) {
-      var li = document.createElement("li");
-      li.textContent = sender + ": " + message;
-      document.getElementById("messages").appendChild(li);
-    }
-
-    // Función para enviar el mensaje al servidor de SimSimi
-    async function sendMessage(message) {
-      try {
-        return fetch(`https://api.simsimi.net/v2/?text=${message}&lc=es`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
-        return response.json()
-      })
-      .catch(error => {
-        alert.showValidationMessage(
-          `Request failed: ${error}`
-        )
-      })
-      },
-      allowOutsideClick: () => !alret.isLoading()
-}).then((result) => {
-  if (result.isConfirmed) {
-    alert({title: `${result.success}`})
-  }
-})
-
-    // Evento al hacer clic en el botón de enviar
-    document.getElementById("send").addEventListener("click", function() {
-      var input = document.getElementById("input");
-      var message = input.value.trim();
-      input.value = "";
-
-      if (message.length > 0) {
-        addMessage("Tú", message);
-        sendMessage(message);
+  <head>
+    <title>Simple Chat</title>
+    <style>
+      #messages {
+        height: 300px;
+        overflow: auto;
       }
-    });
-  </script>
-</body>
+    </style>
+  </head>
+  <body>
+    <h1>Simple Chat</h1>
+    <div id="messages"></div>
+    <input type="text" id="input" placeholder="Type a message..." />
+    <button id="send">Send</button>
+
+    <script>
+      const messagesDiv = document.getElementById("messages");
+      const inputField = document.getElementById("input");
+      const sendButton = document.getElementById("send");
+
+      sendButton.addEventListener("click", sendMessage);
+
+      function sendMessage() {
+        const message = inputField.value;
+        inputField.value = "";
+
+        const messageElement = document.createElement("p");
+        messageElement.textContent = `You: ${message}`;
+        messagesDiv.appendChild(messageElement);
+
+        fetch(`https://api.simsimi.net/v1/?text=${message}&lang=en`)
+          .then((response) => response.json())
+          .then((data) => {
+            const replyElement = document.createElement("p");
+            replyElement.textContent = `SimSimi: ${data.messages[0].response}`;
+            messagesDiv.appendChild(replyElement);
+          })
+          .catch((error) => console.log(error));
+      }
+    </script>
+  </body>
 </html>
