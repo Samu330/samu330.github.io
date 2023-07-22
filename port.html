@@ -1,96 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Mi Portafolio</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text to Speech</title>
+  <style>
       body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
+  text-align: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
 h1 {
-    margin: 0;
+  margin-bottom: 20px;
 }
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+textarea {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
 }
 
-nav ul li {
-    display: inline;
+select {
+  margin-bottom: 10px;
 }
 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    margin-right: 10px;
+button {
+  padding: 10px 20px;
+  font-size: 16px;
 }
-
-section {
-    padding: 40px;
-}
-
-.proyecto {
-    margin-bottom: 20px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-}
-    </style>
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Mi Portafolio</h1>
-        <nav>
-            <ul>
-                <li><a href="#sobre-mi">Sobre Mí</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section id="sobre-mi">
-        <h2>Sobre Mí</h2>
-        <p>Bienvenido a mi portafolio. Soy un desarrollador web apasionado y creativo.</p>
-    </section>
-    <section id="proyectos">
-        <h2>Proyectos</h2>
-        <div class="proyecto">
-            <h3>Proyecto 1</h3>
-            <p>Descripción del proyecto 1.</p>
-        </div>
-        <div class="proyecto">
-            <h3>Proyecto 2</h3>
-            <p>Descripción del proyecto 2.</p>
-        </div>
-    </section>
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <form>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" required></textarea>
-            <input type="submit" value="Enviar">
-        </form>
-    </section>
-    <footer>
-        <p>Derechos de autor &copy; 2021 Mi Portafolio</p>
-    </footer>
+  <h1>Text to Speech</h1>
+  <textarea id="text-input" placeholder="Escribe el texto que deseas convertir a voz..."></textarea>
+  <select id="language-select">
+    <option value="en-US">Inglés</option>
+    <option value="es-ES">Español</option>
+    <option value="fr-FR">Francés</option>
+    <!-- Añadir más opciones de lenguaje si es necesario -->
+  </select>
+  <button id="speak-btn">Hablar</button>
+  <script>
+      const speakButton = document.getElementById('speak-btn');
+const textInput = document.getElementById('text-input');
+const languageSelect = document.getElementById('language-select');
+
+// Función para convertir texto a voz
+function speak() {
+  const text = textInput.value;
+  const language = languageSelect.value;
+  
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = language;
+  speechSynthesis.speak(utterance);
+}
+
+speakButton.addEventListener('click', speak);
+  </script>
 </body>
 </html>
