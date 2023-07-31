@@ -1,261 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tetris</title>
-  <style>
-      #game {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+   <title>Tetris</title>
+   <style>
+     #tetris {
+   position: relative;
+   width: 300px;
+   height: 600px;
+   border: 1px solid #000;
+   margin: 0 auto;
+   overflow: hidden;
+   touch-action: none;
 }
 
-#tetris-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 30px);
-  grid-template-rows: repeat(20, 30px);
-  border: 1px solid black;
+.grid {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: grid;
+   grid-template-columns: repeat(10, 1fr);
+   grid-template-rows: repeat(20, 1fr);
+   border: 1px solid #000;
+   box-sizing: border-box;
 }
 
-#tetris-grid div {
-  background-color: #FFF;
-  border: 1px solid #CCC;
+.tetromino {
+   position: absolute;
+   width: 30px;
+   height: 30px;
+   background-color: #ff0000;
+   border: 1px solid #000;
 }
-
-#score {
-  margin-top: 20px;
-  font-size: 24px;
-}
-
-#game-over {
-  margin-top: 20px;
-  font-size: 36px;
-  color: red;
-  display: none;
-}
-
-  </style>
+   </style>
 </head>
 <body>
-  <div id="game">
-    <div id="tetris-grid"></div>
-    <div id="score">Score: 0</div>
-    <div id="game-over">Game Over!</div>
-  </div>
+   <div id="tetris">
+      <div class="grid"></div>
+      <div class="tetromino"></div>
+   </div>
 
-  <script>
-      document.addEventListener('DOMContentLoaded', () => {
-  const grid = document.getElementById('tetris-grid');
-  const scoreDisplay = document.getElementById('score');
-  const gameOverDisplay = document.getElementById('game-over');
+   <script src="hammer.min.js"></script>
+   <script>
+     const tetris = document.getElementById('tetris');
 
-  const width = 10;
-  const height = 20;
-  const gridSize = width * height;
+const hammer = new Hammer(tetris);
+hammer.on('swipeleft', moveLeft);
+hammer.on('swiperight', moveRight);
+hammer.on('swipeup', rotate);
+hammer.on('swipedown', moveDown);
 
-  let squares = Array.from(grid.getElementsByClassName('grid-square'));
-  let currentPosition = 4;
-  let currentRotation = 0;
-  let currentShape = shapes[0][0];
-  let timerId;
-  let score = 0;
-  let gameOver = false;
+function moveLeft() {
+   // Mover la pieza hacia la izquierda
+}
 
-  // Tetromino Shapes
-  const shapes = [
-    // Tetromino I
-    [
-      [1, width + 1, width * 2 + 1, width * 3 + 1],
-      [width, width + 1, width + 2, width + 3],
-      [1, width + 1, width * 2 + 1, width * 3 + 1],
-      [width, width + 1, width + 2, width + 3]
-    ],
-    // Tetromino L
-    [
-      [1, width + 1, width * 2 + 1, 2],
-      [width, width + 1, width + 2, width * 2 + 2],
-      [1, width + 1, width * 2 + 1, width * 2],
-      [width, width * 2, width * 2 + 1, width * 2 + 2]
-    ],
-    // Tetromino O
-    [
-      [0, 1, width, width + 1],
-      [0, 1, width, width + 1],
-      [0, 1, width, width + 1],
-      [0, 1, width, width + 1]
-    ],
-    // Tetromino Z
-    [
-      [0, width, width + 1, width * 2 + 1],
-      [width + 1, width + 2, width * 2, width * 2 + 1],
-      [0, width, width + 1, width * 2 + 1],
-      [width + 1, width + 2, width * 2, width * 2 + 1]
-    ],
-    // Tetromino T
-    [
-      [1, width, width + 1, width + 2],
-      [1, width + 1, width + 2, width * 2 + 1],
-      [width, width + 1, width + 2, width * 2 + 1],
-      [1, width, width + 1, width * 2 + 1]
-    ]
-  ];
+function moveRight() {
+   // Mover la pieza hacia la derecha
+}
 
-  // Displays the Tetromino
-  function draw() {
-    currentShape.forEach(index => {
-      squares[currentPosition + index].classList.add('shape');
-    });
-  }
+function rotate() {
+   // Rotar la pieza
+}
 
-  // Removes the Tetromino
-  function undraw() {
-    currentShape.forEach(index => {
-      squares[currentPosition + index].classList.remove('shape');
-    });
-  }
-
-  // Moves the Tetromino down
-  function moveDown() {
-    undraw();
-    currentPosition += width;
-    draw();
-    freeze();
-  }
-
-  // Moves the Tetromino right
-  function moveRight() {
-    undraw();
-    const isAtRightEdge = currentShape.some(index => (currentPosition + index) % width === width - 1);
-
-    if (!isAtRightEdge) currentPosition += 1;
-
-    if (currentShape.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-      currentPosition -= 1;
-    }
-
-    draw();
-  }
-
-  // Moves the Tetromino left
-  function moveLeft() {
-    undraw();
-    const isAtLeftEdge = currentShape.some(index => (currentPosition + index) % width === 0);
-
-    if (!isAtLeftEdge) currentPosition -= 1;
-
-    if (currentShape.some(index => squares[currentPosition + index].classList.contains('taken'))) {
-      currentPosition += 1;
-    }
-
-    draw();
-  }
-
-  // Rotates the Tetromino
-  function rotate() {
-    undraw();
-    currentRotation = (currentRotation + 1) % currentShape.length;
-    currentShape = shapes[randomShape][currentRotation];
-    draw();
-  }
-
-  // Freezes the Tetromino when it reaches the bottom or another Tetromino
-  function freeze() {
-    if (currentShape.some(index => squares[currentPosition + index + width].classList.contains('taken'))) {
-      currentShape.forEach(index => squares[currentPosition + index].classList.add('taken'));
-
-      // Start a new Tetromino falling
-      randomShape = Math.floor(Math.random() * shapes.length);
-      currentPosition = 4;
-      currentRotation = 0;
-      currentShape = shapes[randomShape][currentRotation];
-      draw();
-
-      // Check for line clears
-      checkForLineClears();
-    }
-  }
-
-  // Checks if any lines have been cleared
-  function checkForLineClears() {
-    for (let rowIndex = 0; rowIndex < gridSize; rowIndex += width) {
-      const row = [
-        rowIndex, rowIndex + 1, rowIndex + 2, rowIndex + 3,
-        rowIndex + 4, rowIndex + 5, rowIndex + 6, rowIndex + 7,
-        rowIndex + 8, rowIndex + 9
-      ];
-
-      if (row.every(index => squares[index].classList.contains('taken'))) {
-        score += 10;
-        scoreDisplay.innerHTML = `Score: ${score}`;
-        row.forEach(index => {
-          squares[index].classList.remove('taken', 'shape');
-        });
-
-        // Move down all the squares above the cleared line
-        const squaresRemoved = squares.splice(rowIndex, width);
-        squares = squaresRemoved.concat(squares);
-        squares.forEach(cell => grid.appendChild(cell));
-      }
-    }
-
-    endGame();
-  }
-
-  // Ends the game if any square in the first row is taken
-  function endGame() {
-    if (squares.some(cell => cell.classList.contains('taken') && cell.classList.contains('visible'))) {
-      gameOver = true;
-      clearInterval(timerId);
-      gameOverDisplay.style.display = 'block';
-    }
-  }
-
-  // Event listener for keyboard controls
-  function control(event) {
-    if (!gameOver) {
-      if (event.keyCode === 37) {
-        moveLeft();
-      } else if (event.keyCode === 38) {
-        rotate();
-      } else if (event.keyCode === 39) {
-        moveRight();
-      } else if (event.keyCode === 40) {
-        moveDown();
-      }
-    }
-  }
-  document.addEventListener('keydown', control);
-
-  // Starts the game
-  function startGame() {
-    grid.innerHTML = '';
-
-    // Create the grid squares
-    for (let i = 0; i < gridSize; i++) {
-      const square = document.createElement('div');
-      square.classList.add('grid-square');
-      grid.appendChild(square);
-    }
-
-    squares = Array.from(grid.getElementsByClassName('grid-square'));
-    score = 0;
-    gameOver = false;
-    gameOverDisplay.style.display = 'none';
-    scoreDisplay.innerHTML = `Score: ${score}`;
-
-    randomShape = Math.floor(Math.random() * shapes.length);
-    currentPosition = 4;
-    currentRotation = 0;
-    currentShape = shapes[randomShape][currentRotation];
-    draw();
-
-    timerId = setInterval(moveDown, 1000);
-  }
-
-  startGame();
-});
-
-  </script>
+function moveDown() {
+   // Mover la pieza hacia abajo
+}
+   </script>
 </body>
 </html>
