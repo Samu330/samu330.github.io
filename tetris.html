@@ -1,71 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <title>Tetris</title>
-   <style>
-     #tetris {
-   position: relative;
-   width: 300px;
-   height: 600px;
-   border: 1px solid #000;
-   margin: 0 auto;
-   overflow: hidden;
-   touch-action: none;
+    <title>Tetris</title>
+    <style>
+       #tetris-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    height: 600px;
+    margin: 0 auto;
+    background-color: #333;
 }
 
-.grid {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   display: grid;
-   grid-template-columns: repeat(10, 1fr);
-   grid-template-rows: repeat(20, 1fr);
-   border: 1px solid #000;
-   box-sizing: border-box;
+.tetris-cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #555;
+    background-color: #666;
 }
 
-.tetromino {
-   position: absolute;
-   width: 30px;
-   height: 30px;
-   background-color: #ff0000;
-   border: 1px solid #000;
+.tetris-cell.active {
+    background-color: #999;
 }
-   </style>
+    </style>
 </head>
 <body>
-   <div id="tetris">
-      <div class="grid"></div>
-      <div class="tetromino"></div>
-   </div>
+    <div id="tetris-grid"></div>
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script>
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+    const grid = document.getElementById("tetris-grid");
+    const cells = [];
+    const rows = 20;
+    const cols = 10;
+    let currentShape = null;
+    let intervalId = null;
 
-   <script src="hammer.min.js"></script>
-   <script>
-     const tetris = document.getElementById('tetris');
+    function createGrid() {
+        for (let i = 0; i < rows; i++) {
+            const row = document.createElement("div");
+            for (let j = 0; j < cols; j++) {
+                const cell = document.createElement("div");
+                cell.className = "tetris-cell";
+                row.appendChild(cell);
+                cells.push(cell);
+            }
+            grid.appendChild(row);
+        }
+    }
 
-const hammer = new Hammer(tetris);
-hammer.on('swipeleft', moveLeft);
-hammer.on('swiperight', moveRight);
-hammer.on('swipeup', rotate);
-hammer.on('swipedown', moveDown);
+    function clearGrid() {
+        cells.forEach(cell => {
+            cell.className = "tetris-cell";
+        });
+    }
 
-function moveLeft() {
-   // Mover la pieza hacia la izquierda
-}
+    function drawShape() {
+        if (currentShape) {
+            currentShape.cells.forEach(cell => {
+                const index = cell[0] + (cell[1] * cols);
+                cells[index].className = "tetris-cell active";
+            });
+        }
+    }
 
-function moveRight() {
-   // Mover la pieza hacia la derecha
-}
+    function removeShape() {
+        if (currentShape) {
+            currentShape.cells.forEach(cell => {
+                const index = cell[0] + (cell[1] * cols);
+                cells[index].className = "tetris-cell";
+            });
+        }
+    }
 
-function rotate() {
-   // Rotar la pieza
-}
+    function moveShape(direction) {
+        if (currentShape) {
+            removeShape();
 
-function moveDown() {
-   // Mover la pieza hacia abajo
-}
-   </script>
+            const movedCells = currentShape.move(direction);
+            const isCollision = movedCells.some(cell => {
+                const [x, y] = cell;
+                return x < 0 || x >= cols || y >= rows;
+            });
+
+            if (!isCollision) {
+                currentShape.cells = movedCells;
+            }
+
+            drawShape();
+        }
+    }
+
+    function rotateShape() {
+        if (currentShape) {
+            removeShape();
+
+            const rotatedCells = currentShape.rotate();
+            const isCollision = rotatedCells.some(cell => {
+                const [x, y] = cell;
+                return x < 0 || x >= cols || y >= rows;
+            });
+
+            if (!isCollision) {
+                currentShape.cells = rotatedCells;
+            }
+
+            drawShape();
+        }
+    }
+
+    function startGame() {
+        clearGrid();
+
+        // Definir las formas posibles del tetris (ejemplo: I, J, L, O, S, T, Z)
+        const shapes = [
+            [[0, 0], [0, 1], [0, 2], [0, 3]],
+            [[0, 0], [1, 0], [1, 1], [1, 2]],
+            [[0, 2], [1, 0], [1, 1], [1, 2]],
+            [[0, 0], [0, 1], [1, 0], [1, 1]],
+            [[0, 1], [0, 2], [1, 0], [1, 1]],
+            [[0, 0], [0, 1], [0, 2], [1, 1]],
+            [[0, 1], [0, 2], [1, 0], [1, 1]]
+        ];
+
+        // Generar una forma aleatoria
+        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+        currentShape = {
+            cells: randomShape,
+            move: function(direction) {
+                return this.cells.map(cell => {
+                    let [x, y] = cell;
+                    if (direction === "down") y++;
+                    else if (direction === "left") x--;
+                    else if (direction === "right") x++;
+                    return [x, y];
+                });
+            },
+            rotate: function() {
+                return this.cells.map(cell => {
+                    let [x, y] = cell;
+                    [x, y] = [y, -x];
+                    return [x, y];
+                });
+            }
+        };
+
+        drawShape();
+
+        // Movimiento con Hammer.js en dispositivos móviles
+        const mc = new Hammer(grid);
+        mc.get("swipe").set({ direction: Hammer.DIRECTION_ALL });
+        mc.on("swipeleft", function() {
+            moveShape("left");
+        });
+        mc.on("swiperight", function() {
+            moveShape("right");
+        });
+        mc.on("swipedown", function() {
+            moveShape("down");
+        });
+        mc.on("tap", function() {
+            rotateShape();
+        });
+
+        // Bucle de juego para mover la forma hacia abajo automáticamente
+        intervalId = setInterval(function() {
+            moveShape("down");
+        }, 1000);
+    }
+
+    function endGame() {
+        clearInterval(intervalId);
+        currentShape = null;
+        alert("Game Over");
+    }
+
+    createGrid();
+    startGame();
+});
+    </script>
 </body>
 </html>
