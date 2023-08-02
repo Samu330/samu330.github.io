@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Piano</title>
+    <style>
+        /* Estilos generales */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .piano {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+            width: 800px;
+        }
+
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 50px;
+            background-color: white;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .key.black {
+            position: relative;
+            height: 70%;
+            width: 40px;
+            background-color: black;
+            margin: 0 -15px;
+            z-index: 1;
+        }
+
+        /* Estilos cuando se presiona la tecla */
+        .key.pressed {
+            background-color: #bbb;
+        }
+
+        .key.black.pressed {
+            background-color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="piano">
+        <div class="key" data-note="C"></div>
+        <div class="key black" data-note="C#"></div>
+        <div class="key" data-note="D"></div>
+        <div class="key black" data-note="D#"></div>
+        <div class="key" data-note="E"></div>
+        <div class="key" data-note="F"></div>
+        <div class="key black" data-note="F#"></div>
+        <div class="key" data-note="G"></div>
+        <div class="key black" data-note="G#"></div>
+        <div class="key" data-note="A"></div>
+        <div class="key black" data-note="A#"></div>
+        <div class="key" data-note="B"></div>
+    </div>
+
+    <script>
+        // Obtener todas las teclas
+        const keys = document.querySelectorAll('.key');
+
+        // Añadir evento click a cada tecla para reproducir el sonido respectivo
+        keys.forEach(key => {
+            key.addEventListener('click', () => {
+                const note = key.getAttribute('data-note');
+                const audio = new Audio(`https://www.marianopolis.edu/wp-content/uploads/2021/01/${note}.mp3`); // Reemplazar por la ruta de los audios correspondientes
+                audio.play();
+                key.classList.add('pressed');
+                setTimeout(() => {
+                    key.classList.remove('pressed');
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
