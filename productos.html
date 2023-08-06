@@ -153,7 +153,7 @@ return false;
 }
 function NS(e)
 {
-if (document.layers || (document.getElementBylId && !document.all))
+if (document.layers || (document.getElementById && !document.all))
 {
 if (e.which == "2" || e.which == "3")
 {
@@ -161,7 +161,7 @@ return false;
 }
 }
 }
-document.onmousedown=IE;document.onmouseup=N5; document.oncontextmenu=new Function("return false");
+document.onmousedown=IE;document.onmouseup=N5;document.oncontextmenu=new Function("return false");
 </script>
     
 </script>
