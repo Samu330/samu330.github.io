@@ -105,7 +105,7 @@ img {
   </style>
 
 </head>
-<body>
+<body onkeydown=“return false”>
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PRODUCTOS DISPONIBLES</h1>
@@ -144,40 +144,26 @@ img {
   transition: true,
 })
 
-function disableIE() {
-  if (document.all) {
-        return false;
-    }
-}
-function disableNS(e) {
-    if (document.layers || (document.getElementById && !document.all)) {
-        if (e.which==2 || e.which==3) {
-            return false;
-        }
-    }
-}
-if (document.layers) {
-    document.captureEvents(Event.MOUSEDOWN);
-    document.onmousedown = disableNS;
-} 
-else {
-    document.onmouseup = disableNS;
-    document.oncontextmenu = disableIE;
-}
-document.oncontextmenu=new Function("return false");
-
-var isCtrl = false;//declaramos en falso si no se presiona la tecla control
-document.onkeyup=function(e){
-if(e.which == 17) isCtrl=false;
-}
-document.onkeydown=function(e){
-if(e.which == 17) isCtrl=true;// si esta presionado la tecla control es true
-if(e.which == 80 &amp;&amp; isCtrl == true) {
-//Combinancion de teclas CTRL+S y bloquear su ejecucion en el navegador
+function IE(e)
+   {
+if (navigator.appName == "Microsoft Internet Explorer" && (event.button == "2" || event.button == "3"))
+{
 return false;
 }
 }
-
+function NS(e)
+{
+if (document.layers || (document.getElementBylId && !document.all))
+{
+if (e.which == "2" || e.which == "3")
+{
+return false;
+}
+}
+}
+document.onmousedown=IE;document.onmouseup=N5; document.oncontextmenu=new Function("return false");
+</script>
+    
 </script>
 
 </body>
