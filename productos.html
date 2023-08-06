@@ -152,6 +152,12 @@ function disableNS(e) {
     if (document.layers || (document.getElementById && !document.all)) {
         if (e.which==2 || e.which==3) {
             return false;
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Something went wrong!',
+  footer: '<a href="">Why do I have this issue?</a>'
+})
         }
     }
 }
@@ -163,12 +169,6 @@ else {
     document.onmouseup = disableNS;
     document.oncontextmenu = disableIE;
 }
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Something went wrong!',
-  footer: '<a href="">Why do I have this issue?</a>'
-})
 document.oncontextmenu=new Function("return false");
     
   </script>
