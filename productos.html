@@ -145,6 +145,9 @@ img {
 })
 
 document.oncontextmenu = function(){return false}
+document.addEventListener("dragstart", function(event) {
+  event.preventDefault();
+});
 
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
@@ -153,7 +156,7 @@ document.addEventListener('keydown', function(event) {
   icon: 'error',
   title: 'Oops...',
   text: 'No puedes acceder al codigo fuente de esta pagina!',
-  footer: '<a href="https://wa.me/5219984907794">Why do I have this issue?</a>'
+  footer: '<a href="https://wa.me/5219984907794" about:blank>Why do I have this issue?</a>'
 });
   }
 });
