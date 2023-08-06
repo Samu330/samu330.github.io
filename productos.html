@@ -173,13 +173,13 @@ function desactivarCrlAlt(teclaactual){
    //Ctrl + 
    if (controlprecionado==17){
       if (teclaactual==78 || teclaactual==85 ){
-  Swal.fire({
+        desactivar=true;
+          Swal.fire({
   icon: 'error',
   title: 'Oops...',
   text: 'Something went wrong!',
   footer: '<a href="">Why do I have this issue?</a>'
 })
-        desactivar=true;
       }         
       if (teclaactual==82){
         //alert("Ctrl+R deshabilitado");
