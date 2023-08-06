@@ -164,33 +164,21 @@ else {
     document.oncontextmenu = disableIE;
 }
 document.oncontextmenu=new Function("return false");
-    
-  </script>
-  <script>
-//Autor: rbedat,
-//Este script permite deshabilitar:
-// El boton derecho del mouse,
-// El F5 y F11
-// El Ctrl + F5
-// El Ctrl + N y Ctrl + U
-// El Ctrl + R
-// El Ctrl + [<-] y el Ctrl + [->]
-// El Backspace fuera de los formularios.
-//  
-//Tener en cuenta que utiliza los eventos: 
-// onkeydown y onkeyup 
-
-//begin desabilitar teclas
 
 var controlprecionado = 0;
 var altprecionado = 0;
 function desactivarCrlAlt(teclaactual){
-   //alert(teclaactual);
+   
    var desactivar = false;
    //Ctrl + 
    if (controlprecionado==17){
-      if (teclaactual==78 || teclaactual==85 ){
-        //alert("Ctrl+N y Ctrl+U deshabilitado");
+      if (teclaactual==85 ){
+  Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Something went wrong!',
+  footer: '<a href="">Why do I have this issue?</a>'
+})
         desactivar=true;
       }         
       if (teclaactual==82){
@@ -294,7 +282,7 @@ document.onkeydown = function(){
    }
  }
 } 
-//end desabilitar teclas
+
 </script>
 
 </body>
