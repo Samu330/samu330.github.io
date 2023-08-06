@@ -1,3 +1,4 @@
+const Swal = require('sweetalert2')
 document.oncontextmenu = function(){return false;}
 shortcut = {
     all_shortcuts: {},
