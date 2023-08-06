@@ -116,6 +116,7 @@ shortcut = {
       }
     },
      shortcut.add("Ctrl+U",function(){
+     Swal.fire('Any fool can use a computer')
      alert('Se siente\nLa combinación CTRL+U no está disponible. Se creativo!')
     }),
      shortcut.add("Meta+Alt+U",function(){
