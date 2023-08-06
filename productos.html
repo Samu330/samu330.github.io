@@ -105,7 +105,7 @@ img {
   </style>
 
 </head>
-<body>
+<body onmousedown = 'return false' onselectstart = 'return false'>
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PRODUCTOS DISPONIBLES</h1>
@@ -152,12 +152,11 @@ document.addEventListener("dragstart", function(event) {
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
     event.preventDefault();
-  Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'No puedes acceder al codigo fuente de esta pagina!',
-  footer: '<a href="https://wa.me/5219984907794" about:blank>Why do I have this issue?</a>'
-});
+  Swal.fire(
+  'Sin acceso?',
+  'Lo Siento pero no tienes permiso',
+  'question'
+)
   }
 });
     
