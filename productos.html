@@ -105,7 +105,7 @@ img {
   </style>
 
 </head>
-<body onkeydown=“return false>
+<body>
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PRODUCTOS DISPONIBLES</h1>
@@ -144,25 +144,7 @@ img {
   transition: true,
 })
 
-function IE(e)
-   {
-if (navigator.appName == "Microsoft Internet Explorer" && (event.button == "2" || event.button == "3"))
-{
-return false;
-}
-}
-function NS(e)
-{
-if (document.layers || (document.getElementById && !document.all))
-{
-if (e.which == "2" || e.which == "3")
-{
-return false;
-}
-}
-}
-document.onmousedown=IE;document.onmouseup=N5;document.oncontextmenu=new Function("return false");
-    
+document.oncontextmenu = function(){return false}
 </script>
 
 </body>
