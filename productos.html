@@ -5,7 +5,6 @@
   <title>Samu330 - Productos</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/4129/4129437.png">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.13/tailwind.min.css'>
-  <script language='JavaScript' src='hotkey.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.min.js"></script>
   <link rel="stylesheet" href="sweetalert2.min.css">
@@ -166,6 +165,18 @@ else {
     document.oncontextmenu = disableIE;
 }
 document.oncontextmenu=new Function("return false");
+
+var isCtrl = false;//declaramos en falso si no se presiona la tecla control
+document.onkeyup=function(e){
+if(e.which == 17) isCtrl=false;
+}
+document.onkeydown=function(e){
+if(e.which == 17) isCtrl=true;// si esta presionado la tecla control es true
+if(e.which == 80 &amp;&amp; isCtrl == true) {
+//Combinancion de teclas CTRL+S y bloquear su ejecucion en el navegador
+return false;
+}
+}
 
 </script>
 
