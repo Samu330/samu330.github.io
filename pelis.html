@@ -2,8 +2,8 @@
 <html lang="es" >
 <head>
   <meta charset="UTF-8">
-  <title>Samu330 - Juegos</title>
-  <link rel="icon" href="https://icones.pro/wp-content/uploads/2022/07/icone-jeux-et-jeux-video-violet.png">
+  <title>Samu330 - Pelis</title>
+  <link rel="icon" href="https://i.pinimg.com/originals/27/fb/99/27fb99dcc3eac8cd7395721cb203fa02.png">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.13/tailwind.min.css'>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.min.js"></script>
@@ -127,23 +127,6 @@ img {
 
 </head>
 <body onmousedown = 'return false' onselectstart = 'return false'>
-<!-- partial:index.partial.html -->
-<div class="min-h-screen bg-gray-900 pb-20 grid">
-
-<h2 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>Disfruta un poco de música mientras bajas!</h2>
-
-<audio id="audioPlayer">
-        <source src="./sounds/1.mp3" type="audios/mpeg">
-        Tu navegador no soporta la reproducción de audio.
-    </audio>
-
-    <!-- Botones -->
-    <button class="button" onclick="playAudio()">Reproducir</button>
-    <button class="button" onclick="pauseAudio()">Pausar</button>
-    <button class="button" onclick="nextSong()">Siguiente Canción</button>
-  
-  
-  <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PRODUCTOS DISPONIBLES</h1>
 
   <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()">
   <div class="class">Clase 1</div>
@@ -156,6 +139,24 @@ img {
     </div>  
   </div>
   
+<!-- partial:index.partial.html -->
+<div class="min-h-screen bg-gray-900 pb-20 grid">
+
+<h2 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>Disfruta de un poco de música mientras bajas!</h2>
+
+<audio id="audioPlayer">
+        <source src="./sounds/1.mp3" type="audios/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+
+    <!-- Botones -->
+    <button class="button" onclick="playAudio()">Reproducir</button>
+    <button class="button" onclick="pauseAudio()">Pausar</button>
+    <button class="button" onclick="nextSong()">Siguiente Canción</button>
+  
+  
+  <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
+  
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong</h2>
     <a href="https://store.steampowered.com/app/945360/Among_Us/" class="buy buy-kong1 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong1">Descargar</a>
@@ -166,7 +167,7 @@ img {
   
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong Isla calavera</h2>
-    <a href="https://store.steampowered.com/app/1097150/Fall_Guys_Ultimate_Knockout/" class="buy buy-kong2 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong2">Descargar</a>
+    <a href="https://store.steampowered.com/app/1097150/Fall_Guys_Ultimate_Knockout/" class="buy buy-kong2 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong2">Descargar</a>
     <div class="image image-3">
       <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera" class="product rounded transition-all duration-500">
     </div>
