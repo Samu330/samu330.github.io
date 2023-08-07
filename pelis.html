@@ -254,35 +254,21 @@ document.addEventListener('keydown', function(event) {
     }
 
 
-document.addEventListener("DOMContentLoaded", function() {
-  var enlaces = document.getElementsByTagName("a");
-  
-  for(var i = 0; i < enlaces.length; i++) {
-    enlaces[i].addEventListener("click", function(event) {
-      const id = this.id;
-  Swal.fire({
-  title: `Estas a punto de descargar ${id}`,
-  text: "Deseas continuar o prefieres seguir buscando!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Si quiero descargar'
-}).then((result) => {
-  if (result.isConfirmed) {
-  Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  title: `Descargando ${id}`,
-  showConfirmButton: false,
-  timer: 2000
-})
-    )
-  }
-})
 
-    });
-  }
+    const enlaces = document.querySelectorAll('a');
+
+// Recorrer todos los enlaces y agregar un evento de clic
+enlaces.forEach(enlace => {
+  enlace.addEventListener('click', function(event) {
+    // Prevenir el comportamiento predeterminado del enlace
+    event.preventDefault();
+    
+    // Obtener el id del enlace
+    const id = this.id;
+    
+    // Mostrar el id en una alerta
+    alert(`ID del enlace: ${id}`);
+  });
 });
 
 </script>
