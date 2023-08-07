@@ -16,6 +16,13 @@
             display: block;
             margin-bottom: 10px;
     }
+div1{
+  height: 200px;
+  background-color: #EEE;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 .button {
             background-color: #4CAF50;
             color: white;
@@ -146,8 +153,9 @@ img {
   
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
+  <div1>
   <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:50px">
-  <div class="class">Clase 1</div>
+  </div1>
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon</h2>
