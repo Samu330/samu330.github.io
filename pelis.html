@@ -18,11 +18,6 @@
             margin-bottom: 10px;
     }
 
-    .outlinenone {
-     outline: none;
-     background-color: #eee;
-     border: 0;
-   }
 
 div1{
   height: 100px;
@@ -163,7 +158,7 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" class="outlinenone" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
+        <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
   </div1>
   
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
@@ -257,6 +252,17 @@ document.addEventListener('keydown', function(event) {
                 }
             }
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+  var enlaces = document.getElementsByTagName("a");
+  
+  for(var i = 0; i < enlaces.length; i++) {
+    enlaces[i].addEventListener("click", function(event) {
+      event.preventDefault();
+      alert("Se ha presionado un enlace");
+    });
+  }
+});
     
 </script>
 
