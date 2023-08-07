@@ -260,14 +260,28 @@ document.addEventListener('keydown', function(event) {
 // Recorrer todos los enlaces y agregar un evento de clic
 enlaces.forEach(enlace => {
   enlace.addEventListener('click', function(event) {
-    // Prevenir el comportamiento predeterminado del enlace
-    event.preventDefault();
-    
+
     // Obtener el id del enlace
     const id = this.id;
-    
-    // Mostrar el id en una alerta
-    alert(`ID del enlace: ${id}`);
+  Swal.fire({
+  title: `Estas seguro que deseas descargar ${id}`,
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+})
+
+
   });
 });
 
