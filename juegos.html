@@ -11,9 +11,11 @@
   
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-.hidden {
-        display: none;
-}
+
+    #search-input {
+            display: block;
+            margin-bottom: 10px;
+    }
 .button {
             background-color: #4CAF50;
             color: white;
@@ -143,8 +145,8 @@ img {
   
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PRODUCTOS DISPONIBLES</h1>
 
-  <input type="text" id="filterInput" placeholder="Filtrar película" onkeyup="filterClasses()" />
-  
+  <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()">
+  <div class="class">Clase 1</div>
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon</h2>
@@ -222,21 +224,19 @@ document.addEventListener('keydown', function(event) {
 
 
 
-    function filterClasses() {
-        // Obtener el input y el div que contiene las clases
-        var input = document.getElementById("filterInput");
-        var classes = document.getElementsByClassName("class");
+    function filterImages() {
+            var input = document.getElementById("search-input").value.toLowerCase();
+            var images = document.getElementsByTagName("img");
 
-        // Recorrer todas las clases y comprobar si coinciden con el input
-        for (var i = 0; i < classes.length; i++) {
-          var className = classes[i].textContent || classes[i].innerText;
+            for (var i = 0; i < images.length; i++) {
+                var alt = images[i].getAttribute("alt");
 
-          if (className.toLowerCase().indexOf(input.value.toLowerCase()) > -1) {
-            classes[i].style.display = "";
-          } else {
-            classes[i].style.display = "none";
-          }
-        }
+                if (alt.toLowerCase().includes(input)) {
+                    images[i].style.display = "block";
+                } else {
+                    images[i].style.display = "none";
+                }
+            }
     }
     
 </script>
