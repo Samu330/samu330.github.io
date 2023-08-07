@@ -126,9 +126,10 @@ img {
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
 
+<h2 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>Disfruta un poco de música mientras bajas!</h2>
 
 <audio id="audioPlayer">
-        <source src="./sounds/D.mp3" type="audios/mpeg">
+        <source src="./sounds/1.mp3" type="audios/mpeg">
         Tu navegador no soporta la reproducción de audio.
     </audio>
 
@@ -189,6 +190,31 @@ document.addEventListener('keydown', function(event) {
 )
   }
 });
+
+
+    var audioPlayer = document.getElementById("audioPlayer");
+        var songs = ["./sounds/1.mp3", "./sounds/2.mp3", "./sounds/3.mp3"]; // Rutas a tus canciones
+        
+        var currentSongIndex = 0;
+
+        function playAudio() {
+            audioPlayer.src = songs[currentSongIndex];
+            audioPlayer.play();
+        }
+
+        function pauseAudio() {
+            audioPlayer.pause();
+        }
+
+        function nextSong() {
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0;
+            }
+
+            audioPlayer.src = songs[currentSongIndex];
+            audioPlayer.play();
+        }
     
 </script>
 
