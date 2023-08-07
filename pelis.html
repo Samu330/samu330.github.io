@@ -18,22 +18,6 @@
             margin-bottom: 10px;
     }
 
-        .input-group {
-            position: relative;
-            display: flex;
-        }
-
-        .input-group input {
-            padding-right: 30px;
-        }
-
-        .input-group .search-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-    
 div1{
   height: 100px;
   display:flex;
@@ -173,10 +157,7 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <div class="input-group">
-        <i class="fa-regular fa-magnifying-glass"></i>
         <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
-    </div>
   </div1>
   
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
