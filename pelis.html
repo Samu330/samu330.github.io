@@ -261,8 +261,28 @@ enlaces.forEach(enlace => {
     
     // Obtener el id del enlace
     const id = this.id;
+
+  Swal.fire({
+  title: `Estas a punto de descargar ${id}`,
+  text: "Deseas continuar o prefieres seguir buscando!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si quiero descargar'
+}).then((result) => {
+  if (result.isConfirmed) {
+  Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  title: `Descargando ${id}`,
+  showConfirmButton: false,
+  timer: 2000
+})
+    )
+  }
+})
     
-    // Mostrar el id en una alerta
     alert(`ID del enlace: ${id}`);
   });
 });
