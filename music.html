@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Estilos CSS para los botones */
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+        
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <audio id="audioPlayer" controls>
+        <source src="./D.mp3" type="audios/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+
+    <!-- Botones -->
+    <button class="button" onclick="playAudio()">Reproducir</button>
+    <button class="button" onclick="pauseAudio()">Pausar</button>
+    <button class="button" onclick="nextSong()">Siguiente Canción</button>
+
+    <script>
+        var audioPlayer = document.getElementById("audioPlayer");
+        var songs = ["./audios/D.mp3", "./audios/C.mp3", "./audios/E.mp3"]; // Rutas a tus canciones
+        
+        var currentSongIndex = 0;
+
+        function playAudio() {
+            audioPlayer.src = songs[currentSongIndex];
+            audioPlayer.play();
+        }
+
+        function pauseAudio() {
+            audioPlayer.pause();
+        }
+
+        function nextSong() {
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0;
+            }
+
+            audioPlayer.src = songs[currentSongIndex];
+            audioPlayer.play();
+        }
+    </script>
+</body>
+</html>
