@@ -17,20 +17,23 @@
             display: block;
             margin-bottom: 10px;
     }
-        .search-container {
+
+        .input-group {
             position: relative;
-            display: inline-block;
+            display: flex;
         }
 
-        .search-container input[type="text"] {
-            padding-left: 30px;
+        .input-group input {
+            padding-right: 30px;
         }
 
-        .search-container i {
+        .input-group .search-icon {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
         }
+    
 div1{
   height: 100px;
   display:flex;
@@ -170,9 +173,9 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <div class="search-container">
-        <i class="fa fa-search"></i>
-        <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px height:10px">
+        <div class="input-group">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
     </div>
   </div1>
   
