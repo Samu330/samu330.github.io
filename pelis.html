@@ -297,11 +297,10 @@ enlaces.forEach(enlace => {
 
   filtro.oninput = function() {
 
-    filtro.addEventListener("change", function() {
       if (filtro.value.length > 0) {
         divd.remove();
+        alert("aaaaaaaa");
     }
-    });
 
   if (filtro === '') {
     location.reload();
