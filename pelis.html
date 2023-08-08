@@ -13,12 +13,18 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-    #search-input {
-            display: block;
-            margin-bottom: 10px;
-    }
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-
+        .image-container img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 10px;
+        }
+    
 div1{
   height: 100px;
   display:flex;
@@ -165,9 +171,10 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" id="search-input" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
+        <input type="text" id="filterInput" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
   </div1>
 
+  <div class="image-container">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
@@ -200,7 +207,8 @@ img {
       <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500">
     </div>
   </div>
-</div>  
+</div>
+</div>
   </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
@@ -251,22 +259,24 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
+    const filterInput = document.getElementById('filterInput');
+        const imageContainer = document.querySelector('.image-container');
+        const images = [...imageContainer.getElementsByTagName('img')];
 
+        filterInput.addEventListener('keyup', function() {
+            const filter = filterInput.value.toLowerCase();
 
-    function filterImages() {
-            var input = document.getElementById("search-input").value.toLowerCase();
-            var images = document.getElementsByTagName("img");
-
-            for (var i = 0; i < images.length; i++) {
-                var alt = images[i].getAttribute("alt");
-
-                if (alt.toLowerCase().includes(input)) {
-                    images[i].style.display = "block";
+            images.forEach(function(img) {
+                const altText = img.getAttribute('alt').toLowerCase();
+                if (altText.includes(filter)) {
+                    img.style.display = 'block';
                 } else {
-                    images[i].style.display = "none";
+                    img.style.display = 'none';
                 }
-            }
-    }
+            });
+
+            imageContainer.prepend(...images.filter(img => img.style.display === 'block'));
+        });
 
 
 
