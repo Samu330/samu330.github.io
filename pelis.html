@@ -164,8 +164,8 @@ img {
   </div1>
   
 
-  <div id="galeria">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
+  <div id="resultado">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
@@ -250,27 +250,18 @@ document.addEventListener('keydown', function(event) {
         }
 
 
-    document.getElementById("filtro").addEventListener("input", filterImages);
-
-
-    function filtrar() {
-  var filtro = document.getElementById("filtro").value.toLowerCase();
-  var imagenes = document.querySelectorAll("img");
+    document.getElementById("filtro").addEventListener("input", function() {
+  let filtro = this.value.toLowerCase();
+  let imagenes = Array.from(document.querySelectorAll("#resultado img"));
   
-  imagenes.forEach(function(img) {
-    if (img.alt.toLowerCase().includes(filtro)) {
-      img.style.display = "block";
-    } else {
-      img.style.display = "none";
-    }
+  let resultadosFiltrados = imagenes.filter(function(imagen) {
+    return imagen.alt.toLowerCase().includes(filtro);
   });
-}
-
-window.onload = function() {
-  var boton = document.getElementById("boton-filtrar");
-  boton.addEventListener("click", filtrar);
-}
-
+  
+  resultadosFiltrados.forEach(function(imagen) {
+    document.getElementById("resultado").prepend(imagen);
+  });
+});
 
     const enlaces = document.querySelectorAll('a');
 
