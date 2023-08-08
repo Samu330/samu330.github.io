@@ -165,6 +165,7 @@ img {
   <div id="contenedorImagenes">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
 
+  <div id="The Megalodon 2">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
@@ -172,6 +173,7 @@ img {
       <img src="https://i.postimg.cc/HLcs5bdD/20230807-222833.png" alt="The Megalodon 2" class="product rounded transition-all duration-500">  
     </div>  
   </div>
+    </div>
   
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon</h2>
@@ -253,14 +255,14 @@ document.addEventListener('keydown', function(event) {
 
     function filtrarImagenes() {
   var filtro = document.getElementById("filtro").value.toLowerCase();
-  var imagenes = document.querySelectorAll("#contenedorImagenes img");
+  var imagenes = document.querySelectorAll("#contenedorImagenes div");
 
   // Mover las imágenes que no coincidan con la búsqueda a otro div
   var imagenesFiltradas = document.getElementById("imagenesFiltradas");
   imagenesFiltradas.innerHTML = "";
 
   for (var i = 0; i < imagenes.length; i++) {
-    if (imagenes[i].getAttribute("alt").toLowerCase().includes(filtro)) {
+    if (imagenes[i].getAttribute("id").toLowerCase().includes(filtro)) {
       imagenes[i].style.display = "";
     } else {
       imagenes[i].style.display = "none";
