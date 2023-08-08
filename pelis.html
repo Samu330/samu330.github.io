@@ -279,6 +279,7 @@ enlaces.forEach(enlace => {
   var filtro = document.getElementById('filtroInput').value.toLowerCase();
   var imagenes = document.getElementById('imagenesContenedor').getElementsByTagName('img');
   var resultadoContenedor = document.getElementById('resultadoContenedor');
+  var divd = document.getElementById("imagenesContenedor");
 
   resultadoContenedor.innerHTML = '';
 
@@ -286,11 +287,10 @@ enlaces.forEach(enlace => {
     var alt = imagenes[i].getAttribute('alt').toLowerCase();
 
     if (alt.includes(filtro)) {
+      divd.remove();
       var img = document.createElement('img');
       img.src = imagenes[i].src;
       img.alt = imagenes[i].alt;
-      var div = document.getElementById("imagenesContenedor");
-      div.remove();
 
       resultadoContenedor.appendChild(img);
     }
