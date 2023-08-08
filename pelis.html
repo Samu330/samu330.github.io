@@ -159,8 +159,10 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" id="filtro" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
+        <input type="text" id="filtroInput" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
   </div1>
+
+  <div id="imagenesContenedor">
   
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
 
@@ -195,7 +197,15 @@ img {
       <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500">
     </div>
   </div>
+    
 </div>
+
+</div>
+
+  <div1 id="resultadoContenedor">
+    <!-- Aquí se agregarán las imágenes filtradas -->
+  </div1>
+  
   </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
@@ -264,6 +274,31 @@ enlaces.forEach(enlace => {
 
   });
 });
+
+    function filtrarImagenes() {
+  var filtro = document.getElementById('filtroInput').value.toLowerCase();
+  var imagenes = document.getElementById('imagenesContenedor').getElementsByTagName('img');
+  var resultadoContenedor = document.getElementById('resultadoContenedor');
+
+  resultadoContenedor.innerHTML = '';
+
+  for (var i = 0; i < imagenes.length; i++) {
+    var alt = imagenes[i].getAttribute('alt').toLowerCase();
+
+    if (alt.includes(filtro)) {
+      var img = document.createElement('img');
+      img.src = imagenes[i].src;
+      img.alt = imagenes[i].alt;
+
+      resultadoContenedor.appendChild(img);
+    }
+  }
+
+  if (filtro === '') {
+    location.reload();
+  }
+}
+
 
 </script>
 
