@@ -12,15 +12,7 @@
   
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-.filtered {
-  display: none;
-}
-
-#filteredImages {
-  margin-top: 20px;
-}
-    
+  
 div1{
   height: 100px;
   display:flex;
@@ -171,6 +163,7 @@ img {
   </div1>
   
 
+  <div id="divOriginal">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
@@ -204,8 +197,9 @@ img {
     </div>
   </div>
 </div>
+</div>
   </div>
-  <div id="filteredImages"></div>
+  <div id="divFiltrado"></div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
     VanillaTilt.init(document.querySelectorAll(".card"), {
@@ -255,32 +249,30 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
-    window.onload = function() {
-  const input = document.getElementById("searchInput");
-  const images = document.querySelectorAll("img");
+    document.getElementById('inputFiltro').addEventListener('input', function () {
+            var filtro = this.value.toLowerCase();
+            var imagenes = document.querySelectorAll('#divOriginal img');
 
-  input.addEventListener("input", function() {
-    const searchTerm = input.value.toLowerCase();
+            var divFiltrado = document.getElementById('divFiltrado');
+            divFiltrado.innerHTML = '';
 
-    images.forEach(function(img) {
-      const altText = img.getAttribute("alt").toLowerCase();
+            for (var i = 0; i < imagenes.length; i++) {
+                var img = imagenes[i];
 
-      if (altText.includes(searchTerm)) {
-        img.style.display = "block";
-      } else {
-        img.style.display = "none";
-        img.classList.add("filtered");
-      }
-    });
-  });
+                if (img.alt.toLowerCase().includes(filtro)) {
+                    img.style.display = '';
+                } else {
+                    img.style.display = 'none';
+                    divFiltrado.appendChild(img);
+                }
+            }
+        });
 
-  input.addEventListener("keyup", function(event) {
-    if (event.key === "Backspace" && input.value === "") {
-      // Recargar la página
-      location.reload();
-    }
-  });
-};
+        document.getElementById('inputFiltro').addEventListener('blur', function () {
+            if (this.value === '') {
+                location.reload();
+            }
+        });
     
     const enlaces = document.querySelectorAll('a');
 
