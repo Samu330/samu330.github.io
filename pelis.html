@@ -165,7 +165,6 @@ img {
   <div id="contenedor">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
 
-  <div id="The">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
@@ -173,9 +172,7 @@ img {
       <img src="https://i.postimg.cc/HLcs5bdD/20230807-222833.png" alt="The Megalodon 2" class="product rounded transition-all duration-500">  
     </div>  
   </div>
-    </div>
 
-    <div id="meg">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon</h2>
     <a id="Megalodon" href="" target="_blank" class="buy buy-meg absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg">Descargar</a>
@@ -183,7 +180,6 @@ img {
       <img src="https://i.postimg.cc/Kj2PvydW/20230806-212739.png" alt="The Megalodon" class="product rounded transition-all duration-500">  
     </div>  
   </div>
-      </div>
   
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong</h2>
@@ -202,7 +198,6 @@ img {
   </div>
 </div>
 </div>
-<div id="resultado"></div>
   </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
@@ -252,28 +247,6 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.src = songs[currentSongIndex];
             audioPlayer.play();
         }
-
-    document.getElementById("searchInput").addEventListener("input", function() {
-  var searchValue = this.value.toLowerCase();
-  var container = document.getElementById("container");
-  var filteredContainer = document.getElementById("filteredContainer");
-  filteredContainer.innerHTML = "";
-
-  Array.from(container.getElementsByClassName("item")).forEach(function(item) {
-    var itemId = item.id.toLowerCase();
-    if (itemId.includes(searchValue)) {
-      container.appendChild(item);
-    } else {
-      filteredContainer.appendChild(item);
-    }
-  });
-});
-
-document.getElementById("searchInput").addEventListener("change", function() {
-  if (this.value === "") {
-    location.reload();
-  }
-});
     
     const enlaces = document.querySelectorAll('a');
 
