@@ -296,11 +296,12 @@ enlaces.forEach(enlace => {
   }
 
   filtro.oninput = function() {
-    
-    if (filtro.value.length > 0) {
+
+    filtro.addEventListener("change", function() {
+      if (filtro.value.length > 0) {
         divd.remove();
-            }
-        };
+    }
+    });
 
   if (filtro === '') {
     location.reload();
