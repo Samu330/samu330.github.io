@@ -289,6 +289,10 @@ enlaces.forEach(enlace => {
       var img = document.createElement('img');
       img.src = imagenes[i].src;
       img.alt = imagenes[i].alt;
+      function eliminarDiv() {
+      var div = document.getElementById("imagenesContenedor");
+      div.remove();
+      }
 
       resultadoContenedor.appendChild(img);
     }
