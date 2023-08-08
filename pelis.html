@@ -13,6 +13,14 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+.filtered {
+  display: none;
+}
+
+#filteredImages {
+  margin-top: 20px;
+}
+    
 div1{
   height: 100px;
   display:flex;
@@ -159,7 +167,7 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" id="search" onkeyup="filterImages()" placeholder="Filtrar películas" style="width:300px">
+        <input type="text" id="searchInput" onkeyup="filterImages()" placeholder="Filtrar películas" style="width:300px">
   </div1>
   
 
@@ -197,6 +205,7 @@ img {
   </div>
 </div>
   </div>
+  <div id="filteredImages"></div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
     VanillaTilt.init(document.querySelectorAll(".card"), {
@@ -246,30 +255,33 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
-    function filterImages() {
-  var input = document.getElementById("search");
-  var filter = input.value.toUpperCase();
-  var images = document.getElementsByTagName("img");
+    window.onload = function() {
+  const input = document.getElementById("searchInput");
+  const images = document.querySelectorAll("img");
 
-  for (var i = 0; i < images.length; i++) {
-    var alt = images[i].getAttribute("alt");
-    if (alt.toUpperCase().indexOf(filter) > -1) {
-      images[i].style.display = "";
-    } else {
-      images[i].style.display = "none";
+  input.addEventListener("input", function() {
+    const searchTerm = input.value.toLowerCase();
+
+    images.forEach(function(img) {
+      const altText = img.getAttribute("alt").toLowerCase();
+
+      if (altText.includes(searchTerm)) {
+        img.style.display = "block";
+      } else {
+        img.style.display = "none";
+        img.classList.add("filtered");
+      }
+    });
+  });
+
+  input.addEventListener("keyup", function(event) {
+    if (event.key === "Backspace" && input.value === "") {
+      // Recargar la página
+      location.reload();
     }
-  }
-}
-
-document.getElementById("search").addEventListener("input", function() {
-  if (this.value === "") {
-    var images = document.getElementsByTagName("img");
-    for (var i = 0; i < images.length; i++) {
-      images[i].style.display = "";
-    }
-  }
-});
-
+  });
+};
+    
     const enlaces = document.querySelectorAll('a');
 
 // Recorrer todos los enlaces y agregar un evento de clic
