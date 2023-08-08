@@ -163,7 +163,6 @@ img {
   </div1>
   
 
-  <div id="imagenes">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
@@ -196,7 +195,6 @@ img {
       <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500">
     </div>
   </div>
-</div>
 </div>
   </div>
 <!-- partial -->
@@ -248,16 +246,26 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
-    document.getElementById("filtro").addEventListener("input", function() {
-  var filtro = this.value.toLowerCase();
-  var imagenes = document.getElementById("imagenes").getElementsByTagName("img");
-  
-  for(var i = 0; i < imagenes.length; i++) {
-    var alt = imagenes[i].alt.toLowerCase();
-    if(alt.indexOf(filtro) > -1) {
-      imagenes[i].style.display = "";
+    function filterImages() {
+  var input = document.getElementById("search");
+  var filter = input.value.toUpperCase();
+  var images = document.getElementsByTagName("img");
+
+  for (var i = 0; i < images.length; i++) {
+    var alt = images[i].getAttribute("alt");
+    if (alt.toUpperCase().indexOf(filter) > -1) {
+      images[i].style.display = "";
     } else {
-      imagenes[i].style.display = "none";
+      images[i].style.display = "none";
+    }
+  }
+}
+
+document.getElementById("search").addEventListener("input", function() {
+  if (this.value === "") {
+    var images = document.getElementsByTagName("img");
+    for (var i = 0; i < images.length; i++) {
+      images[i].style.display = "";
     }
   }
 });
