@@ -287,7 +287,6 @@ enlaces.forEach(enlace => {
     var alt = imagenes[i].getAttribute('alt').toLowerCase();
 
     if (alt.includes(filtro)) {
-      divd.remove();
       var img = document.createElement('img');
       img.src = imagenes[i].src;
       img.alt = imagenes[i].alt;
@@ -295,6 +294,13 @@ enlaces.forEach(enlace => {
       resultadoContenedor.appendChild(img);
     }
   }
+
+  filtro.oninput = function() {
+    
+    if (filtro.value.length > 0) {
+        divd.remove();
+            }
+        };
 
   if (filtro === '') {
     location.reload();
