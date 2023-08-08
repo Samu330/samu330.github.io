@@ -162,10 +162,10 @@ img {
         <input type="text" id="filtro" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
   </div1>
   
-  <div id="contenedorImagenes">
+  <div id="container">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
 
-  <div id="The Megalodon 2">
+  <div class="item" id="item1">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
@@ -200,7 +200,7 @@ img {
   </div>
 </div>
 </div>
-<div id="imagenesFiltradas"></div>
+<div id="filteredContainer"></div>
   </div>
   <div id="divFiltrado"></div>
 <!-- partial -->
@@ -252,29 +252,27 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
+    document.getElementById("searchInput").addEventListener("input", function() {
+  var searchValue = this.value.toLowerCase();
+  var container = document.getElementById("container");
+  var filteredContainer = document.getElementById("filteredContainer");
+  filteredContainer.innerHTML = "";
 
-    function filtrarImagenes() {
-  var filtro = document.getElementById("filtro").value.toLowerCase();
-  var imagenes = document.querySelectorAll("#contenedorImagenes div");
-
-  // Mover las imágenes que no coincidan con la búsqueda a otro div
-  var imagenesFiltradas = document.getElementById("imagenesFiltradas");
-  imagenesFiltradas.innerHTML = "";
-
-  for (var i = 0; i < imagenes.length; i++) {
-    if (imagenes[i].getAttribute("id").toLowerCase().includes(filtro)) {
-      imagenes[i].style.display = "";
+  Array.from(container.getElementsByClassName("item")).forEach(function(item) {
+    var itemId = item.id.toLowerCase();
+    if (itemId.includes(searchValue)) {
+      container.appendChild(item);
     } else {
-      imagenes[i].style.display = "none";
-      imagenesFiltradas.appendChild(imagenes[i].cloneNode(true));
+      filteredContainer.appendChild(item);
     }
-  }
+  });
+});
 
-  // Recargar la página si el input está vacío
-  if (filtro === "") {
+document.getElementById("searchInput").addEventListener("change", function() {
+  if (this.value === "") {
     location.reload();
   }
-}
+});
     
     const enlaces = document.querySelectorAll('a');
 
