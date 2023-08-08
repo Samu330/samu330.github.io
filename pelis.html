@@ -159,12 +159,13 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" id="inputFiltro" onkeyup="filterImages()" placeholder="Filtrar películas" style="width:300px">
+        <input type="text" id="filtro" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
   </div1>
   
 
-  <div id="divOriginal">
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
+
+  <div id="contenedorImagenes">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
@@ -198,6 +199,7 @@ img {
   </div>
 </div>
 </div>
+<div id="imagenesFiltradas"></div>
   </div>
   <div id="divFiltrado"></div>
 <!-- partial -->
@@ -249,30 +251,29 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
-    document.getElementById('inputFiltro').addEventListener('input', function () {
-            var filtro = this.value.toLowerCase();
-            var imagenes = document.querySelectorAll('#divOriginal img');
 
-            var divFiltrado = document.getElementById('divFiltrado');
-            divFiltrado.innerHTML = '';
+    function filtrarImagenes() {
+  var filtro = document.getElementById("filtro").value.toLowerCase();
+  var imagenes = document.querySelectorAll("#contenedorImagenes img");
 
-            for (var i = 0; i < imagenes.length; i++) {
-                var img = imagenes[i];
+  // Mover las imágenes que no coincidan con la búsqueda a otro div
+  var imagenesFiltradas = document.getElementById("imagenesFiltradas");
+  imagenesFiltradas.innerHTML = "";
 
-                if (img.alt.toLowerCase().includes(filtro)) {
-                    img.style.display = '';
-                } else {
-                    img.style.display = 'none';
-                    divFiltrado.appendChild(img);
-                }
-            }
-        });
+  for (var i = 0; i < imagenes.length; i++) {
+    if (imagenes[i].getAttribute("alt").toLowerCase().includes(filtro)) {
+      imagenes[i].style.display = "";
+    } else {
+      imagenes[i].style.display = "none";
+      imagenesFiltradas.appendChild(imagenes[i].cloneNode(true));
+    }
+  }
 
-        document.getElementById('inputFiltro').addEventListener('blur', function () {
-            if (this.value === '') {
-                location.reload();
-            }
-        });
+  // Recargar la página si el input está vacío
+  if (filtro === "") {
+    location.reload();
+  }
+}
     
     const enlaces = document.querySelectorAll('a');
 
