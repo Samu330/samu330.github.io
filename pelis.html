@@ -160,12 +160,11 @@ img {
 
   <div1>
         <input type="text" id="filtro" placeholder="Filtrar películas" onkeyup="filterImages()" style="width:300px">
-        <button id="boton-filtrar">Filtrar</button>
   </div1>
   
 
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
-  <div id="resultado">
+  <div id="imagenes">
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
@@ -249,18 +248,18 @@ document.addEventListener('keydown', function(event) {
             audioPlayer.play();
         }
 
-
     document.getElementById("filtro").addEventListener("input", function() {
-  let filtro = this.value.toLowerCase();
-  let imagenes = Array.from(document.querySelectorAll("#resultado img"));
+  var filtro = this.value.toLowerCase();
+  var imagenes = document.getElementById("imagenes").getElementsByTagName("img");
   
-  let resultadosFiltrados = imagenes.filter(function(imagen) {
-    return imagen.alt.toLowerCase().includes(filtro);
-  });
-  
-  resultadosFiltrados.forEach(function(imagen) {
-    document.getElementById("resultado").prepend(imagen);
-  });
+  for(var i = 0; i < imagenes.length; i++) {
+    var alt = imagenes[i].alt.toLowerCase();
+    if(alt.indexOf(filtro) > -1) {
+      imagenes[i].style.display = "";
+    } else {
+      imagenes[i].style.display = "none";
+    }
+  }
 });
 
     const enlaces = document.querySelectorAll('a');
