@@ -13,18 +13,24 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-#autocompleteList {
+#searchInput {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+#suggestionList {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-#autocompleteList li {
-  cursor: pointer;
+#suggestionList li {
   padding: 5px;
+  cursor: pointer;
 }
 
-#autocompleteList li:hover {
+#suggestionList li:hover {
   background-color: lightgray;
 }
 
@@ -175,8 +181,8 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" id="searchInput" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
-        <ul id="autocompleteList"></ul>
+      <input type="text" id="searchInput" placeholder="Buscar imágenes">
+      <ul id="suggestionList"></ul>
   </div1>
 
   <div id="imagenesContenedor">
@@ -289,33 +295,31 @@ enlaces.forEach(enlace => {
   });
 });
 
+
 const images = [
-  { alt: 'King Kong Isla calavera', url: '#skull' },
-  { alt: 'Gato', url: 'https://example.com/gato.jpg' },
-  { alt: 'Pájaro', url: 'https://example.com/pajaro.jpg' },
-  { alt: 'Flor', url: 'https://example.com/flor.jpg' },
+  { alt: 'King Kong Isla calavera', link: '#skull' },
+  { alt: 'Gato', link: 'https://www.example.com/gato' },
+  { alt: 'Pájaro', link: 'https://www.example.com/pajaro' },
+  { alt: 'Elefante', link: 'https://www.example.com/elefante' },
+  { alt: 'León', link: 'https://www.example.com/leon' },
 ];
 
 const searchInput = document.getElementById('searchInput');
-const autocompleteList = document.getElementById('autocompleteList');
+const suggestionList = document.getElementById('suggestionList');
 
-searchInput.addEventListener('input', e => {
-  const searchTerm = e.target.value.toLowerCase();
-  
-  // Filtrar imágenes que coincidan con el término de búsqueda
-  const matchedImages = images.filter(image => image.alt.toLowerCase().includes(searchTerm));
-  
-  // Limpiar la lista de sugerencias
-  autocompleteList.innerHTML = '';
-  
-  // Mostrar las sugerencias en la lista
-  matchedImages.forEach(image => {
-    const listItem = document.createElement('li');
-    listItem.textContent = image.alt;
-    listItem.addEventListener('click', () => {
-      window.location.href = image.url;
+searchInput.addEventListener('input', () => {
+  const searchValue = searchInput.value.toLowerCase();
+  const suggestions = images.filter((image) => image.alt.toLowerCase().includes(searchValue));
+
+  suggestionList.innerHTML = '';
+
+  suggestions.forEach((suggestion) => {
+    const li = document.createElement('li');
+    li.textContent = suggestion.alt;
+    li.addEventListener('click', () => {
+      window.location.href = suggestion.link;
     });
-    autocompleteList.appendChild(listItem);
+    suggestionList.appendChild(li);
   });
 });
 
