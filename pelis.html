@@ -12,7 +12,23 @@
   
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-  
+
+#autocompleteList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#autocompleteList li {
+  cursor: pointer;
+  padding: 5px;
+}
+
+#autocompleteList li:hover {
+  background-color: lightgray;
+}
+
+    
 div1{
   height: 100px;
   display:flex;
@@ -159,12 +175,14 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-        <input type="text" id="filtroInput" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
+        <input type="text" id="searchInput" onkeyup="filtrarImagenes()" placeholder="Filtrar películas" style="width:300px">
+        <ul id="autocompleteList"></ul>
   </div1>
 
   <div id="imagenesContenedor">
   
   <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
+
 
   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
@@ -202,10 +220,6 @@ img {
 
 </div>
 
-  <div1 id="resultadoContenedor">
-    <!-- Aquí se agregarán las imágenes filtradas -->
-  </div1>
-  
   </div>
 <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
@@ -275,37 +289,6 @@ enlaces.forEach(enlace => {
   });
 });
 
-    function filtrarImagenes() {
-  var filtro = document.getElementById('filtroInput').value.toLowerCase();
-  var imagenes = document.getElementById('imagenesContenedor').getElementsByTagName('img');
-  var resultadoContenedor = document.getElementById('resultadoContenedor');
-  var divd = document.getElementById("imagenesContenedor");
-
-  resultadoContenedor.innerHTML = '';
-
-  for (var i = 0; i < imagenes.length; i++) {
-    var alt = imagenes[i].getAttribute('alt').toLowerCase();
-
-    if (alt.includes(filtro)) {
-      var img = document.createElement('img');
-      img.src = imagenes[i].src;
-      img.alt = imagenes[i].alt;
-
-      resultadoContenedor.appendChild(img);
-    }
-  }
-
-  filtro.oninput = function() {
-
-      if (filtro.value.length > 0) {
-        divd.remove();
-        alert("aaaaaaaa");
-    }
-
-  if (filtro === '') {
-    location.reload();
-  }
-}
 
 
 </script>
