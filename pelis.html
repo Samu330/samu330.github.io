@@ -306,6 +306,7 @@ const images = [
 
 const searchInput = document.getElementById('searchInput');
 const suggestionList = document.getElementById('suggestionList');
+var ulElement = document.querySelector("ul");
 
 searchInput.addEventListener('input', () => {
   const searchValue = searchInput.value.toLowerCase();
@@ -318,6 +319,7 @@ searchInput.addEventListener('input', () => {
     li.textContent = suggestion.alt;
     li.addEventListener('click', () => {
       window.location.href = suggestion.link;
+      ulElement.remove();
     });
     suggestionList.appendChild(li);
   });
