@@ -212,7 +212,7 @@ img {
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong Isla calavera</h2>
     <a id="King Kong: Isla Calavera" href="" class="buy buy-kong2 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong2">Descargar</a>
     <div class="image image-3">
-      <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500">
+      <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500" id="skull">
     </div>
   </div>
     
@@ -289,7 +289,35 @@ enlaces.forEach(enlace => {
   });
 });
 
+const images = [
+  { alt: 'King Kong Isla calavera', url: '#skull' },
+  { alt: 'Gato', url: 'https://example.com/gato.jpg' },
+  { alt: 'Pájaro', url: 'https://example.com/pajaro.jpg' },
+  { alt: 'Flor', url: 'https://example.com/flor.jpg' },
+];
 
+const searchInput = document.getElementById('searchInput');
+const autocompleteList = document.getElementById('autocompleteList');
+
+searchInput.addEventListener('input', e => {
+  const searchTerm = e.target.value.toLowerCase();
+  
+  // Filtrar imágenes que coincidan con el término de búsqueda
+  const matchedImages = images.filter(image => image.alt.toLowerCase().includes(searchTerm));
+  
+  // Limpiar la lista de sugerencias
+  autocompleteList.innerHTML = '';
+  
+  // Mostrar las sugerencias en la lista
+  matchedImages.forEach(image => {
+    const listItem = document.createElement('li');
+    listItem.textContent = image.alt;
+    listItem.addEventListener('click', () => {
+      window.location.href = image.url;
+    });
+    autocompleteList.appendChild(listItem);
+  });
+});
 
 </script>
 
