@@ -108,6 +108,9 @@ div1{
 .bg-kong2:hover {
   background: var(--c-orang);
 }
+.bg-god:hover {
+  background: var(--c-cyan);
+}
 
 * {
   margin: 0;
@@ -186,6 +189,9 @@ img {
 .image-4::before {
   background: center / cover url("https://i.postimg.cc/HLcs5bdD/20230807-222833.png");
 }
+.image-5::before {
+  background: center / cover url("https://i.postimg.cc/G2LG5p4q/20230809-165408.png");
+}
   </style>
 
 </head>
@@ -253,6 +259,14 @@ img {
       <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500" id="kongs">
     </div>
   </div>
+
+   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+    <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Godzilla: El rey de los mounstros</h2>
+    <a id="Godzilla" href="" class="buy buy-god absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-god">Descargar</a>
+    <div class="image image-5">
+      <img src="https://i.postimg.cc/G2LG5p4q/20230809-165408.png" alt="Godzilla: El rey de los mounstros" class="product rounded transition-all duration-500" id="god">
+    </div>
+   </div>
     
 </div>
 
@@ -333,7 +347,8 @@ var images = [
   { alt: "Megalodon 2: El Gran abismo", src: "#meg2" },
   { alt: "Megalodon", src: "#meg" },
   { alt: "King Kong", src: "#kong" },
-  { alt: "King Kong Isla calavera", src: "#kongs" }
+  { alt: "King Kong Isla calavera", src: "#kongs" },
+  { alt: "Godzilla: El rey de los mounstros", src: "#god" }
 ];
 
 // Función para cargar las opciones del select menu
