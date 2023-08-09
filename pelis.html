@@ -13,6 +13,26 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+ .neumorphism-select {
+  padding: 10px;
+  border: none;
+  background-color: #f0f0f0;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 
+              -4px -4px 8px rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  outline: none;
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.neumorphism-select option {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+}   
+
+    
 input[type="text"], select {
   margin-bottom: 10px;
 }
@@ -163,7 +183,7 @@ img {
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
   <div1>
-      <select id="mySelect"></select>
+      <select class="neumorphism-select" id="mySelect"></select>
       <input id="filterInput" type="text" placeholder="Filtrar Pelicula">
       <button onclick="redirectImage()">Buscar</button>
   </div1>
