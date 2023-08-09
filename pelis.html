@@ -309,13 +309,7 @@ const suggestionList = document.getElementById('suggestionList');
 const ulElement = document.querySelector("ul");
 
 searchInput.addEventListener('input', () => {
-    if (searchInput.trim() === "") {
-    ulElement.style.display = "none";
-    alert("0");
-  } else {
-    ulElement.style.display = "block";
-    alert("1");
-  }
+
   const searchValue = searchInput.value.toLowerCase();
   const suggestions = images.filter((image) => image.alt.toLowerCase().includes(searchValue));
 
@@ -328,6 +322,14 @@ searchInput.addEventListener('input', () => {
       window.location.href = suggestion.link;
     });
     suggestionList.appendChild(li);
+
+    if (searchInput.trim() === "") {
+    ulElement.style.display = "none";
+    alert("0");
+  } else {
+    ulElement.style.display = "block";
+    alert("1");
+  }
   });
 });
 
