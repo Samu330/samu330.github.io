@@ -13,34 +13,9 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-#searchInput {
-  width: 300px;
-  padding: 10px;
-  font-size: 16px;
+input[type="text"], select {
+  margin-bottom: 10px;
 }
-
-#suggestionList {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-
-#suggestionList li {
-  padding: 5px;
-  cursor: pointer;
-}
-
-#suggestionList li:hover {
-  background-color: lightgray;
-}
-
-
-.centrar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
     
 div1{
   height: 100px;
@@ -187,10 +162,11 @@ img {
   
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
-  <div class="centrar">
-      <input type="text" id="searchInput" placeholder="Buscar imágenes">
-      <ul id="suggestionList"></ul>
-  </div>
+  <div1>
+      <select id="mySelect"></select>
+      <input id="filterInput" type="text" placeholder="Filtrar Pelicula">
+      <button onclick="redirectImage()">Buscar</button>
+  </div1>
 
   <div id="imagenesContenedor">
   
@@ -201,7 +177,7 @@ img {
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
     <a id="Megalodon 2" href="" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
     <div class="image image-4">
-      <img src="https://i.postimg.cc/HLcs5bdD/20230807-222833.png" alt="The Megalodon 2" class="product rounded transition-all duration-500">  
+      <img src="https://i.postimg.cc/HLcs5bdD/20230807-222833.png" alt="Megalodon 2: El Gran abismo" class="product rounded transition-all duration-500" id="meg2">  
     </div>  
   </div>
 
@@ -209,7 +185,7 @@ img {
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon</h2>
     <a id="Megalodon" href="" target="_blank" class="buy buy-meg absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg">Descargar</a>
     <div class="image image-1">
-      <img src="https://i.postimg.cc/Kj2PvydW/20230806-212739.png" alt="The Megalodon" class="product rounded transition-all duration-500">  
+      <img src="https://i.postimg.cc/Kj2PvydW/20230806-212739.png" alt="The Megalodon" class="product rounded transition-all duration-500" id="meg">  
     </div>  
   </div>
   
@@ -217,7 +193,7 @@ img {
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong</h2>
     <a id="King Kong" href="" class="buy buy-kong1 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong1">Descargar</a>
     <div class="image image-2">
-      <img src="https://i.postimg.cc/wvbCS0Z3/20230806-213533.png" alt="King Kong" class="product rounded transition-all duration-500">
+      <img src="https://i.postimg.cc/wvbCS0Z3/20230806-213533.png" alt="King Kong" class="product rounded transition-all duration-500" id="kong">
     </div>
   </div>
   
@@ -225,7 +201,7 @@ img {
     <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong Isla calavera</h2>
     <a id="King Kong: Isla Calavera" href="" class="buy buy-kong2 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong2">Descargar</a>
     <div class="image image-3">
-      <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500" id="skull">
+      <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500" id="kongs">
     </div>
   </div>
     
@@ -302,44 +278,59 @@ enlaces.forEach(enlace => {
   });
 });
 
-
-const images = [
-  { alt: 'King Kong Isla calavera', link: '#skull' },
-  { alt: 'Gato', link: 'https://www.example.com/gato' },
-  { alt: 'Pájaro', link: 'https://www.example.com/pajaro' },
-  { alt: 'Elefante', link: 'https://www.example.com/elefante' },
-  { alt: 'León', link: 'https://www.example.com/leon' },
+// Datos de ejemplo para las imágenes
+var images = [
+  { alt: "Megalodon 2: El Gran abismo", src: "#meg2" },
+  { alt: "Megalodon", src: "#meg" },
+  { alt: "King Kong", src: "#kong" },
+  { alt: "King Kong Isla calavera", src: "kongs" }
 ];
 
-const searchInput = document.getElementById('searchInput');
-const suggestionList = document.getElementById('suggestionList');
-const ulElement = document.querySelector("ul");
+// Función para cargar las opciones del select menu
+function loadOptions() {
+  var select = document.getElementById("mySelect");
+  select.innerHTML = "";
 
-searchInput.addEventListener('input', () => {
-
-  const searchValue = searchInput.value.toLowerCase();
-  const suggestions = images.filter((image) => image.alt.toLowerCase().includes(searchValue));
-
-  suggestionList.innerHTML = '';
-
-  suggestions.forEach((suggestion) => {
-    const li = document.createElement('li');
-    li.textContent = suggestion.alt;
-    li.addEventListener('click', () => {
-      window.location.href = suggestion.link;
-    });
-    suggestionList.appendChild(li);
+  images.forEach(function(image) {
+    var option = document.createElement("option");
+    option.text = image.alt;
+    option.value = image.src;
+    select.add(option);
   });
-});
+}
 
-  searchInput.addEventListener('input', function() {
+// Filtrar las imágenes por alt
+function filterImages() {
+  var input = document.getElementById("filterInput");
+  var filter = input.value.toLowerCase();
+  var select = document.getElementById("mySelect");
+
+  select.innerHTML = "";
+
+  images.forEach(function(image) {
+    if (image.alt.toLowerCase().includes(filter)) {
+      var option = document.createElement("option");
+      option.text = image.alt;
+      option.value = image.src;
+      select.add(option);
+    }
+  });
+}
+
+// Redireccionar al seleccionar una sugerencia
+function redirectImage() {
+  var select = document.getElementById("mySelect");
+  var selectedSrc = select.value;
   
-  if (searchInput.value === '') {
-    suggestionList.style.display = 'none';
-  } else {
-    suggestionList.style.display = 'block';
-  }
-});
+  // Redirigir a la URL seleccionada
+  window.location.href = selectedSrc;
+}
+
+// Cargar opciones iniciales
+loadOptions();
+
+// Ejecutar el filtrado al cambiar el valor del input
+document.getElementById("filterInput").addEventListener("input", filterImages);
 
 </script>
 
