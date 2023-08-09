@@ -313,7 +313,6 @@ searchInput.addEventListener('input', () => {
   const searchValue = searchInput.value.toLowerCase();
   const suggestions = images.filter((image) => image.alt.toLowerCase().includes(searchValue));
 
-  ulElement.style.display = "block";
   suggestionList.innerHTML = '';
 
   suggestions.forEach((suggestion) => {
@@ -323,11 +322,16 @@ searchInput.addEventListener('input', () => {
       window.location.href = suggestion.link;
     });
     suggestionList.appendChild(li);
-
-    if (searchInput.trim() === "") {
-    ulElement.style.display = "none";
-  }
   });
+});
+
+  searchInput.addEventListener('input', function() {
+  
+  if (searchInput.value === '') {
+    suggestionList.style.display = 'none';
+  } else {
+    suggestionList.style.display = 'block';
+  }
 });
 
 </script>
