@@ -34,6 +34,13 @@
   background-color: lightgray;
 }
 
+
+.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
     
 div1{
   height: 100px;
@@ -180,10 +187,10 @@ img {
   
   <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
-  <div1>
+  <div class="centrar">
       <input type="text" id="searchInput" placeholder="Buscar imágenes">
       <ul id="suggestionList"></ul>
-  </div1>
+  </div>
 
   <div id="imagenesContenedor">
   
