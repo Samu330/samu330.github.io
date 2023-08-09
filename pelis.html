@@ -313,6 +313,7 @@ searchInput.addEventListener('input', () => {
   const searchValue = searchInput.value.toLowerCase();
   const suggestions = images.filter((image) => image.alt.toLowerCase().includes(searchValue));
 
+  ulElement.style.display = "block";
   suggestionList.innerHTML = '';
 
   suggestions.forEach((suggestion) => {
@@ -325,10 +326,6 @@ searchInput.addEventListener('input', () => {
 
     if (searchInput.trim() === "") {
     ulElement.style.display = "none";
-    alert("0");
-  } else {
-    ulElement.style.display = "block";
-    alert("1");
   }
   });
 });
