@@ -69,6 +69,23 @@
 input[type="text"], select {
   margin-bottom: 10px;
 }
+
+.header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 70px;
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+    }
+    
+    .header img {
+        height: 30px;
+    }
     
 div1{
   height: 100px;
@@ -200,6 +217,9 @@ img {
 
 </head>
 <body>
+    <header class="header">
+        <img src="https://img.freepik.com/fotos-premium/phoenix-fantastic-bird-sobre-fondo-negro-ai-generativa_356060-4606.jpg" alt="samu330">
+    </header>
    <!-- onmousedown = 'return false' onselectstart = 'return false' -->
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
