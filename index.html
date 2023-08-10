@@ -16,49 +16,7 @@
 		<link rel="stylesheet" href="sweetalert2.min.css">
 	</head>
 	<body>
-		<script>
-Swal.fire({
-  title: 'Ingresa tu nombre de GitHub, si no tienes cancela!',
-  input: 'text',
-  inputAttributes: {
-    autocapitalize: 'off'
-  },
-  showCancelButton: true,
-  confirmButtonText: 'visualizar',
-  showLoaderOnConfirm: true,
-  preConfirm: (login) => {
-    return fetch(`//api.github.com/users/${login}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(response.statusText)
-        }
-        return response.json()
-      })
-      .catch(error => {
-        Swal.showValidationMessage(
-          `Request failed: ${error}`
-        )
-      })
-  },
-  allowOutsideClick: () => !Swal.isLoading()
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire({
-      title: `${result.value.bio}`,
-      imageUrl: result.value.avatar_url
-    })
-  }
-})
-		</script>
-		<audio id="song">
-  			<source src="assets/music/song.mp3">
-		</audio>
-
-		<script>
-  			window.addEventListener('click', () => {
-    			document.getElementById("song").play();
-  		})
-		</script>
+	
 		<div class="animation-wrapper">
 			<div class="particle particle-1"></div>
 			<div class="particle particle-2"></div>
@@ -91,7 +49,6 @@ Swal.fire({
 					<section class="main2">
 						<ul>
 							<li><a target="_blank" href="https://t.me/Samu330"><i class="fab fa-telegram"></i></a></li>
-							<li><a target="_blank" href="https://github.com/samu330"><i class="fab fa-github"></i></a></li>
 							<li><a target="_blank" href="https://www.instagram.com/sm330.io"><i class="fab fa-instagram"></i></a></li>
 						</ul>
 					</section>
