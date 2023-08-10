@@ -37,7 +37,7 @@
 
 /* Estilos adicionales para el placeholder texto */
 ::placeholder {
-  color: #a8a8a8;
+  color: #000;
   font-style: italic;
 }
     
@@ -299,7 +299,7 @@ document.addEventListener('keydown', function(event) {
 
 
     var audioPlayer = document.getElementById("audioPlayer");
-        var songs = ["./sounds/1.mp3", "./sounds/2.mp3", "./sounds/3.mp3"]; // Rutas a tus canciones
+        var songs = ["./sounds/2.mp3", "./sounds/1.mp3", "./sounds/3.mp3"]; // Rutas a tus canciones
         
         var currentSongIndex = 0;
 
@@ -333,13 +333,18 @@ enlaces.forEach(enlace => {
 
   Swal.fire({
   icon: 'success',
-  title: "ACCEDISTE A DESCARGA DIRECTA",
-  text: `Gracias por descargar ${id}`,
-  footer: '<a href="https://t.me/Samu330" target="_blank">Deseas agradecerme?</a>'
+  title: `Gracias por descargar\n${id}`,
+  text: "La descarga ah sido mediante un enlace externo",
+  footer: '<a href="#" id="help">Click aqui si tienes problemas para descargar!</a>'
 })
 
   });
 });
+
+var helpD = document.getElementById("help");
+    helpD.addEventListener("click", function() {
+      alert("h");
+    });
 
 // Datos de ejemplo para las imágenes
 var images = [
