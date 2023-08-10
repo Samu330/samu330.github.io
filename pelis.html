@@ -390,8 +390,6 @@ function filterImages() {
   images.forEach(function(image) {
     if (image.alt.toLowerCase().includes(filter)) {
       var option = document.createElement("option");
-      var valorSeleccionado = select.value;
-      input.value = valorSeleccionado;
       option.text = image.alt;
       option.value = image.src;
       select.add(option);
@@ -405,11 +403,12 @@ function redirectImage() {
   var selectedSrc = select.value;
   
   // Redirigir a la URL seleccionada
-  window.location.href = selectedSrc;
+  //window.location.href = selectedSrc;
   
   if (select.value === "") {
     Swal.fire('No fue posible encontrar tu peli, si tu peli no aparece en el menu se seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!');
-    return;
+  } else {
+    window.location.href = selectedSrc;
   }
 }
 
