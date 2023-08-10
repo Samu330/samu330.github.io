@@ -5,6 +5,10 @@
   <title>Samu330 - Pelis</title>
   <link rel="icon" href="https://i.pinimg.com/originals/27/fb/99/27fb99dcc3eac8cd7395721cb203fa02.png">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.13/tailwind.min.css'>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.min.js"></script>
@@ -334,17 +338,19 @@ enlaces.forEach(enlace => {
   Swal.fire({
   icon: 'success',
   title: `Gracias por descargar\n${id}`,
-  text: "La descarga ah sido mediante un enlace externo",
-  footer: '<a href="#" id="help">Click aqui si tienes problemas para descargar!</a>'
+  text: "La descarga utiliza un acortador de enlaces, y el archivo es comprimido por detalles de derecho de autor",
+  footer: '<a href="" id="help">Click aqui si tienes problemas para descargar o reproducir tu peli!</a>'
 })
 
     var helpD = document.getElementById("help");
     helpD.addEventListener("click", function() {
-      Swal.fire({
-      imageUrl: 'https://i.postimg.cc/Qxn2RTn0/20230809-205251.jpg',
-      imageHeight: 1500,
-      imageAlt: 'Ayuda'
-      })
+      Swal.fire(
+      'Tienes alguna duda?',
+      `La descarga se hace mediante mediafire, si por alguna razon no te aparece el link de descarga, puedes comunicarte conmigo, haciendo click en el logo de la parte superior.
+      Si ya descargaste el archivo debes descomprimirlo, ya que viene en archivo RAR, para ello puedes usar WinRar en computadoras, y en movil puedes usar ZArchiver.
+      Si ya descomprimiste y el video no se reproduce, intenta cambiar de reproductor, ya que el archivo viene en diferentes formatos de video, y algunos reproductores no los admite`,
+      'question'
+      )
     });
 
   });
@@ -400,7 +406,15 @@ function redirectImage() {
   window.location.href = selectedSrc;
   
   if (select.value === "") {
-    alert("El input está vacío. Por favor, escribe algo antes de agregar.");
+    Swal.fire({
+  title: 'No fue posible encontrar tu peli, si tu peli no aparece en el menu se seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!',
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+  }
+})
     return;
   }
 }
