@@ -339,7 +339,7 @@ enlaces.forEach(enlace => {
   icon: 'success',
   title: `Gracias por descargar\n${id}`,
   text: "La descarga utiliza un acortador de enlaces, y el archivo es comprimido por detalles de derecho de autor",
-  footer: '<a href="" id="help">Click aqui si tienes problemas para descargar o reproducir tu peli!</a>'
+  footer: '<a href="#" id="help">Click aqui si tienes problemas</a>'
 })
 
     var helpD = document.getElementById("help");
@@ -406,15 +406,7 @@ function redirectImage() {
   window.location.href = selectedSrc;
   
   if (select.value === "") {
-    Swal.fire({
-  title: 'No fue posible encontrar tu peli, si tu peli no aparece en el menu se seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!',
-  showClass: {
-    popup: 'animate__animated animate__fadeInDown'
-  },
-  hideClass: {
-    popup: 'animate__animated animate__fadeOutUp'
-  }
-})
+    Swal.fire('No fue posible encontrar tu peli, si tu peli no aparece en el menu se seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!')
     return;
   }
 }
