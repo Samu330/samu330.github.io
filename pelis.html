@@ -398,6 +398,11 @@ function redirectImage() {
   
   // Redirigir a la URL seleccionada
   window.location.href = selectedSrc;
+  
+  if (select.value === "") {
+    alert("El input está vacío. Por favor, escribe algo antes de agregar.");
+    return;
+  }
 }
 
 // Cargar opciones iniciales
