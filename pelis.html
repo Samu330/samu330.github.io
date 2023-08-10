@@ -70,22 +70,78 @@ input[type="text"], select {
   margin-bottom: 10px;
 }
 
-.header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 70px;
-        background-color: #000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    
-    .header img {
-        height: 30px;
-    }
+
+header {
+  background-color: #212121;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.logo {
+  color: #FFF;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #FFF;
+  padding: 3px 10px;
+  border-radius: 5px;
+  background-color: #424242;
+}
+
+section {
+  margin-top: 60px; /* para dejar espacio para el header fijo */
+  padding: 20px;
+}
+
+header {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2),
+              0 4px 6px rgba(0, 0, 0, 0.2),
+              0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+nav ul li a {
+  background-color: #2a2a2a;
+  border-bottom: 4px solid #1f1f1f;
+  border-right: 3px solid #1f1f1f;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  background-color: #1f1f1f;
+  border-bottom: 2px solid #2a2a2a;
+  border-right: 2px solid #2a2a2a;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3),
+              0 4px 6px rgba(0, 0, 0, 0.2),
+              0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+section {
+  background-color: #1f1f1f;
+  color: #FFF;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2),
+              0 4px 6px rgba(0, 0, 0, 0.2),
+              0 10px 15px rgba(0, 0, 0, 0.2);
+}
     
 div1{
   height: 100px;
@@ -217,9 +273,18 @@ img {
 
 </head>
 <body>
-    <header class="header">
-        <img src="https://img.freepik.com/fotos-premium/phoenix-fantastic-bird-sobre-fondo-negro-ai-generativa_356060-4606.jpg" alt="samu330">
-    </header>
+<header>
+    <div class="logo">
+      <img src="https://img.freepik.com/fotos-premium/phoenix-fantastic-bird-sobre-fondo-negro-ai-generativa_356060-4606.jpg" alt="samu330">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Acerca de</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
    <!-- onmousedown = 'return false' onselectstart = 'return false' -->
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
