@@ -390,6 +390,7 @@ function filterImages() {
   images.forEach(function(image) {
     if (image.alt.toLowerCase().includes(filter)) {
       var option = document.createElement("option");
+      input.value = image.alt;
       option.text = image.alt;
       option.value = image.src;
       select.add(option);
