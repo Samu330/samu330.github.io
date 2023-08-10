@@ -275,8 +275,8 @@ img {
     </div>
     <nav>
       <ul>
-        <li><a href="https://samu330.lat" class="fa-solid fa-house fa-fade"> Inicio</a></li>
-        <li><a href="https://wa.me/5219984907794" class="fa-brands fa-whatsapp fa-fade" style="color: #00ff00;"> Contacto, solicitar peliculas</a></li>
+        <li><a id="home" href="https://samu330.lat" class="fa-solid fa-house fa-fade"> Inicio</a></li>
+        <li><a ih="wh" href="https://wa.me/5219984907794" class="fa-brands fa-whatsapp fa-fade" style="color: #00ff00;"> Contacto, solicitar peliculas</a></li>
       </ul>
     </nav>
   </header>
@@ -414,13 +414,17 @@ enlaces.forEach(enlace => {
 
     // Obtener el id del enlace
     const id = this.id;
+    if (id == "home") {
+      return;
+    } else {
 
   Swal.fire({
   icon: 'success',
   title: `Gracias por descargar\n${id}`,
   text: "La descarga utiliza un acortador de enlaces, y el archivo es comprimido por detalles de derecho de autor",
   footer: '<a href="#" id="help">Click aqui si tienes problemas</a>'
-})
+  })
+    }
 
     var helpD = document.getElementById("help");
     helpD.addEventListener("click", function() {
