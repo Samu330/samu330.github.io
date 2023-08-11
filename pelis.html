@@ -14,37 +14,30 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-#scrollToTopBtn {
+body {
+  height: 2000px; /* Solo para probar el desplazamiento */
+}
+#scrollBtn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #191919;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #121212;
   border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  border-radius: 50px;
+  box-shadow: 5px 5px 10px #0d0d0d, -5px -5px 10px #1a1a1a;
+  color: #fff;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
   cursor: pointer;
-  display: none;
-  box-shadow: -6px -6px 16px rgba(255, 255, 255, 0.1), 6px 6px 16px rgba(0, 0, 0, 0.6);
-  transition: opacity 0.3s, transform 0.3s;
 }
 
-.arrow-up {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(45deg);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -10px 0 0 -10px;
-}
-
-#scrollToTopBtn.active {
+#scrollBtn.show {
   opacity: 1;
-  transform: translateY(0);
 }
     
 .neumorphic-but {
@@ -304,7 +297,7 @@ img {
 <body>
 <header>
     <div class="logo">
-      <i class="fa-regular fa-file-video fa-shake" style="color: #ff0000;"></i>
+      <i class="fa-regular fa-file-video fa-shake fa-xl" style="color: #ff0000;"></i>
     </div>
     <nav>
       <ul>
@@ -313,9 +306,7 @@ img {
       </ul>
     </nav>
   </header>
-  <button id="scrollToTopBtn">
-    <span class="arrow-up"></span>
-  </button>
+  <button id="scrollBtn" onclick="scrollToTop()">&#8679;</button>
    <!-- onmousedown = 'return false' onselectstart = 'return false' -->
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
@@ -529,7 +520,7 @@ function redirectImage() {
   //window.location.href = selectedSrc;
   
   if (select.value === "") {
-    Swal.fire('No fue posible encontrar tu peli, si tu peli no aparece en el menu de seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!');
+    Swal.fire('No fue posible encontrar tu peli, si tu pelicula no aparece en el menu de seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!');
   } else {
     window.location.href = selectedSrc;
   }
@@ -541,14 +532,15 @@ loadOptions();
 // Ejecutar el filtrado al cambiar el valor del input
 document.getElementById("filterInput").addEventListener("input", filterImages);
 
-window.addEventListener("scroll", function () {
-  var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    scrollToTopBtn.classList.add("active");
+    document.getElementById("scrollBtn").classList.add("show");
   } else {
-    scrollToTopBtn.classList.remove("active");
+    document.getElementById("scrollBtn").classList.remove("show");
   }
-});
+}
 
 function scrollToTop() {
   window.scrollTo({
@@ -556,8 +548,6 @@ function scrollToTop() {
     behavior: "smooth"
   });
 }
-
-document.getElementById("scrollToTopBtn").addEventListener("click", scrollToTop);
 
 </script>
 
