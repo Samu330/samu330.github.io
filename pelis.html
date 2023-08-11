@@ -218,6 +218,10 @@
       background: var(--c-cyan);
     }
 
+    .bg-open:hover {
+      background: var(--c-red);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -302,6 +306,10 @@
     .image-5::before {
       background: center / cover url("https://i.postimg.cc/G2LG5p4q/20230809-165408.png");
     }
+
+    .image-6::before {
+      background: center / cover url("");
+    }
   </style>
 
 </head>
@@ -344,6 +352,7 @@
       DISPONIBLES</h1>
 
     <div1>
+      <button class="neumorphic-but" onclick="seeHelp()">No sabes como descargar? Click Aqui</button>
       <select class="neumorphism-select" id="mySelect"></select>
       <input class="neumorphic-input" id="filterInput" type="text" placeholder="Filtrar Pelicula">
       <button class="neumorphic-but" onclick="redirectImage()">Buscar</button>
@@ -411,6 +420,18 @@
           <div class="image image-5">
             <img src="https://i.postimg.cc/G2LG5p4q/20230809-165408.png" alt="Godzilla: El rey de los mounstros"
               class="product rounded transition-all duration-500" id="god">
+          </div>
+        </div>
+
+        <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+          <h2
+            class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
+            Oppenheimer</h2>
+          <a id="Oppenheimer" href="" target="_blank"
+            class="buy buy-open absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-open">Descargar</a>
+          <div class="image image-6">
+            <img src="" alt="Oppenheimer"
+              class="product rounded transition-all duration-500" id="open">
           </div>
         </div>
 
@@ -513,7 +534,8 @@
       { alt: "Megalodon", src: "#meg" },
       { alt: "King Kong", src: "#kong" },
       { alt: "King Kong Isla calavera", src: "#kongs" },
-      { alt: "Godzilla: El rey de los mounstros", src: "#god" }
+      { alt: "Godzilla: El rey de los mounstros", src: "#god" },
+      { alt: "Oppenheimer", src: "#open" }
     ];
 
     // Función para cargar las opciones del select menu
@@ -560,6 +582,19 @@
       } else {
         window.location.href = selectedSrc;
       }
+    }
+
+    function seeHelp() {
+      Swal.fire({
+        title: 'Como descargar!',
+        text: `La descarga es por MediaFire, con acortador, al hacer click en el boton de descarga seras redireccionado a una pagina como la de la imagen,
+        simplemente espera que carge el boton color rojo, si al darle click te manda a otra pagina, regresa, es simple.
+        si tienes dudas contactame en el boton de arriba!`,
+        imageUrl: 'https://onlinezerotohero.com/wp-content/uploads/2020/01/ouo-io-ad-page.png',
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+      })
     }
 
     // Cargar opciones iniciales
