@@ -15,31 +15,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
-#scrollUp {
+#scrollButton {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 50px;
   height: 50px;
+  border: none;
+  background-color: #4e4e4e;
+  color: #ffffff;
   border-radius: 50%;
-  background-color: #2b2b2b;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 9999;
-}
-
-#scrollUp:hover {
-  transform: translateY(-5px);
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.2);
-}
-
-#scrollUp i {
-  color: #fff;
   font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#scrollButton:hover {
+  background-color: #757575;
+}
+
+.show {
+  opacity: 1;
+}
+
+.hide {
+  opacity: 0;
 }
     
 .neumorphic-but {
@@ -304,13 +305,11 @@ img {
     <nav>
       <ul>
         <li><a id="home" href="https://samu330.lat" class="fa-solid fa-house fa-fade"> Inicio</a></li>
-        <li><a ih="wh" href="https://wa.me/5219984907794" class="fa-brands fa-whatsapp fa-fade" style="color: #00ff00;"> Contacto, solicitar peliculas</a></li>
+        <li><a id="wh" href="https://wa.me/5219984907794" class="fa-brands fa-whatsapp fa-fade" style="color: #00ff00;"> Contacto, solicitar peliculas</a></li>
       </ul>
     </nav>
   </header>
-  <div id="scrollUp" class="neumorphism-dark">
-    <i class="fas fa-arrow-up"></i>
-  </div>
+  <button id="scrollButton" onclick="scrollToTop()">↑</button>
    <!-- onmousedown = 'return false' onselectstart = 'return false' -->
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
@@ -536,8 +535,30 @@ loadOptions();
 // Ejecutar el filtrado al cambiar el valor del input
 document.getElementById("filterInput").addEventListener("input", filterImages);
 
+window.onscroll = function() {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  var scrollButton = document.getElementById("scrollButton");
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    scrollButton.classList.add("show");
+    scrollButton.classList.remove("hide");
+  } else {
+    scrollButton.classList.add("hide");
+    scrollButton.classList.remove("show");
+  }
+}
+
+function scrollToTop() {
+  var currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+  if (currentPosition > 0) {
+    window.requestAnimationFrame(scrollToTop);
+    window.scrollTo(0, currentPosition - currentPosition / 10);
+  }
+}
+
 </script>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 </body>
 </html>
