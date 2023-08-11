@@ -14,33 +14,37 @@
   <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
-#scrollButton {
+#scrollToTopBtn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
+  bottom: 30px;
+  right: 30px;
+  background-color: #191919;
   border: none;
-  background-color: #4e4e4e;
-  color: #ffffff;
   border-radius: 50%;
-  font-size: 24px;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: none;
+  box-shadow: -6px -6px 16px rgba(255, 255, 255, 0.1), 6px 6px 16px rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s, transform 0.3s;
 }
 
-#scrollButton:hover {
-  background-color: #757575;
+.arrow-up {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
 }
 
-.show {
+#scrollToTopBtn.active {
   opacity: 1;
-}
-
-.hide {
-  opacity: 0;
+  transform: translateY(0);
 }
     
 .neumorphic-but {
@@ -300,7 +304,7 @@ img {
 <body>
 <header>
     <div class="logo">
-      <img src="https://img.freepik.com/fotos-premium/phoenix-fantastic-bird-sobre-fondo-negro-ai-generativa_356060-4606.jpg" width="40" height="40" alt="samu330">
+      <i class="fa-regular fa-file-video fa-shake" style="color: #ff0000;"></i>
     </div>
     <nav>
       <ul>
@@ -309,7 +313,9 @@ img {
       </ul>
     </nav>
   </header>
-  <button id="scrollButton" onclick="scrollToTop()">↑</button>
+  <button id="scrollToTopBtn">
+    <span class="arrow-up"></span>
+  </button>
    <!-- onmousedown = 'return false' onselectstart = 'return false' -->
 <!-- partial:index.partial.html -->
 <div class="min-h-screen bg-gray-900 pb-20 grid">
@@ -535,28 +541,23 @@ loadOptions();
 // Ejecutar el filtrado al cambiar el valor del input
 document.getElementById("filterInput").addEventListener("input", filterImages);
 
-window.onscroll = function() {
-  scrollFunction();
-};
-
-function scrollFunction() {
-  var scrollButton = document.getElementById("scrollButton");
+window.addEventListener("scroll", function () {
+  var scrollToTopBtn = document.getElementById("scrollToTopBtn");
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    scrollButton.classList.add("show");
-    scrollButton.classList.remove("hide");
+    scrollToTopBtn.classList.add("active");
   } else {
-    scrollButton.classList.add("hide");
-    scrollButton.classList.remove("show");
+    scrollToTopBtn.classList.remove("active");
   }
-}
+});
 
 function scrollToTop() {
-  var currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
-  if (currentPosition > 0) {
-    window.requestAnimationFrame(scrollToTop);
-    window.scrollTo(0, currentPosition - currentPosition / 10);
-  }
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
+
+document.getElementById("scrollToTopBtn").addEventListener("click", scrollToTop);
 
 </script>
 
