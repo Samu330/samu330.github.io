@@ -1,552 +1,592 @@
 <!DOCTYPE html>
-<html lang="es" >
+<html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Samu330 - Pelis</title>
   <link rel="icon" href="https://i.pinimg.com/originals/27/fb/99/27fb99dcc3eac8cd7395721cb203fa02.png">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.8.13/tailwind.min.css'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.min.js"></script>
   <link rel="stylesheet" href="sweetalert2.min.css">
-  
+
   <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-#scrollBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background-color: #121212;
-  border: none;
-  border-radius: 50px;
-  box-shadow: 5px 5px 10px #0d0d0d, -5px -5px 10px #1a1a1a;
-  color: #fff;
-  font-size: 24px;
-  line-height: 50px;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-  cursor: pointer;
-}
+    #scrollBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #121212;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 5px 5px 10px #0d0d0d, -5px -5px 10px #1a1a1a;
+      color: #fff;
+      font-size: 24px;
+      line-height: 50px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      cursor: pointer;
+    }
 
-#scrollBtn.show {
-  opacity: 1;
-}
-    
-.neumorphic-but {
-  background-color: #f0f0f0; 
-  border: none;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 
-              -4px -4px 8px rgba(255, 255, 255, 0.7);
-  outline: none;
-} 
-    
-.neumorphic-input {
-  background-color: #f0f0f0; 
-  border: none;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 
-              -4px -4px 8px rgba(255, 255, 255, 0.7);
-  outline: none;
-}
+    #scrollBtn.show {
+      opacity: 1;
+    }
 
-/* Estilos adicionales para el placeholder texto */
-::placeholder {
-  color: #000000;
-  font-style: italic;
-}
-    
- .neumorphism-select {
-  margin: 10px;
-  padding: 10px;
-  border: none;
-  background-color: #f0f0f0;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), 
-              -4px -4px 8px rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  outline: none;
-  font-family: 'Arial', sans-serif;
-  font-size: 16px;
-  color: #333;
-}
+    .neumorphic-but {
+      background-color: #f0f0f0;
+      border: none;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
+        -4px -4px 8px rgba(255, 255, 255, 0.7);
+      outline: none;
+    }
 
-.neumorphism-select option {
-  background-color: #f0f0f0;
-  padding: 10px;
-  border-radius: 10px;
-}   
+    .neumorphic-input {
+      background-color: #f0f0f0;
+      border: none;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
+        -4px -4px 8px rgba(255, 255, 255, 0.7);
+      outline: none;
+    }
 
-    
-input[type="text"], select {
-  margin-bottom: 10px;
-}
+    /* Estilos adicionales para el placeholder texto */
+    ::placeholder {
+      color: #000000;
+      font-style: italic;
+    }
+
+    .neumorphism-select {
+      margin: 10px;
+      padding: 10px;
+      border: none;
+      background-color: #f0f0f0;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
+        -4px -4px 8px rgba(255, 255, 255, 0.7);
+      border-radius: 10px;
+      outline: none;
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .neumorphism-select option {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 10px;
+    }
 
 
-header {
-  background-color: #212121;
-  padding: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
+    input[type="text"],
+    select {
+      margin-bottom: 10px;
+    }
 
-.logo {
-  height: 30px;
-  weight: 30px;
-}
 
-nav ul {
-  list-style: none;
-  display: flex;
-}
+    header {
+      background-color: #212121;
+      padding: 10px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
 
-nav ul li {
-  margin-right: 10px;
-}
+    .logo {
+      height: 30px;
+      weight: 30px;
+    }
 
-nav ul li a {
-  text-decoration: none;
-  color: #FFF;
-  padding: 3px 10px;
-  border-radius: 5px;
-  background-color: #424242;
-}
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
 
-section {
-  margin-top: 60px; /* para dejar espacio para el header fijo */
-  padding: 20px;
-}
+    nav ul li {
+      margin-right: 10px;
+    }
 
-header {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2),
-              0 4px 6px rgba(0, 0, 0, 0.2),
-              0 10px 15px rgba(0, 0, 0, 0.2);
-}
+    nav ul li a {
+      text-decoration: none;
+      color: #FFF;
+      padding: 3px 10px;
+      border-radius: 5px;
+      background-color: #424242;
+    }
 
-nav ul li a {
-  background-color: #2a2a2a;
-  border-bottom: 4px solid #1f1f1f;
-  border-right: 3px solid #1f1f1f;
-  transition: all 0.3s ease;
-}
+    section {
+      margin-top: 60px;
+      /* para dejar espacio para el header fijo */
+      padding: 20px;
+    }
 
-nav ul li a:hover {
-  background-color: #1f1f1f;
-  border-bottom: 2px solid #2a2a2a;
-  border-right: 2px solid #2a2a2a;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3),
-              0 4px 6px rgba(0, 0, 0, 0.2),
-              0 10px 15px rgba(0, 0, 0, 0.2);
-}
+    header {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2),
+        0 4px 6px rgba(0, 0, 0, 0.2),
+        0 10px 15px rgba(0, 0, 0, 0.2);
+    }
 
-section {
-  background-color: #1f1f1f;
-  color: #FFF;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2),
-              0 4px 6px rgba(0, 0, 0, 0.2),
-              0 10px 15px rgba(0, 0, 0, 0.2);
-}
-    
-div1{
-  height: 100px;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-}
-.button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            text-align: center;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 8px;
-        }
-        
-        .button:hover {
-            background-color: #45a049;
-        }
+    nav ul li a {
+      background-color: #2a2a2a;
+      border-bottom: 4px solid #1f1f1f;
+      border-right: 3px solid #1f1f1f;
+      transition: all 0.3s ease;
+    }
 
-:root {
-  --c-cyan: #00ffff;
-  --c-yell: #e0eb1a;
-  --c-red: #c51110;
-  --c-orang: #f5b002;
-}
+    nav ul li a:hover {
+      background-color: #1f1f1f;
+      border-bottom: 2px solid #2a2a2a;
+      border-right: 2px solid #2a2a2a;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3),
+        0 4px 6px rgba(0, 0, 0, 0.2),
+        0 10px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.bg-meg:hover {
-  background: var(--c-cyan);
-}
-.bg-meg2:hover {
-  background: var(--c-yell);
-}
-.bg-kong1:hover {
-  background: var(--c-red);
-}
-.bg-kong2:hover {
-  background: var(--c-orang);
-}
-.bg-god:hover {
-  background: var(--c-cyan);
-}
+    section {
+      background-color: #1f1f1f;
+      color: #FFF;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2),
+        0 4px 6px rgba(0, 0, 0, 0.2),
+        0 10px 15px rgba(0, 0, 0, 0.2);
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    div1 {
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-body {
-  font-family: 'Poppins', sans-serif;
-}
+    .button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
 
-.card {
-  transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-}
+    .button:hover {
+      background-color: #45a049;
+    }
 
-.name {
-  transform: translate3d(0, 0, 50px);
-  transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-}
+    :root {
+      --c-cyan: #00ffff;
+      --c-yell: #e0eb1a;
+      --c-red: #c51110;
+      --c-orang: #f5b002;
+    }
 
-.card:hover .name {
-  top: 1rem;
-  opacity: 1;
-}
+    .bg-meg:hover {
+      background: var(--c-cyan);
+    }
 
-.buy {
-  left: 50%;
-  transform: translate3d(-50%, 0, 50px);
-  transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-}
+    .bg-meg2:hover {
+      background: var(--c-yell);
+    }
 
-.card:hover .buy {
-  bottom: 1rem;
-  opacity: 1;
-}
+    .bg-kong1:hover {
+      background: var(--c-red);
+    }
 
-img {
-  transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-}
+    .bg-kong2:hover {
+      background: var(--c-orang);
+    }
 
-.card:hover img {
-  transform: translate3d(0, 0, 50px);
-  transform-style: preserve-3d;
-}
+    .bg-god:hover {
+      background: var(--c-cyan);
+    }
 
-.image::before {
-  content: "";
-  border-radius: .25rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: .25rem;
-  opacity: 0;
-  transition: all .5s;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.card:hover .image::before {
-  opacity: .2;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
 
-.image-1::before {
-  background: center / cover url("https://i.postimg.cc/Kj2PvydW/20230806-212739.png");
-}
-.image-2::before {
-  background: center / cover url("https://i.postimg.cc/wvbCS0Z3/20230806-213533.png");
-}
-.image-3::before {
-  background: center / cover url("https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png");
-}
-.image-4::before {
-  background: center / cover url("https://i.postimg.cc/HLcs5bdD/20230807-222833.png");
-}
-.image-5::before {
-  background: center / cover url("https://i.postimg.cc/G2LG5p4q/20230809-165408.png");
-}
+    .card {
+      transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+    }
+
+    .name {
+      transform: translate3d(0, 0, 50px);
+      transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+    }
+
+    .card:hover .name {
+      top: 1rem;
+      opacity: 1;
+    }
+
+    .buy {
+      left: 50%;
+      transform: translate3d(-50%, 0, 50px);
+      transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+    }
+
+    .card:hover .buy {
+      bottom: 1rem;
+      opacity: 1;
+    }
+
+    img {
+      transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+    }
+
+    .card:hover img {
+      transform: translate3d(0, 0, 50px);
+      transform-style: preserve-3d;
+    }
+
+    .image::before {
+      content: "";
+      border-radius: .25rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: .25rem;
+      opacity: 0;
+      transition: all .5s;
+    }
+
+    .card:hover .image::before {
+      opacity: .2;
+    }
+
+    .image-1::before {
+      background: center / cover url("https://i.postimg.cc/Kj2PvydW/20230806-212739.png");
+    }
+
+    .image-2::before {
+      background: center / cover url("https://i.postimg.cc/wvbCS0Z3/20230806-213533.png");
+    }
+
+    .image-3::before {
+      background: center / cover url("https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png");
+    }
+
+    .image-4::before {
+      background: center / cover url("https://i.postimg.cc/HLcs5bdD/20230807-222833.png");
+    }
+
+    .image-5::before {
+      background: center / cover url("https://i.postimg.cc/G2LG5p4q/20230809-165408.png");
+    }
   </style>
 
 </head>
+
 <body>
-<header>
+  <header>
     <div class="logo">
       <i class="fa-regular fa-file-video fa-shake fa-xl" style="color: #ff0000;"></i>
     </div>
     <nav>
       <ul>
         <li><a id="home" href="https://samu330.lat" class="fa-solid fa-house fa-fade"> Inicio</a></li>
-        <li><a id="wh" href="https://wa.me/5219984907794" class="fa-brands fa-whatsapp fa-fade" style="color: #00ff00;"> Contacto, solicitar peliculas</a></li>
+        <li><a id="wh" href="https://wa.me/5219984907794" class="fa-brands fa-whatsapp fa-fade" style="color: #00ff00;">
+            Contacto, solicitar peliculas</a></li>
       </ul>
     </nav>
   </header>
   <button id="scrollBtn" onclick="scrollToTop()">&#8679;</button>
-   <!-- onmousedown = 'return false' onselectstart = 'return false' -->
-<!-- partial:index.partial.html -->
-<div class="min-h-screen bg-gray-900 pb-20 grid">
-<br><br><br>
-<h2 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>Disfruta de un poco de música mientras bajas!</h2>
+  <!-- onmousedown = 'return false' onselectstart = 'return false' -->
+  <!-- partial:index.partial.html -->
+  <div class="min-h-screen bg-gray-900 pb-20 grid">
+    <br><br><br>
+    <h2 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>Disfruta de un poco
+      de música mientras bajas!</h2>
 
-<audio id="audioPlayer">
-        <source src="./sounds/1.mp3" type="audios/mpeg">
-        Tu navegador no soporta la reproducción de audio.
+    <audio id="audioPlayer">
+      <source src="./sounds/1.mp3" type="audios/mpeg">
+      Tu navegador no soporta la reproducción de audio.
     </audio>
 
     <div1>
-    <!-- Botones -->
-    <button class="button" onclick="playAudio()">Reproducir</button>
-    <button class="button" onclick="pauseAudio()">Pausar</button>
-    <button class="button" onclick="nextSong()">Siguiente Canción</button>
+      <!-- Botones -->
+      <button class="button" onclick="playAudio()">Reproducir</button>
+      <button class="button" onclick="pauseAudio()">Pausar</button>
+      <button class="button" onclick="nextSong()">Siguiente Canción</button>
     </div1>
-  
-  
-  <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS DISPONIBLES</h1>
 
-  <div1>
+
+    <h1 class='flex items-end justify-center h-full w-full text-3xl text-white font-thin uppercase'>PELICULAS
+      DISPONIBLES</h1>
+
+    <div1>
       <select class="neumorphism-select" id="mySelect"></select>
       <input class="neumorphic-input" id="filterInput" type="text" placeholder="Filtrar Pelicula">
       <button class="neumorphic-but" onclick="redirectImage()">Buscar</button>
-  </div1>
+    </div1>
 
-  <div id="imagenesContenedor">
-  
-  <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
+    <div id="imagenesContenedor">
+
+      <div class='grid place-items-center lg:grid-cols-3 _container gap-y-10'>
 
 
-  <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
-    <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon 2: El Gran abismo</h2>
-    <a id="Megalodon 2" href="https://ouo.io/nPAmSJ" target="_blank" class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
-    <div class="image image-4">
-      <img src="https://i.postimg.cc/HLcs5bdD/20230807-222833.png" alt="Megalodon 2: El Gran abismo" class="product rounded transition-all duration-500" id="meg2">  
-    </div>  
-  </div>
+        <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+          <h2
+            class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
+            Megalodon 2: El Gran abismo</h2>
+          <a id="Megalodon 2" href="https://ouo.io/nPAmSJ" target="_blank"
+            class="buy buy-meg2 absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg2">Descargar</a>
+          <div class="image image-4">
+            <img src="https://i.postimg.cc/HLcs5bdD/20230807-222833.png" alt="Megalodon 2: El Gran abismo"
+              class="product rounded transition-all duration-500" id="meg2">
+          </div>
+        </div>
 
-  <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
-    <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Megalodon</h2>
-    <a id="Megalodon" href="https://ouo.io/VoSPdn" target="_blank" class="buy buy-meg absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg">Descargar</a>
-    <div class="image image-1">
-      <img src="https://i.postimg.cc/Kj2PvydW/20230806-212739.png" alt="The Megalodon" class="product rounded transition-all duration-500" id="meg">  
-    </div>  
-  </div>
-  
-  <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
-    <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong</h2>
-    <a id="King Kong" href="https://ouo.io/IG2gXL" target="_blank" class="buy buy-kong1 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong1">Descargar</a>
-    <div class="image image-2">
-      <img src="https://i.postimg.cc/wvbCS0Z3/20230806-213533.png" alt="King Kong" class="product rounded transition-all duration-500" id="kong">
+        <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+          <h2
+            class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
+            Megalodon</h2>
+          <a id="Megalodon" href="https://ouo.io/VoSPdn" target="_blank"
+            class="buy buy-meg absolute bottom-0 bg-gray-600 text-white hover:text-black font-medium px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-meg">Descargar</a>
+          <div class="image image-1">
+            <img src="https://i.postimg.cc/Kj2PvydW/20230806-212739.png" alt="The Megalodon"
+              class="product rounded transition-all duration-500" id="meg">
+          </div>
+        </div>
+
+        <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+          <h2
+            class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
+            King Kong</h2>
+          <a id="King Kong" href="https://ouo.io/IG2gXL" target="_blank"
+            class="buy buy-kong1 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong1">Descargar</a>
+          <div class="image image-2">
+            <img src="https://i.postimg.cc/wvbCS0Z3/20230806-213533.png" alt="King Kong"
+              class="product rounded transition-all duration-500" id="kong">
+          </div>
+        </div>
+
+        <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+          <h2
+            class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
+            King Kong Isla calavera</h2>
+          <a id="King Kong: Isla Calavera" href="https://ouo.io/mRMJQC" target="_blank"
+            class="buy buy-kong2 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong2">Descargar</a>
+          <div class="image image-3">
+            <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island"
+              class="product rounded transition-all duration-500" id="kongs">
+          </div>
+        </div>
+
+        <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
+          <h2
+            class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">
+            Godzilla: El rey de los mounstros</h2>
+          <a id="Godzilla" href="https://ouo.io/Dt4Ih2" target="_blank"
+            class="buy buy-god absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-god">Descargar</a>
+          <div class="image image-5">
+            <img src="https://i.postimg.cc/G2LG5p4q/20230809-165408.png" alt="Godzilla: El rey de los mounstros"
+              class="product rounded transition-all duration-500" id="god">
+          </div>
+        </div>
+
+      </div>
+
     </div>
-  </div>
-  
-  <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
-    <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">King Kong Isla calavera</h2>
-    <a id="King Kong: Isla Calavera" href="https://ouo.io/mRMJQC" target="_blank" class="buy buy-kong2 absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-kong2">Descargar</a>
-    <div class="image image-3">
-      <img src="https://i.postimg.cc/L6NZ1Pcv/20230806-214103.png" alt="King Kong Isla calavera Skull island" class="product rounded transition-all duration-500" id="kongs">
-    </div>
-  </div>
-
-   <div class="card rounded-lg px-8 py-20 relative hover:shadow-xl">
-    <h2 class="name text-gray-100 text-center text-xl font-medium uppercase transition-all duration-500 opacity-0 z-10 absolute top-0 left-0 w-full">Godzilla: El rey de los mounstros</h2>
-    <a id="Godzilla" href="https://ouo.io/Dt4Ih2" target="_blank" class="buy buy-god absolute bottom-0 bg-gray-600 hover:bg-gray-500 text-black px-4 py-2 rounded-full transition-all duration-500 opacity-0 z-10 bg-god">Descargar</a>
-    <div class="image image-5">
-      <img src="https://i.postimg.cc/G2LG5p4q/20230809-165408.png" alt="Godzilla: El rey de los mounstros" class="product rounded transition-all duration-500" id="god">
-    </div>
-   </div>
-    
-</div>
-
-</div>
 
   </div>
-<!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script><script>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script>
+  <script>
     VanillaTilt.init(document.querySelectorAll(".card"), {
-  max: 25,
-  speed: 1000,
-  transition: true,
-})
+      max: 25,
+      speed: 1000,
+      transition: true,
+    })
 
-document.oncontextmenu = function(){return false}
-document.addEventListener("dragstart", function(event) {
-  event.preventDefault();
-});
+    document.oncontextmenu = function () { return false }
+    document.addEventListener("dragstart", function (event) {
+      event.preventDefault();
+    });
 
-document.addEventListener('keydown', function(event) {
-  if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
-    event.preventDefault();
-  Swal.fire(
-  'Sin acceso?',
-  'Lo Siento pero no tienes permiso',
-  'question'
-)
-  }
-});
+    document.addEventListener('keydown', function (event) {
+      if (event.ctrlKey && (event.key === 'u' || event.key === 'U')) {
+        event.preventDefault();
+        Swal.fire(
+          'Sin acceso?',
+          'Lo Siento pero no tienes permiso',
+          'question'
+        )
+      }
+    });
 
 
     var audioPlayer = document.getElementById("audioPlayer");
-        var songs = ["./sounds/2.mp3", "./sounds/1.mp3", "./sounds/3.mp3"]; // Rutas a tus canciones
-        
-        var currentSongIndex = 0;
+    var songs = ["./sounds/2.mp3", "./sounds/1.mp3", "./sounds/3.mp3"]; // Rutas a tus canciones
 
-        function playAudio() {
-            audioPlayer.src = songs[currentSongIndex];
-            audioPlayer.play();
-        }
+    var currentSongIndex = 0;
 
-        function pauseAudio() {
-            audioPlayer.pause();
-        }
+    function playAudio() {
+      audioPlayer.src = songs[currentSongIndex];
+      audioPlayer.play();
+    }
 
-        function nextSong() {
-            currentSongIndex++;
-            if (currentSongIndex >= songs.length) {
-                currentSongIndex = 0;
-            }
+    function pauseAudio() {
+      audioPlayer.pause();
+    }
 
-            audioPlayer.src = songs[currentSongIndex];
-            audioPlayer.play();
-        }
-    
+    function nextSong() {
+      currentSongIndex++;
+      if (currentSongIndex >= songs.length) {
+        currentSongIndex = 0;
+      }
+
+      audioPlayer.src = songs[currentSongIndex];
+      audioPlayer.play();
+    }
+
     const enlaces = document.querySelectorAll('a');
 
-// Recorrer todos los enlaces y agregar un evento de clic
-enlaces.forEach(enlace => {
-  enlace.addEventListener('click', function(event) {
+    // Recorrer todos los enlaces y agregar un evento de clic
+    enlaces.forEach(enlace => {
+      enlace.addEventListener('click', function (event) {
 
-    // Obtener el id del enlace
-    const id = this.id;
-    if (id == "wh") {
-        return;
-    };
-    if (id == "home") {
-      return;
-    } else {
+        // Obtener el id del enlace
+        const id = this.id;
+        if (id == "wh") {
+          return;
+        };
+        if (id == "home") {
+          return;
+        } else {
 
-  Swal.fire({
-  icon: 'success',
-  title: `Gracias por descargar\n${id}`,
-  text: "La descarga utiliza un acortador de enlaces, y el archivo es comprimido por detalles de derecho de autor",
-  footer: '<a href="#" id="help">Click aqui si tienes problemas</a>'
-  })
-    }
+          Swal.fire({
+            icon: 'success',
+            title: `Gracias por descargar\n${id}`,
+            text: "La descarga utiliza un acortador de enlaces, y el archivo es comprimido por detalles de derecho de autor",
+            footer: '<a href="#" id="help">Click aqui si tienes problemas</a>'
+          })
+        }
 
-    var helpD = document.getElementById("help");
-    helpD.addEventListener("click", function() {
-      Swal.fire(
-      'Tienes alguna duda?',
-      `La descarga se hace mediante mediafire, si por alguna razon no te aparece el link de descarga, puedes comunicarte conmigo, haciendo click en el logo de la parte superior.
+        var helpD = document.getElementById("help");
+        helpD.addEventListener("click", function () {
+          Swal.fire(
+            'Tienes alguna duda?',
+            `La descarga se hace mediante mediafire, si por alguna razon no te aparece el link de descarga, puedes comunicarte conmigo, haciendo click en el logo de la parte superior.
       Si ya descargaste el archivo debes descomprimirlo, ya que viene en archivo RAR, para ello puedes usar WinRar en computadoras, y en movil puedes usar ZArchiver.
       Si ya descomprimiste y el video no se reproduce, intenta cambiar de reproductor, ya que el archivo viene en diferentes formatos de video, y algunos reproductores no los admite`,
-      'question'
-      )
+            'question'
+          )
+        });
+
+      });
     });
 
-  });
-});
+    // Datos de ejemplo para las imágenes
+    var images = [
+      { alt: "Selecciona para buscar", src: "" },
+      { alt: "Megalodon 2: El Gran abismo", src: "#meg2" },
+      { alt: "Megalodon", src: "#meg" },
+      { alt: "King Kong", src: "#kong" },
+      { alt: "King Kong Isla calavera", src: "#kongs" },
+      { alt: "Godzilla: El rey de los mounstros", src: "#god" }
+    ];
 
-// Datos de ejemplo para las imágenes
-var images = [
-  { alt: "Selecciona para buscar", src: "" },
-  { alt: "Megalodon 2: El Gran abismo", src: "#meg2" },
-  { alt: "Megalodon", src: "#meg" },
-  { alt: "King Kong", src: "#kong" },
-  { alt: "King Kong Isla calavera", src: "#kongs" },
-  { alt: "Godzilla: El rey de los mounstros", src: "#god" }
-];
+    // Función para cargar las opciones del select menu
+    function loadOptions() {
+      var select = document.getElementById("mySelect");
+      select.innerHTML = "";
 
-// Función para cargar las opciones del select menu
-function loadOptions() {
-  var select = document.getElementById("mySelect");
-  select.innerHTML = "";
-
-  images.forEach(function(image) {
-    var option = document.createElement("option");
-    option.text = image.alt;
-    option.value = image.src;
-    select.add(option);
-  });
-}
-
-// Filtrar las imágenes por alt
-function filterImages() {
-  var input = document.getElementById("filterInput");
-  var filter = input.value.toLowerCase();
-  var select = document.getElementById("mySelect");
-
-  select.innerHTML = "";
-
-  images.forEach(function(image) {
-    if (image.alt.toLowerCase().includes(filter)) {
-      var option = document.createElement("option");
-      option.text = image.alt;
-      option.value = image.src;
-      select.add(option);
+      images.forEach(function (image) {
+        var option = document.createElement("option");
+        option.text = image.alt;
+        option.value = image.src;
+        select.add(option);
+      });
     }
-  });
-}
 
-// Redireccionar al seleccionar una sugerencia
-function redirectImage() {
-  var select = document.getElementById("mySelect");
-  var selectedSrc = select.value;
-  
-  // Redirigir a la URL seleccionada
-  //window.location.href = selectedSrc;
-  
-  if (select.value === "") {
-    Swal.fire('No fue posible encontrar tu peli, si tu pelicula no aparece en el menu de seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!');
-  } else {
-    window.location.href = selectedSrc;
-  }
-}
+    // Filtrar las imágenes por alt
+    function filterImages() {
+      var input = document.getElementById("filterInput");
+      var filter = input.value.toLowerCase();
+      var select = document.getElementById("mySelect");
 
-// Cargar opciones iniciales
-loadOptions();
+      select.innerHTML = "";
 
-// Ejecutar el filtrado al cambiar el valor del input
-document.getElementById("filterInput").addEventListener("input", filterImages);
+      images.forEach(function (image) {
+        if (image.alt.toLowerCase().includes(filter)) {
+          var option = document.createElement("option");
+          option.text = image.alt;
+          option.value = image.src;
+          select.add(option);
+        }
+      });
+    }
 
-window.onscroll = function() {scrollFunction()};
+    // Redireccionar al seleccionar una sugerencia
+    function redirectImage() {
+      var select = document.getElementById("mySelect");
+      var selectedSrc = select.value;
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    document.getElementById("scrollBtn").classList.add("show");
-  } else {
-    document.getElementById("scrollBtn").classList.remove("show");
-  }
-}
+      // Redirigir a la URL seleccionada
+      //window.location.href = selectedSrc;
 
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
+      if (select.value === "") {
+        Swal.fire('No fue posible encontrar tu peli, si tu pelicula no aparece en el menu de seleccion al escribir en la barra de busqueda, puedes hacer una solicitud para agregar tu pelicula, gracias!');
+      } else {
+        window.location.href = selectedSrc;
+      }
+    }
 
-</script>
+    // Cargar opciones iniciales
+    loadOptions();
+
+    // Ejecutar el filtrado al cambiar el valor del input
+    document.getElementById("filterInput").addEventListener("input", filterImages);
+
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("scrollBtn").classList.add("show");
+      } else {
+        document.getElementById("scrollBtn").classList.remove("show");
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+
+  </script>
 
 </body>
+
 </html>
