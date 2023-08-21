@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8Ball Hack</title>
+  <link rel="icon" href="https://t4.ftcdn.net/jpg/05/60/72/05/360_F_560720565_dZv6gNfn9fcxLnri9YGBjPMOH3WFTM6i.jpg">
+  <style>
+body {
+  background-color: #1f1f1f;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+}
+
+.neumorphic-image {
+  margin: 40px 0;
+  position: relative;
+}
+
+.neumorphic-image img {
+  border-radius: 10px;
+  width: 200px;
+  height: 200px;
+  box-shadow: 10px 10px 30px #000, -10px -10px 30px #353535;
+}
+
+.download-button {
+  display: inline-block;
+  background-color: #ffd700;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#toggle-button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+
+.light-mode .neumorphic-image img {
+  box-shadow: 5px 5px 10px #000, -5px -5px 10px #353535;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Descargar Aplicación de acceso</h1>
+    <div class="neumorphic-image">
+      <img src="https://t4.ftcdn.net/jpg/05/60/72/05/360_F_560720565_dZv6gNfn9fcxLnri9YGBjPMOH3WFTM6i.jpg" alt="Image">
+      <a href="#" class="download-button">Download</a>
+    </div>
+    <button id="toggle-button">Activar Light Mode</button>
+  </div>
+
+  <script>
+    document.getElementById("toggle-button").addEventListener("click", function() {
+  document.body.classList.toggle("light-mode");
+});
+  </script>
+</body>
+</html>
