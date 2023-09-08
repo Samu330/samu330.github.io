@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
+  
   <title>WhatsApp Hack</title>
-  <link rel="icon" href="https://www.shareicon.net/download/2016/11/29/857988_media_512x512.png">
+  <link rel="icon" href="https://i.pinimg.com/originals/27/fb/99/27fb99dcc3eac8cd7395721cb203fa02.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.min.js"></script>
   <link rel="stylesheet" href="sweetalert2.min.css">
   
   <style>
+    
+/* Estilo base del botón */
+.whatsapp-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #00980F;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo al pasar el cursor sobre el botón */
+.whatsapp-button:hover {
+  background-color: #24C16B;
+}
+
+/* Estilo al hacer clic en el botón */
+.whatsapp-button:active {
+  background-color: #17693C;
+}
+
+/* Estilo del icono de WhatsApp */
+.whatsapp-button i {
+  margin-right: 5px;
+}
 .container {
   background-color: rgba(0, 0, 0, 0.43);
   color: #fff;
@@ -31,14 +61,6 @@ input[type="text"] {
   width: 250px;
 }
 
-button {
-  padding: 8px 16px;
-  border: none;
-  background-color: #075E54;
-  color: #fff;
-  cursor: pointer;
-}
-
 .hidden {
   display: none;
 }
@@ -49,7 +71,7 @@ button {
     <h1>WhatsApp Hack</h1>
     <label for="input-text">Escribe El Numero De WhatsApp Sin El +:</label>
     <input id="input-text" type="text" name="tel" value="" maxlength="15" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
-    <button id="btn-aceptar">Aceptar</button>
+    <button class="whatsapp-button" id="btn-aceptar">Aceptar</button>
     <div id="info" class="hidden">
       <h2 id="response"></h2>
       <p>Otra información...</p>
@@ -67,7 +89,29 @@ inputText.addEventListener("input", function() {
 });
 
 btnAceptar.addEventListener("click", function() {
-  infoDiv.classList.remove("hidden");
+  let timerInterval
+Swal.fire({
+  title: 'Buscando Información...!',
+  html: 'Tiempo restante: <b></b> Porfavor espera!',
+  timer: 10000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+    infoDiv.classList.remove("hidden");
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
 });
   </script>
 </body>
