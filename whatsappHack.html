@@ -71,7 +71,8 @@ input[type="text"] {
     <button class="whatsapp-button" id="btn-aceptar">Aceptar</button>
     <div id="info" class="hidden">
       <h2 id="response"></h2>
-      <p>Otra información...</p>
+      <i class="fa-regular fa-ghost fa-beat">
+      <h1> Datos Obtenidos:</h1></i>
     </div>
   </div>
 
@@ -80,14 +81,6 @@ const inputText = document.getElementById("input-text");
 const responseH2 = document.getElementById("response");
 const infoDiv = document.getElementById("info");
 const btnAceptar = document.getElementById("btn-aceptar");
-
-if (inputText == 0) = {
-  return Swal.fire(
-  'The Internet?',
-  'That thing is still around?',
-  'question'
-)
-};
 
 inputText.addEventListener("input", function() {
   responseH2.textContent = inputText.value;
