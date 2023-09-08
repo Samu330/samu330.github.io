@@ -71,7 +71,8 @@ input[type="text"] {
     <button class="whatsapp-button" id="btn-aceptar">Aceptar</button>
     <div id="info" class="hidden">
       <h2 id="response"></h2>
-      <h1><i class="fa-solid fa-ghost fa-beat fa-xl"></i> Datos Obtenidos:</h1>
+      <h1><i class="fa-solid fa-ghost fa-beat"></i> Datos Obtenidos:</h1>
+      <h2 id="convs"><i class="fa-regular fa-comments fa-fade" style="color: #00ff04;"></i> </h2>
     </div>
   </div>
 
@@ -80,6 +81,13 @@ const inputText = document.getElementById("input-text");
 const responseH2 = document.getElementById("response");
 const infoDiv = document.getElementById("info");
 const btnAceptar = document.getElementById("btn-aceptar");
+
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+var convs = getRandomNumber(0, 99);
+var conv = document.getElementById("convs");
+resultadoElement.textContent = convs;
 
 inputText.addEventListener("input", function() {
   responseH2.textContent = inputText.value;
