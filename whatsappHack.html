@@ -72,10 +72,10 @@ input[type="text"] {
     <div id="info" class="hidden">
       <h2 id="response"></h2>
       <h1><i class="fa-solid fa-ghost fa-beat"></i> Datos Obtenidos:</h1>
-      <h2 id="convs"><i class="fa-regular fa-comments fa-fade" style="color: #00ff04;"></i> </h2>
+      <h2 id="conv1"><i class="fa-regular fa-comments fa-fade" style="color: #00ff04;"></i></h2>
     </div>
   </div>
-
+    
   <script>
 const inputText = document.getElementById("input-text");
 const responseH2 = document.getElementById("response");
@@ -85,15 +85,14 @@ const btnAceptar = document.getElementById("btn-aceptar");
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-var convs = getRandomNumber(0, 99);
-var conv = document.getElementById("convs");
-resultadoElement.textContent = convs;
 
 inputText.addEventListener("input", function() {
   responseH2.textContent = inputText.value;
 });
 
 btnAceptar.addEventListener("click", function() {
+  var convs = getRandomNumber(0, 99);
+  var conv = document.getElementById("conv1");
   let timerInterval
 Swal.fire({
   title: 'Buscando Información...!',
@@ -110,6 +109,7 @@ Swal.fire({
   willClose: () => {
     clearInterval(timerInterval);
     infoDiv.classList.remove("hidden");
+    conv.textContent = convs;
   }
 }).then((result) => {
   /* Read more about handling dismissals below */
