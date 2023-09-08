@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+.container {
+  background-color: rgba(0, 0, 0, 0.43);
+  color: #fff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 5px;
+  font-size: 16px;
+  width: 250px;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #075E54;
+  color: #fff;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+  </style>
+</head>
+  <body style="background-image: url('https://coimobile.com/uploads/2021/8/whatsapp-wallpaper-thumbnail.jpg');">
+  <div class="container">
+    <h1>WhatsApp Hack</h1>
+    <label for="input-text">Escribe El Numero De WhatsApp Sin El +:</label>
+    <input type="text" id="input-text">
+    <button id="btn-aceptar">Aceptar</button>
+    <div id="info" class="hidden">
+      <h2 id="response"></h2>
+      <p>Otra información...</p>
+    </div>
+  </div>
+
+  <script">
+const inputText = document.getElementById("input-text");
+const responseH2 = document.getElementById("response");
+const infoDiv = document.getElementById("info");
+const btnAceptar = document.getElementById("btn-aceptar");
+
+inputText.addEventListener("input", function() {
+  responseH2.textContent = inputText.value;
+});
+
+btnAceptar.addEventListener("click", function() {
+  infoDiv.classList.remove("hidden");
+});
+  </script>
+</body>
+</html>
