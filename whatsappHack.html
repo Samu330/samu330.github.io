@@ -89,8 +89,19 @@ input[type="text"] {
       <h2>-Conversaciones</h2>
   </div>
   <div class="box" style="padding:1rem;line-height:2em;font-weight:bold">
-    <i class="icon fa-regular fa-comments fa-fade" style="color: #128C7E;"></i>
-    <h2 id="conv1"></h2>
+    <i class="fa-regular fa-images fa-fade fa-xl" style="color: #ff0000;"></i>
+    <h2 id="conv2"></h2>
+    <h2>-Fotos</h2>
+  </div>
+  <div class="box" style="padding:1rem;line-height:2em;font-weight:bold">
+    <i class="fa-solid fa-video fa-fade fa-xl" style="color: #ff0000;"></i>
+    <h2 id="conv3"></h2>
+    <h2>-Videos</h2>
+  </div>
+  <div class="box" style="padding:1rem;line-height:2em;font-weight:bold">
+    <i class="fa-regular fa-address-book fa-fade fa-xl" style="color: #ff0000;"></i>
+    <h2 id="conv4"></h2>
+    <h2>-Contactos</h2>
   </div>
 </div>
       
@@ -113,7 +124,12 @@ inputText.addEventListener("input", function() {
 
 btnAceptar.addEventListener("click", function() {
   var convs = getRandomNumber(0, 99);
+  var contc = getRandomNumber(100, 500);
   var conv = document.getElementById("conv1");
+  var conv1 = document.getElementById("conv2");
+  var conv2 = document.getElementById("conv3");
+  var conv3 = document.getElementById("conv4");
+  var conv4 = document.getElementById("conv5");
   let timerInterval
 Swal.fire({
   title: 'Buscando Información...!',
@@ -131,6 +147,10 @@ Swal.fire({
     clearInterval(timerInterval);
     infoDiv.classList.remove("hidden");
     conv.textContent = convs;
+    conv1.textContent = convs;
+    conv2.textContent = convs;
+    conv3.textContent = convs;
+    conv4.textContent = contc;
   }
 }).then((result) => {
   /* Read more about handling dismissals below */
