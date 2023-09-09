@@ -124,6 +124,9 @@ inputText.addEventListener("input", function() {
 
 btnAceptar.addEventListener("click", function() {
   var convs = getRandomNumber(0, 99);
+  var convs1 = getRandomNumber(0, 99);
+  var convs2 = getRandomNumber(0, 99);
+  var convs3 = getRandomNumber(0, 99);
   var contc = getRandomNumber(100, 500);
   var conv = document.getElementById("conv1");
   var conv1 = document.getElementById("conv2");
@@ -147,9 +150,9 @@ Swal.fire({
     clearInterval(timerInterval);
     infoDiv.classList.remove("hidden");
     conv.textContent = convs;
-    conv1.textContent = convs;
-    conv2.textContent = convs;
-    conv3.textContent = convs;
+    conv1.textContent = conv1;
+    conv2.textContent = conv2;
+    conv3.textContent = conv3;
     conv4.textContent = contc;
   }
 }).then((result) => {
