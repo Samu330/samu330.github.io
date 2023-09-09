@@ -126,13 +126,11 @@ btnAceptar.addEventListener("click", function() {
   var convs = getRandomNumber(0, 99);
   var convs1 = getRandomNumber(0, 99);
   var convs2 = getRandomNumber(0, 99);
-  var convs3 = getRandomNumber(0, 99);
   var contc = getRandomNumber(100, 500);
   var conv = document.getElementById("conv1");
   var conv11 = document.getElementById("conv2");
   var conv22 = document.getElementById("conv3");
   var conv33 = document.getElementById("conv4");
-  var conv44 = document.getElementById("conv5");
   let timerInterval
 Swal.fire({
   title: 'Buscando Información...!',
@@ -152,8 +150,7 @@ Swal.fire({
     conv.textContent = convs;
     conv11.textContent = convs1;
     conv22.textContent = convs2;
-    conv33.textContent = convs3;
-    conv44.textContent = contc;
+    conv33.textContent = contv;
   }
 }).then((result) => {
   /* Read more about handling dismissals below */
