@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+   <table id="tablaDatos"></table>
+   <input type="file" id="inputArchivo" />
+   <script>
+// Función para procesar el archivo seleccionado
+function procesarArchivo() {
+   var archivo = document.getElementById("inputArchivo").files[0];
+   var lector = new FileReader();
+  
+   lector.onload = function(e) {
+      var data = new Uint8Array(e.target.result);
+      var workbook = XLSX.read(data, {type: 'array'});
+      var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+      var jsonDatos = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+     
+      var tabla = document.getElementById("tablaDatos");
+     
+      // Crear encabezado de la tabla
+      var encabezado = tabla.createTHead();
+      var filaEncabezado = encabezado.insertRow();
+      for (var i = 0; i < jsonDatos[0].length; i++) {
+         var celda = filaEncabezado.insertCell();
+         celda.innerHTML = jsonDatos[0][i];
+      }
+     
+      // Llenar tabla con los datos
+      var cuerpo = tabla.createTBody();
+      for (var i = 1; i < jsonDatos.length; i++) {
+         var fila = cuerpo.insertRow();
+         for (var j = 0; j < jsonDatos[i].length; j++) {
+            var celda = fila.insertCell();
+            celda.innerHTML = jsonDatos[i][j];
+         }
+      }
+   }
+  
+   lector.readAsArrayBuffer(archivo);
+}
+
+// Asignar el evento al input de archivo
+document.getElementById("inputArchivo").addEventListener("change", procesarArchivo);
+</script>
+</body>
+</html>
