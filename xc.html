@@ -1,56 +1,103 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tabla desde Excel</title>
+  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
   <style>
     table {
       border-collapse: collapse;
-      width: 100%;
     }
-  
     th, td {
       border: 1px solid black;
       padding: 8px;
-      text-align: left;
     }
   </style>
 </head>
 <body>
-  <input type="file" id="inputFile">
-  <br>
-  <table id="excelTable"></table>
-  
-  <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <input type="file" id="input" accept=".xlsx">
+  <table id="table"></table>
+  <button id="export-btn">Exportar a Excel</button>
+
   <script>
-     document.getElementById('inputFile').addEventListener('change', handleFile, false);
+    document.getElementById('input').addEventListener('change', handleFile, false);
 
-function handleFile(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
+    var tableData;
 
-  reader.onload = function(e) {
-    const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, { type: 'array' });
-    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
-    
-    const table = document.getElementById('excelTable');
-    table.innerHTML = '';
+    function handleFile(event) {
+      var file = event.target.files[0];
+      var reader = new FileReader();
 
-    for (let i = 0; i < jsonData.length; i++) {
-      const row = document.createElement('tr');
-      for (let j = 0; j < jsonData[i].length; j++) {
-        const cellData = jsonData[i][j];
-        const cell = document.createElement(i === 0 ? 'th' : 'td');
-        cell.textContent = cellData;
-        row.appendChild(cell);
-      }
-      table.appendChild(row);
+      reader.onload = function(e) {
+        var data = new Uint8Array(e.target.result);
+        var workbook = XLSX.read(data, {type: 'array'});
+        var worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        tableData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
+        createTable();
+      };
+
+      reader.readAsArrayBuffer(file);
     }
-  };
-  
-  reader.readAsArrayBuffer(file);
-}
+
+    function createTable() {
+      var table = document.getElementById('table');
+      table.innerHTML = '';
+
+      var thead = document.createElement('thead');
+      var tbody = document.createElement('tbody');
+
+      table.appendChild(thead);
+      table.appendChild(tbody);
+
+      var headers = tableData[0];
+      var row = document.createElement('tr');
+
+      for (var i = 0; i < headers.length; i++) {
+        var th = document.createElement('th');
+        th.textContent = headers[i];
+
+        var deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Eliminar';
+        deleteBtn.addEventListener('click', deleteColumn.bind(null, i));
+
+        th.appendChild(deleteBtn);
+        row.appendChild(th);
+      }
+
+      thead.appendChild(row);
+
+      for (var j = 1; j < tableData.length; j++) {
+        var rowData = tableData[j];
+        var row = document.createElement('tr');
+
+        for (var k = 0; k < rowData.length; k++) {
+          var td = document.createElement('td');
+          td.textContent = rowData[k];
+          row.appendChild(td);
+        }
+
+        tbody.appendChild(row);
+      }
+    }
+
+    function deleteColumn(index) {
+      for (var i = 0; i < tableData.length; i++) {
+        tableData[i].splice(index, 1);
+      }
+
+      createTable();
+    }
+
+    document.getElementById('export-btn').addEventListener('click', exportTable, false);
+
+    function exportTable() {
+      var wb = XLSX.utils.book_new();
+      var ws = XLSX.utils.aoa_to_sheet(tableData);
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Tabla');
+
+      var wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'array'});
+
+      saveAs(new Blob([wbout], {type: 'application/octet-stream'}), 'tabla.xlsx');
+    }
   </script>
 </body>
 </html>
