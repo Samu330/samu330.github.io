@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+</head>
+<body>
+  <h1>Panel de Administración</h1>
+  <h2>Agregar Producto</h2>
+  <form id="product-form" action="">
+    <label for="name">Nombre del Producto:</label>
+    <input type="text" id="name" name="name">
+    <label for="photo">URL de la foto:</label>
+    <input type="text" id="photo" name="photo">
+    <input type="submit" value="Agregar Producto">
+  </form>
+  <h2>Productos Actuales</h2>
+  <ul id="product-list">
+    <li>Producto 1 <button class="delete-btn">Eliminar</button></li>
+    <li>Producto 2 <button class="delete-btn">Eliminar</button></li>
+    <li>Producto 3 <button class="delete-btn">Eliminar</button></li>
+  </ul>
+  <script>
+  document.getElementById("product-form").addEventListener("submit", function(event) {
+  event.preventDefault(); // Evita que se actualice la página al enviar el formulario
+  var productName = document.getElementById("name").value;
+  var productPhoto = document.getElementById("photo").value;
+  
+  var productList = document.getElementById("product-list");
+  var newProduct = document.createElement("li");
+  newProduct.innerHTML = productName + ' <button class="delete-btn">Eliminar</button>';
+  productList.appendChild(newProduct);
+
+  document.getElementById("name").value = "";
+  document.getElementById("photo").value = "";
+});
+
+document.addEventListener("click", function(event) {
+  if (event.target.classList.contains("delete-btn")) {
+    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+  }
+});
+  </script>
+</body>
+</html>
