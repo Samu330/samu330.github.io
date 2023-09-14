@@ -1,44 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <h1>Panel de Administración</h1>
-  <h2>Agregar Producto</h2>
-  <form id="product-form" action="">
-    <label for="name">Nombre del Producto:</label>
-    <input type="text" id="name" name="name">
-    <label for="photo">URL de la foto:</label>
-    <input type="text" id="photo" name="photo">
-    <input type="submit" value="Agregar Producto">
-  </form>
-  <h2>Productos Actuales</h2>
-  <ul id="product-list">
-    <li>Producto 1 <button class="delete-btn">Eliminar</button></li>
-    <li>Producto 2 <button class="delete-btn">Eliminar</button></li>
-    <li>Producto 3 <button class="delete-btn">Eliminar</button></li>
-  </ul>
-  <script>
-  document.getElementById("product-form").addEventListener("submit", function(event) {
-  event.preventDefault(); // Evita que se actualice la página al enviar el formulario
-  var productName = document.getElementById("name").value;
-  var productPhoto = document.getElementById("photo").value;
-  
-  var productList = document.getElementById("product-list");
-  var newProduct = document.createElement("li");
-  newProduct.innerHTML = productName + ' <button class="delete-btn">Eliminar</button>';
-  productList.appendChild(newProduct);
+    <h1>Panel de Administración</h1>
+    <form id="formulario" onsubmit="event.preventDefault(); agregarProducto();">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" required>
 
-  document.getElementById("name").value = "";
-  document.getElementById("photo").value = "";
-});
+        <label for="imagen">Imagen del Producto:</label>
+        <input type="file" id="imagen" required accept="image/jpeg,image/png">
 
-document.addEventListener("click", function(event) {
-  if (event.target.classList.contains("delete-btn")) {
-    event.target.parentNode.parentNode.removeChild(event.target.parentNode);
-  }
-});
-  </script>
+        <button type="submit">Agregar Producto</button>
+    </form>
+
+    <h2>Productos Agregados</h2>
+    <ul id="productosLista">
+        <!-- Los productos agregados serán mostrados aquí -->
+    </ul>
+
+    <script>
+    function agregarProducto() {
+    var nombre = document.getElementById("nombre").value;
+    var imagen = document.getElementById("imagen").value;
+
+    // Crear nuevo elemento de lista
+    var li = document.createElement("li");
+
+    // Crear elementos de título y imagen
+    var h3 = document.createElement("h3");
+    var img = document.createElement("img");
+
+    // Agregar contenido a los elementos
+    h3.textContent = nombre;
+    img.src = imagen;
+
+    // Agregar elementos al DOM
+    li.appendChild(h3);
+    li.appendChild(img);
+
+    var productosLista = document.getElementById("productosLista");
+    productosLista.appendChild(li);
+
+    // Restablecer valores del formulario
+    document.getElementById("nombre").value = "";
+    document.getElementById("imagen").value = "";
+}
+    </script>
 </body>
 </html>
