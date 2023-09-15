@@ -1,53 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Panel de Administración</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <title>Admin</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Panel de Administración</h1>
-    <form id="formulario" onsubmit="event.preventDefault(); agregarProducto();">
-        <label for="nombre">Nombre del Producto:</label>
-        <input type="text" id="nombre" required>
+  <form id="product-form">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" required>
+    <br>
+    
+    <label for="image">Imagen:</label>
+    <input type="file" id="image" required>
+    <br>
 
-        <label for="imagen">Imagen del Producto:</label>
-        <input type="file" id="imagen" required accept="image/jpeg,image/png">
-
-        <button type="submit">Agregar Producto</button>
-    </form>
-
-    <h2>Productos Agregados</h2>
-    <ul id="productosLista">
-        <!-- Los productos agregados serán mostrados aquí -->
-    </ul>
-
-    <script>
-    function agregarProducto() {
-    var nombre = document.getElementById("nombre").value;
-    var imagen = document.getElementById("imagen").value;
-
-    // Crear nuevo elemento de lista
-    var li = document.createElement("li");
-
-    // Crear elementos de título y imagen
-    var h3 = document.createElement("h3");
-    var img = document.createElement("img");
-
-    // Agregar contenido a los elementos
-    h3.textContent = nombre;
-    img.src = imagen;
-
-    // Agregar elementos al DOM
-    li.appendChild(h3);
-    li.appendChild(img);
-
-    var productosLista = document.getElementById("productosLista");
-    productosLista.appendChild(li);
-
-    // Restablecer valores del formulario
-    document.getElementById("nombre").value = "";
-    document.getElementById("imagen").value = "";
-}
-    </script>
+    <button type="submit">Agregar Producto</button>
+  </form>
+  
+  <script src="script.js"></script>
 </body>
 </html>
