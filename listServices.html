@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notas</title>
+  <style>
+    body {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: lightgray;
+    }
+
+    #notes {
+      background-color: white;
+      padding: 20px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #taskInput {
+      margin-bottom: 10px;
+      width: 250px;
+      padding: 5px;
+    }
+
+    #addButton {
+      background-color: lightblue;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .taskItem {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+
+    .deleteButton {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="notes">
+    <h1>Mini Programa de Notas</h1>
+    <input type="text" id="taskInput" placeholder="Tarea">
+    <select id="prioritySelect">
+      <option value="alta">Alta</option>
+      <option value="media">Media</option>
+      <option value="baja">Baja</option>
+    </select>
+    <select id="statusSelect">
+      <option value="pendiente">Pendiente</option>
+      <option value="en progreso">En Progreso</option>
+      <option value="completada">Completada</option>
+    </select>
+    <button id="addButton">Agregar Tarea</button>
+    <div id="taskList"></div>
+  </div>
+
+  <script>
+    // Obtenemos los elementos del DOM
+    const taskInput = document.getElementById("taskInput");
+    const prioritySelect = document.getElementById("prioritySelect");
+    const statusSelect = document.getElementById("statusSelect");
+    const addButton = document.getElementById("addButton");
+    const taskList = document.getElementById("taskList");
+
+    // Almacenamos las tareas en un arreglo
+    let tasks = [];
+
+    // Función para agregar una tarea
+    function addTask() {
+      // Obtenemos los valores de los inputs
+      const task = taskInput.value;
+      const priority = prioritySelect.value;
+      const status = statusSelect.value;
+
+      // Creamos un objeto con los datos de la tarea
+      const newTask = { task, priority, status };
+
+      // Agregamos la tarea al arreglo
+      tasks.push(newTask);
+
+      // Renderizamos las tareas
+      renderTasks();
+
+      // Limpiamos los inputs
+      taskInput.value = "";
+      prioritySelect.value = "alta";
+      statusSelect.value = "pendiente";
+    }
+
+    // Función para eliminar una tarea
+    function deleteTask(index) {
+      // Eliminamos la tarea del arreglo
+      tasks.splice(index, 1);
+
+      // Renderizamos las tareas
+      renderTasks();
+    }
+
+    // Función para renderizar las tareas en el DOM
+    function renderTasks() {
+      // Limpiamos el div de las tareas anteriores
+      taskList.innerHTML = "";
+
+      // Recorremos el arreglo de tareas y generamos el HTML
+      tasks.forEach((task, index) => {
+        const taskElement = document.createElement("div");
+        taskElement.classList.add("taskItem");
+        taskElement.innerHTML = `
+          <p>${task.task}</p>
+          <p>${task.priority}</p>
+          <p>${task.status}</p>
+          <button class="deleteButton" onclick="deleteTask(${index})">Eliminar</button>
+        `;
+        taskList.appendChild(taskElement);
+      });
+    }
+
+    // Agregamos el evento para el botón de agregar tarea
+    addButton.addEventListener("click", addTask);
+  </script>
+</body>
+</html>
